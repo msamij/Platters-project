@@ -1,0 +1,1048 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400&family=Satisfy&display=swap");
+/* <---------------------------------> */
+/* <-----------BASIC RESET-----------> */
+/* <---------------------------------> */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+/* <---------------------------------------> */
+/* <---------------------------------------> */
+/* <---------------------------------------> */
+
+body {
+  min-height: calc(100vh - 3rem);
+  font-family: "Poppins", sans-serif;
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fbdb89;
+}
+
+.container {
+  width: 90rem;
+  height: 1200px;
+  background: #fff;
+  border-radius: 5px;
+  margin: 3rem auto;
+  box-shadow: 0 0.7rem 3rem rgba(101, 90, 86, 0.233);
+  display: grid;
+  grid-template-rows: 1fr 1130px;
+}
+
+header {
+  height: 70px;
+  background: #fff;
+  position: relative;
+  border-radius: 5px;
+  border-bottom: 1px solid #e5e5e5;
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+  display: grid;
+  grid-template-columns: 2fr 26.4rem;
+}
+
+/* <---------------------------------> */
+/* <-----------COMMON STYLES---------> */
+/* <---------------------------------> */
+.btn-default {
+  border: none;
+  background: none;
+  cursor: pointer;
+  letter-spacing: 1px;
+  border-radius: 50px;
+  font-family: inherit;
+}
+
+.input-default {
+  font-family: inherit;
+}
+
+.btn-default:focus,
+.btn-default:active,
+.input-default:focus {
+  outline: none;
+}
+
+.box-left,
+.box-right {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+
+.box-left {
+  grid-template-columns: 180px 1fr 180px;
+}
+
+.box-right {
+  grid-template-columns: 10.7rem 15.7rem;
+}
+
+.logo-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  font-family: "Satisfy", cursive;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 auto;
+  color: rgb(73, 73, 73);
+}
+
+.logo-box span {
+  margin-top: 5px;
+}
+
+.logo {
+  height: 2.6rem;
+  width: 2.6rem;
+  border-radius: 50%;
+  margin-right: 10px;
+  background: #f7f7f7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo i {
+  font-size: 1.3rem;
+  background: linear-gradient(to right bottom, #fbdb89, #f48982);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.account-username:hover + .account-box--inner,
+.likes-icon:hover + .liked-items {
+  opacity: 1;
+  visibility: visible;
+}
+
+.account-box--inner:hover,
+.liked-items:hover {
+  opacity: 1;
+  visibility: visible;
+}
+
+.account-box--inner,
+.likes-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.account-box--inner,
+.liked-items {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s, visibility 0.5s;
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  position: relative;
+  z-index: 1;
+}
+
+.logout-btn,
+.view-recipe-btn {
+  height: 1.9rem;
+  width: 5.7rem;
+  font-size: 0.8rem;
+  color: #fff;
+  transition: all 0.3s;
+  background: linear-gradient(to right bottom, #fbdb89, #f48982);
+}
+
+.logout-btn:hover,
+.view-recipe-btn:hover {
+  transform: scale(1.1);
+}
+
+/* <---------------------------------------------------------------------> */
+/* <-----------FORM (FORM INPUT, SUBMIT & CREATE RECIPE BUTTONS)-----------> */
+/* <---------------------------------------------------------------------> */
+.search-form {
+  height: 2.7rem;
+  width: 25rem;
+  border-radius: 20px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  padding-left: 1rem;
+  transition: all 0.3s;
+  background: #f7f7f7;
+}
+.search-form:focus-within {
+  width: 25.8rem;
+}
+
+.search-input {
+  height: 100%;
+  width: 80%;
+  border: none;
+  font-size: 1rem;
+  border-radius: 20px;
+  padding-left: 5px;
+  background: #f7f7f7;
+}
+
+.search-input::placeholder {
+  color: #c0c0c0;
+  font-size: 1rem;
+  letter-spacing: 1px;
+}
+
+.btn-search {
+  height: 2.7rem;
+  width: 130px;
+  padding: 0px 10px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  color: #fff;
+  background: linear-gradient(to right bottom, #fbdb89, #f48982);
+}
+
+.btn-search i {
+  font-size: 0.8rem;
+  margin-top: 3px;
+}
+
+.btn-search:hover {
+  transform: scale(1.1);
+}
+
+.create-recipe-btn {
+  font-size: 0.9rem;
+  padding: 5px 8px;
+  transition: all 0.3s;
+  color: rgb(73, 73, 73);
+}
+
+/* <----------------------------------------------------------------> */
+/* <------------USER & AUTHOR ACCOUNTS (COMMON STYLES)--------------> */
+/* <----------------------------------------------------------------> */
+.account-box {
+  height: 3.8rem;
+  width: 10.7rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.account-username,
+.likes-icon {
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.account-username {
+  height: 40px;
+  width: 40px;
+  font-weight: 100;
+  border-radius: 50%;
+  background: #f7f7f7;
+  margin-top: 10px;
+}
+
+.account-box--inner {
+  height: 4.8rem;
+  margin-top: 14px;
+}
+
+/* <----------------------------------------------------> */
+/* <-------------AUTHOR ACCOUNT (BUTTONS)---------------> */
+/* <----------------------------------------------------> */
+.box-inner--author {
+  height: 6.4rem;
+}
+
+.view-recipe-btn {
+  width: 7.8rem;
+  margin-top: 10px;
+}
+
+/* <--------------------------------------> */
+/* <---------------LIKES------------------> */
+/* <--------------------------------------> */
+.likes-box {
+  height: 3.8rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.likes-icon {
+  height: 50px;
+  width: 50px;
+  border-radius: 50px;
+  margin-top: 5px;
+  transition: all 0.4s;
+}
+
+.likes-icon:hover {
+  background-color: #f7f7f7;
+}
+
+.likes-icon i {
+  font-size: 1.9rem;
+  cursor: pointer;
+  transition: all 0.4s;
+  color: #f59a83;
+}
+
+.liked-item,
+.liked-item--img {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.liked-items {
+  width: 15.7rem;
+  margin-top: 10px;
+}
+
+.liked-item {
+  width: 100%;
+  margin: 8px 0;
+  color: rgb(73, 73, 73);
+  padding: 3px 0;
+  transition: all 0.4s;
+  font-weight: lighter;
+}
+
+.liked-item:hover {
+  background: #f7f7f7;
+}
+
+.liked-item--img {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+
+.liked-item--img img {
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  background-position: center;
+  background-size: cover;
+}
+
+/* <------------------------------------------------------------------------------> */
+/* <------------------------------------------------------------------------------> */
+/* <------------------------------------------------------------------------------> */
+main {
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  position: relative;
+}
+
+/* <---------------------------------------------------> */
+/* <---------------CATEGORIES SECTION------------------> */
+/* <---------------------------------------------------> */
+.categories-section {
+  border-bottom-left-radius: 5px;
+  background: linear-gradient(to right bottom, #fbdb89, #f48982);
+}
+
+.categories-box {
+  height: 45%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-evenly;
+}
+
+.btn-categories {
+  height: 2.6rem;
+  width: 80%;
+  color: #fff;
+  border-radius: 0px;
+  font-size: 1rem;
+  padding-left: 15px;
+  font-weight: lighter;
+  letter-spacing: 2px;
+  transition: all 0.4s;
+}
+
+.btn-categories:hover,
+.btn-categories:focus {
+  border-left: 5px solid #fff;
+}
+
+/* <---------------------------------------------------> */
+/* <-------------------RECIPES SECTION-----------------> */
+/* <---------------------------------------------------> */
+.recipes-section {
+  height: 100%;
+  background: #f7f7f7;
+}
+
+.recipes-container,
+.author-recipes-container {
+  height: 90%;
+  display: grid;
+  align-items: flex-end;
+}
+
+.recipes-container {
+  grid-template-rows: repeat(4, 240px);
+}
+
+.author-recipes-container {
+  grid-template-rows: repeat(4 1fr);
+  grid-row-gap: 1rem;
+}
+
+.recipes-box {
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  justify-content: center;
+  grid-gap: 1.8rem;
+  align-items: center;
+  justify-items: center;
+}
+
+.recipe {
+  height: 180px;
+}
+
+.recipe,
+.author-recipe {
+  width: 220px;
+  padding: 25px 0px;
+  border-radius: 5px;
+  transition: all 0.3s;
+  background: #fff;
+  box-shadow: 0 0.7rem 2.3rem rgba(101, 90, 86, 0.158);
+}
+
+.recipe:hover,
+.author-recipe:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0.7rem 2.3rem rgba(101, 90, 86, 0.295);
+}
+
+.img-box {
+  height: 90px;
+  width: 100px;
+  margin: auto;
+  margin-bottom: 8px;
+  border-radius: 50%;
+}
+
+.img-box img {
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+}
+
+.recipe-title {
+  font-size: 1rem;
+}
+
+.recipe-title {
+  height: 30px;
+  width: 160px;
+  display: inline-block;
+  padding: 2px 5px;
+  margin-right: 5px;
+  color: #fff;
+  background: linear-gradient(to right bottom, #fbdb89, #f48982);
+}
+
+.recipe-menu-btns-box {
+  margin-top: 10px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.menu-btn {
+  height: 30px;
+  border-radius: 1px;
+  color: #fff;
+  transition: all 0.3s;
+}
+
+.menu-btn:hover {
+  width: 75px;
+}
+
+.edit-btn {
+  width: 60px;
+  background: linear-gradient(to right bottom, #fbdb89, #f48982);
+}
+
+.delete-btn {
+  width: 70px;
+  background: #f48982;
+}
+
+.author-title-box {
+  height: 70px;
+  width: 80%;
+  padding-left: 10px;
+  color: #fff;
+  background: linear-gradient(to right bottom, #fbdb89, #f48982);
+}
+
+.author-recipe {
+  height: 200px;
+}
+
+/* <------------------------------------------------------> */
+/* <-------------------PAGINATION BUTTONS-----------------> */
+/* <------------------------------------------------------> */
+.btn-pagination {
+  height: 33px;
+  width: 33px;
+  background-color: #fff;
+}
+
+.btn-pagination i {
+  font-size: 1rem;
+  line-height: 33px;
+  background: linear-gradient(to right bottom, #fbdb89, #f48982);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.btn-next {
+  padding-left: 2px;
+}
+
+/* <--------------------------------------------------------------> */
+/* <-------------------MOST LIKED RECIPES SECTION-----------------> */
+/* <--------------------------------------------------------------> */
+.most-liked-recipes-section {
+  display: flex;
+  flex-direction: column;
+  border-bottom-right-radius: 5px;
+}
+
+.most-liked-recipes-section h2 {
+  color: rgb(73, 73, 73);
+  font-size: 1.2rem;
+  font-weight: lighter;
+  text-align: center;
+  margin: 30px 0;
+}
+
+.most-liked-recipes--container {
+  height: 100%;
+}
+
+.most-liked-recipe {
+  height: 150px;
+  width: 100%;
+  padding: 10px 0;
+  margin-bottom: 25px;
+  transition: all 0.3s;
+}
+
+.most-liked-recipe:hover {
+  transform: translateY(-2px);
+  background: #f7f7f7;
+}
+
+.most-liked-recipe .img-box {
+  height: 85px;
+  width: 85px;
+}
+
+.recipe-details {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 25px;
+}
+
+.recipe-details .most-like-recipe-title {
+  width: 65%;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: lighter;
+  text-align: center;
+  background: none;
+}
+
+.most-like-recipe-title,
+.like-icon,
+.likes,
+.recipe-details {
+  color: rgb(73, 73, 73);
+}
+
+.like-icon {
+  font-size: 0.8rem;
+  margin-right: 5px;
+}
+
+.likes {
+  font-size: 1rem;
+  font-weight: lighter;
+}
+
+/* <------------------------------------------------------------------------> */
+/* <-------------------LOGIN/SIGNUP (FORM INPUTS & BUTTONS)-----------------> */
+/* <------------------------------------------------------------------------> */
+.form-container,
+.create-recipe-container,
+.edit-recipe-container {
+  height: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+}
+
+.create-recipe-container,
+.edit-recipe-container {
+  height: 90%;
+}
+
+.account-form,
+.recipe-form {
+  height: 70%;
+  width: 70%;
+  background: #fff;
+  box-shadow: 0 0.7rem 2.3rem rgba(101, 90, 86, 0.158);
+  padding: 25px 0;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.recipe-form {
+  height: 85%;
+  width: 80%;
+}
+
+.form-input {
+  height: 2.5rem;
+  width: 20rem;
+  border: none;
+  border-radius: 3px;
+  padding-left: 10px;
+  margin-bottom: 25px;
+  font-size: 0.9rem;
+  background: #f7f7f7;
+  border: 1px solid #e5e5e5;
+}
+
+.form-input::placeholder {
+  color: #c0c0c0;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+}
+
+.btn-submit {
+  height: 2.4rem;
+  width: 7.4rem;
+  margin-bottom: 20px;
+  font-family: inherit;
+  letter-spacing: 2px;
+  color: #fff;
+  background: linear-gradient(to right bottom, #fbdb89, #f48982);
+  transition: all 0.3s;
+}
+
+.btn-submit:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0.7rem 2.3rem rgba(101, 90, 86, 0.158);
+}
+
+/* <------------------------------------------------------------------------> */
+/* <-------------------CREATE RECIPE (FORM INPUTS & BUTTONS)------------------> */
+/* <------------------------------------------------------------------------> */
+.btn-save-recipe {
+  width: 9rem;
+}
+
+.btn-save-ingredient {
+  width: 10.5rem;
+}
+
+.ingredient-box,
+.edit-ingredient-box {
+  width: 60%;
+  margin: 10px 0;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.edit-ingredient-box {
+  width: 90%;
+}
+
+.ingredients-choice {
+  cursor: pointer;
+  color: #c0c0c0;
+}
+
+.ingredients-choice option {
+  color: #000;
+  background: #c0c0c0;
+}
+
+.input-ingredient {
+  width: 10rem;
+}
+
+.input-ingredient-qty {
+  width: 5rem;
+}
+
+.input_instructions {
+  height: 15rem;
+  width: 20rem;
+  padding: 10px;
+}
+
+.input-instructions::placeholder {
+  font-size: 10rem;
+}
+
+/* <-------------------------------------> */
+/* <---------------MESSAGES--------------> */
+/* <-------------------------------------> */
+.message {
+  height: 50px;
+  width: 40%;
+  color: #fff;
+  border-radius: 1px;
+  margin-top: 60px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  visibility: hidden;
+  opacity: 0;
+  animation: fadeAway 20s linear 0s 0.2;
+}
+
+@keyframes fadeAway {
+  0% {
+    opacity: 1;
+    visibility: visible;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+.message h2 {
+  font-size: 1.1rem;
+  font-weight: lighter;
+  text-align: center;
+  line-height: 50px;
+}
+
+.success-message {
+  background: linear-gradient(to right bottom, #fbdb89, #f48982);
+}
+
+.error-message {
+  background: #f59a83;
+}
+
+/* <----------------------------------------> */
+/* <---------------RECIPE VIEW--------------> */
+/* <----------------------------------------> */
+
+/* <-------------------------------------------------------> */
+/* <---------------MAIN CONTAINER FOR RECIPES--------------> */
+/* <-------------------------------------------------------> */
+.recipe-view-container {
+  height: 100%;
+  position: relative;
+}
+
+.recipe-img-box {
+  height: 50%;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
+}
+
+.recipe-img-box img {
+  height: 100%;
+  width: 100%;
+}
+
+.recipe-img-box::before {
+  content: "";
+  position: absolute;
+  display: block;
+  top: 0%;
+  left: 50%;
+  transform: translate(-50%, -0%);
+  height: 100%;
+  width: 100%;
+  opacity: 0.3;
+  background: #f7f7f7;
+}
+
+/* <---------------------------------------------------------------------> */
+/* <---------------LIKE & PREVIOUS BUTTONS (ON RECIPE IMAGE)-------------> */
+/* <---------------------------------------------------------------------> */
+.recipe-btns-box {
+  width: 100%;
+  padding: 0 20px;
+  position: absolute;
+  top: 3%;
+  transform: translateY(-3%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.like-btn,
+.btn-prev-alt,
+.btn-forward-alt {
+  height: 40px;
+  width: 40px;
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.4s;
+  background: linear-gradient(to right bottom, #fbdb89, #f48982);
+}
+.like-btn i,
+.btn-prev-alt i,
+.btn-forward-alt i {
+  color: #fff;
+}
+
+.like-btn:hover {
+  transform: scale(1.2);
+}
+
+/* <--------------------------------------------------> */
+/* <---------------RECIPE TITLE CONTAINER-------------> */
+/* <--------------------------------------------------> */
+.recipe-title-box {
+  height: 75px;
+  max-width: 100%;
+  min-width: 50%;
+  border-radius: 1px;
+  padding: 20px;
+  position: absolute;
+  top: 65%;
+  transform: translateY(-65%);
+  background: linear-gradient(to right bottom, #fbdb89, #f48982);
+}
+
+.recipe-title-main,
+.recipe-ingredient-title,
+.author-title {
+  font-size: 2rem;
+  font-weight: lighter;
+  color: #fff;
+  text-align: start;
+  text-transform: uppercase;
+  line-height: 1.1;
+  letter-spacing: 1px;
+}
+
+.author-title {
+  line-height: 70px;
+}
+
+/* <---------------------------------------------------------------------------------------> */
+/* <------------RECIPE DETAILS BOX (CONTAINS INGREDIENTS & INSTRUCTIONS BUTTON)------------> */
+/* <---------------------------------------------------------------------------------------> */
+.recipe-details-box {
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.recipe-ingredient-title {
+  height: 75px;
+  width: 30%;
+  transform: skewY(-9deg);
+  margin: 15px auto;
+  border-radius: 1px;
+  text-align: center;
+  padding: 20px;
+  background: linear-gradient(to right bottom, #fbdb89, #f48982);
+}
+
+.recipe-ingredients-box {
+  height: 50%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+  transform: skewY(-9deg);
+}
+
+.recipe-ingredients-box button {
+  height: 35px;
+  width: 35px;
+  font-size: 1rem;
+}
+
+.btn-forward-alt {
+  position: absolute;
+  right: 8%;
+  transform: translateX(-8%);
+  padding-left: 2px;
+}
+
+.recipe-ingredients-box .btn-prev-alt {
+  position: absolute;
+  left: 8%;
+  transform: translateX(-8%);
+}
+
+.ingredients {
+  height: 100%;
+  width: 70%;
+  font-size: 1.1rem;
+  font-weight: lighter;
+  border-radius: 3px;
+  color: #fff;
+  background-image: linear-gradient(to right bottom, #fbdb89, #f48982);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.ingredients li {
+  margin: 10px 0;
+}
+
+.ingredients i {
+  margin-right: 5px;
+}
+
+.recipe-instruction-btn-box {
+  height: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.recipe-instructions-btn,
+.recipe-instruction-btn-box p {
+  font-size: 1rem;
+  font-weight: lighter;
+  text-transform: uppercase;
+  transform: skewY(-9deg);
+}
+
+.recipe-instructions-btn {
+  height: 2.9rem;
+  width: 12rem;
+  margin: 25px 0;
+  color: #fff;
+  background: linear-gradient(to right bottom, #fbdb89, #f48982);
+  transition: all 0.3s;
+}
+
+.recipe-instructions-btn:hover {
+  width: 12.6rem;
+}
+
+.recipe-instruction-btn-box p,
+.recipe-instruction-btn-box a,
+footer a {
+  color: rgb(73, 73, 73);
+}
+
+.recipe-instruction-btn-box a,
+footer a {
+  border-bottom: 1px solid rgb(73, 73, 73);
+}
+
+.instructions {
+  width: 100%;
+  height: 100%;
+  padding: 25px 20px;
+  line-height: 35px;
+  font-weight: lighter;
+  color: rgb(73, 73, 73);
+  background: #f7f7f7;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.5s;
+}
+
+.visible {
+  visibility: visible;
+  opacity: 1;
+}
+
+.instructions button {
+  margin-bottom: 15px;
+}
+
+footer {
+  height: auto;
+  position: absolute;
+  bottom: 1%;
+  right: 15%;
+  transform: translate(-15%, -1%);
+  font-size: 0.7rem;
+  font-weight: lighter;
+  color: rgb(73, 73, 73);
+}
+
+.skeleton-white {
+  background: #fff;
+  animation: fadeInOut 2s linear 1s infinite;
+}
+
+.skeleton {
+  background: #f1f1f1;
+  animation: fadeInOut 2s linear 1s infinite;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 1;
+  }
+}

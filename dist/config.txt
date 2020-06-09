@@ -1,0 +1,24 @@
+// https://cors-anywhere.herokuapp.com/https://api.edamam.com/search?q=${recipe}&app_id=${app_id}&app_key=${app_key}
+
+// const getData = async (app_id, app_key, recipe) => {
+//   const response = await fetch(
+//     `https://cors-anywhere.herokuapp.com/https://api.edamam.com/search?q=${recipe}&app_id=${app_id}&app_key=${app_key}`
+//   );
+//   const data = await response.json();
+//   console.log(data.hits);
+// };
+
+// getData("d1196952", "20643d17eccb692cb37bae4301bd8f2a", "pizza");
+
+// const getSpooncularData = async (api_key, recipe) => {
+//   const response = await fetch(
+//     `https://cors-anywhere.herokuapp.com/https://api.spoonacular.com/recipes/search?apiKey=${api_key}&query=${recipe}`
+//   );
+//   const data = await response.json();
+//   console.log(data);
+// };
+
+// getSpooncularData("566c523054244b38a477795508ded7be", "pizza");
+//   566c523054244b38a477795508ded7be
+// Getting image.
+// https://spoonacular.com/recipeImages/209785-636x393.jpg
