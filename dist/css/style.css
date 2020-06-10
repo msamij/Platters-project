@@ -613,6 +613,10 @@ main {
 .form-container,
 .create-recipe-container,
 .edit-recipe-container {
+  width: 80%;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   height: 70%;
   display: flex;
   justify-content: center;
@@ -629,6 +633,7 @@ main {
 .recipe-form {
   height: 70%;
   width: 70%;
+  position: relative;
   background: #fff;
   box-shadow: 0 0.7rem 2.3rem rgba(101, 90, 86, 0.158);
   padding: 25px 0;
@@ -642,6 +647,13 @@ main {
 .recipe-form {
   height: 85%;
   width: 80%;
+}
+
+.closeform-btn-box {
+  position: absolute;
+  top: 3%;
+  right: 3%;
+  transform: translate(-3%, -3%);
 }
 
 .form-input {
@@ -921,10 +933,8 @@ main {
   padding-left: 2px;
 }
 
-.recipe-ingredients-box .btn-prev-alt {
-  position: absolute;
-  left: 8%;
-  transform: translateX(-8%);
+.btn-close-box {
+  display: flex;
 }
 
 .ingredients {
