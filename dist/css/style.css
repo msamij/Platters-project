@@ -397,6 +397,14 @@ main {
   background: #f7f7f7;
 }
 
+.backdrop {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background: rgba(58, 57, 57, 0.445);
+  opacity: 0.1;
+}
+
 .recipes-container,
 .author-recipes-container {
   height: 90%;
