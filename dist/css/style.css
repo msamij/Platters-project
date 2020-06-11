@@ -613,11 +613,11 @@ main {
 .form-container,
 .create-recipe-container,
 .edit-recipe-container {
+  height: 70%;
   width: 80%;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  height: 70%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -635,7 +635,7 @@ main {
   width: 70%;
   position: relative;
   background: #fff;
-  box-shadow: 0 0.7rem 2.3rem rgba(101, 90, 86, 0.158);
+  box-shadow: 0 0.7rem 2.3rem rgba(63, 57, 55, 0.233);
   padding: 25px 0;
   border-radius: 5px;
   display: flex;
