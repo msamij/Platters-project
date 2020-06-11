@@ -934,6 +934,12 @@ main {
   font-size: 1rem;
 }
 
+.recipe-ingredients-box .btn-prev-alt {
+  position: absolute;
+  left: 8%;
+  transform: translateX(-8%);
+}
+
 .btn-forward-alt {
   position: absolute;
   right: 8%;
