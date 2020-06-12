@@ -482,7 +482,7 @@ main {
 }
 
 .recipe-menu-btns-box {
-  margin-top: 10px;
+  margin-top: 16px;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -701,11 +701,17 @@ main {
 /* <------------------------------------------------------------------------> */
 /* <-------------------CREATE RECIPE (FORM INPUTS & BUTTONS)------------------> */
 /* <------------------------------------------------------------------------> */
-.btn-save-recipe {
+.btn-save-recipe,
+.btn-new-recipe {
   width: 9rem;
 }
 
-.btn-save-ingredient {
+.btn-new-recipe {
+  margin-top: 20px;
+}
+
+.btn-new-ingredient,
+.btn-update-recipe {
   width: 10.5rem;
 }
 
@@ -718,7 +724,7 @@ main {
 }
 
 .edit-ingredient-box {
-  width: 90%;
+  width: 80%;
 }
 
 .ingredients-choice {
@@ -736,7 +742,7 @@ main {
 }
 
 .input-ingredient-qty {
-  width: 5rem;
+  width: 4rem;
 }
 
 .input_instructions {
