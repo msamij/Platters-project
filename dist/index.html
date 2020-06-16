@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Platters --> Create Recipes</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <script
+      src="https://kit.fontawesome.com/62d35d416a.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="box-left">
+          <div class="logo-box">
+            <div class="logo"><i class="fas fa-hamburger"></i></div>
+            <span>Platters</span>
+          </div>
+
+          <form class="search-form">
+            <input
+              type="text"
+              class="search-input input-default"
+              placeholder="Search for recipes"
+            />
+            <button class="btn-search btn-default">
+              <span>Search</span><i class="fas fa-search"></i>
+            </button>
+          </form>
+
+          <div class="create-recipe-box">
+            <button class="btn-default create-recipe-btn">
+              Create Recipe 👨‍🍳
+            </button>
+          </div>
+        </div>
+
+        <div class="box-right">
+          <!-- <div class="account-box user-account--box">
+            <div class="account-username user-account--username">MS</div>
+            <div class="account-box--inner box-inner--user">
+              <ul class="account-menu user-account--menu">
+                <li>
+                  <div class="account-menu--controls">
+                    <button class="btn-default logout-btn user-btn--logout">
+                      Logout
+                    </button>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div> -->
+
+          <div class="account-box author-account--box">
+            <div class="account-username author-account--username">MS</div>
+            <div class="account-box--inner box-inner--author">
+              <ul class="account-menu author-account--menu">
+                <li>
+                  <div class="account-menu--controls">
+                    <button class="btn-default logout-btn author-btn--logout">
+                      Logout
+                    </button>
+                    <button class="btn-default view-recipe-btn">
+                      View Recipes
+                    </button>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-------------- MESSAGES ------------->
+          <!-- <div class="message success-message">
+            <h2>Logged in successfully ✔️</h2>
+          </div> -->
+
+          <!-- <div class="message error-message">
+            <h2>Couldn't find the recipe you are looking for 🧐❌</h2>
+            <h2>You didn't add any indgredients in the recipe ❌</h2>
+          </div> -->
+          <!------------------------------>
+
+          <div class="likes-box">
+            <div class="likes-icon">
+              <i class="fas fa-heart"></i>
+            </div>
+            <div class="liked-items">
+              <a href="#09067" class="liked-item">
+                <div class="liked-item--img">
+                  <img src="../Spaghetti.jpg" alt="Spaghetti" />
+                </div>
+                <span>Pizza Dip</span>
+              </a>
+
+              <a href="#09067" class="liked-item">
+                <div class="liked-item--img">
+                  <img src="../Spaghetti.jpg" alt="Spaghetti" />
+                </div>
+                <span>Home made spaghetti...</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <!-- <div class="backdrop"></div> -->
+        <section class="categories-section">
+          <nav class="categories-box">
+            <button class="btn-default btn-categories btn-all-foods">
+              <i class="fas fa-utensils"></i> <span>All</span>
+            </button>
+            <button class="btn-default btn-categories btn-pizzas">
+              <i class="fas fa-pizza-slice"></i> <span>Pizzas</span>
+            </button>
+            <button class="btn-default btn-categories btn-deserts">
+              <i class="fas fa-ice-cream"></i> <span>Deserts</span>
+            </button>
+            <button class="btn-default btn-categories btn-fast-foods">
+              <i class="fas fa-hamburger"></i> <span>Fast Foods</span>
+            </button>
+            <button class="btn-default btn-categories btn-desi-foods">
+              <i class="fas fa-fish"></i> <span>Desi Foods</span>
+            </button>
+          </nav>
+        </section>
+
+        <section class="recipes-section">
+          <!-- ----------------------------------- -->
+          <!-- AUTHORS FORM MARKUP -->
+          <!-- ----------------------------------- -->
+          <!-- <div class="form-container">
+            <form class="account-form authors-form">
+              <div class="btn-close-box closeform-btn-box">
+                <button class="btn-default btn-prev-alt btn-close">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+              <input
+                type="text"
+                class="input-default form-input input-first-name"
+                placeholder="First name"
+              />
+              <input
+                type="text"
+                class="input-default form-input input-last-name"
+                placeholder="Last name"
+              />
+              <input
+                type="text"
+                class="input-default form-input input-user-name"
+                placeholder="Username"
+              />
+              <input
+                type="password"
+                class="input-default form-input password"
+                placeholder="Password"
+              />
+              <button class="btn-default btn-submit btn-signup">
+                Signup
+              </button>
+              <button class="btn-default btn-submit btn-login">Login</button>
+            </form>
+          </div> -->
+
+          <!-- ----------------------------------- -->
+          <!-- USERS FORM MARKUP -->
+          <!-- ----------------------------------- -->
+          <!-- <div class="form-container">
+            <form class="account-form users-form">
+              <div class="btn-close-box closeform-btn-box">
+                <button class="btn-default btn-prev-alt btn-close">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+              <input
+                type="text"
+                class="input-default form-input input-first-name"
+                placeholder="First name"
+              />
+              <input
+                type="text"
+                class="input-default form-input input-last-name"
+                placeholder="Last name"
+              />
+              <input
+                type="text"
+                class="input-default form-input input-user-name"
+                placeholder="Username"
+              />
+              <input
+                type="password"
+                class="input-default form-input password"
+                placeholder="Password"
+              />
+              <button class="btn-default btn-submit btn-signup">
+                Signup
+              </button>
+              <button class="btn-default btn-submit btn-login">Login</button>
+            </form>
+          </div> -->
+
+          <!-- ----------------------------------- -->
+          <!-- CREATE RECIPES MARKUP -->
+          <!-- ----------------------------------- -->
+          <!-- <div class="create-recipe-container">
+            <form class="recipe-form">
+              <div class="btn-close-box closeform-btn-box">
+                <button class="btn-default btn-prev-alt btn-close">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+              <input
+                type="text"
+                class="input-default form-input input-recipe--name"
+                placeholder="Recipe name"
+              />
+              <input
+                type="text"
+                class="input-default form-input input-img-url"
+                placeholder="Image URL"
+              />
+              <textarea
+                class="input-default form-input input_instructions"
+                placeholder="Instructions"
+                cols="30"
+                rows="10"
+              ></textarea>
+
+              <div class="ingredient-box">
+                <input
+                  type="text"
+                  class="input-default form-input input-ingredient"
+                  placeholder="Ingredient name"
+                />
+                <input
+                  type="text"
+                  class="input-default form-input input-ingredient-qty"
+                  placeholder="Qty"
+                />
+                <button class="btn-default btn-submit btn-new-ingredient">
+                  New Ingredient
+                </button>
+              </div>
+              <button class="btn-default btn-submit btn-save-recipe">
+                Save Recipe
+              </button>
+
+              <button class="btn-default btn-submit btn-new-recipe">
+                New Recipe
+              </button>
+            </form>
+          </div> -->
+
+          <!-- ----------------------------------- -->
+          <!-- EDIT RECIPIES MARKUP -->
+          <!-- ----------------------------------- -->
+          <!-- <div class="edit-recipe-container">
+            <form class="recipe-form edit-recipe-form">
+              <div class="btn-close-box closeform-btn-box">
+                <button class="btn-default btn-prev-alt btn-close">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+              <input
+                type="text"
+                class="input-default form-input input-recipe--name"
+                placeholder="Recipe name"
+              />
+              <input
+                type="text"
+                class="input-default form-input input-img-url"
+                placeholder="Image URL"
+              />
+              <textarea
+                class="input-default form-input input_instructions"
+                placeholder="Instructions"
+                cols="30"
+                rows="10"
+              ></textarea>
+              <div class="edit-ingredient-box">
+                <select class="ingredients-choice input-default form-input">
+                  <option>2 pounds ground bison (buffalo)</option>
+                  <option>1 1/2 teaspoons salt</option>
+                  <option>2 teaspoons black pepper</option>
+                </select>
+
+                <input
+                  type="text"
+                  class="input-default form-input input-ingredient"
+                  placeholder="New Ingredient"
+                />
+                <input
+                  type="text"
+                  class="input-default form-input input-ingredient-qty"
+                  placeholder="Qty"
+                />
+              </div>
+              <button class="btn-default btn-submit btn-update-recipe">
+                Update Recipe
+              </button>
+            </form>
+          </div> -->
+
+          <!-- ----------------------------------- -->
+          <!-- RECIPIES VIEW MARKUP -->
+          <!-- ----------------------------------- -->
+          <!-- <div class="recipe-view-container">
+            <figure class="recipe-img-box">
+              <img
+                src="https://spoonacular.com/recipeImages/246916-636x393.jpg"
+                alt="Bison Burger"
+              />
+              <div class="recipe-btns-box">
+                <button class="btn-default btn-prev-alt">
+                  <i class="fas fa-angle-left"></i>
+                </button>
+                <button class="btn-default like-btn">
+                  <i class="far fa-heart"></i>
+                </button>
+              </div>
+              <div class="recipe-title-box">
+                <h2 class="recipe-title-main">
+                  Bison Burger
+                </h2>
+              </div>
+            </figure>
+
+            <div class="recipe-details-box">
+              <h2 class="recipe-ingredient-title">
+                Ingredients
+              </h2>
+              <div class="recipe-ingredients-box">
+                <button class="btn-default btn-prev-alt">
+                  <i class="fas fa-angle-left"></i>
+                </button>
+
+                <div class="ingredients">
+                  <ul>
+                    <li>
+                      <i class="fas fa-check-circle"></i> 2 pounds ground bison
+                      (buffalo)
+                    </li>
+                    <li>
+                      <i class="fas fa-check-circle"></i> 2 tablespoons finely
+                      chopped fresh sage
+                    </li>
+                    <li>
+                      <i class="fas fa-check-circle"></i> 1 1/2 teaspoons salt
+                    </li>
+                    <li>
+                      <i class="fas fa-check-circle"></i> 2 teaspoons black
+                      pepper
+                    </li>
+                    <li>
+                      <i class="fas fa-check-circle"></i> 1/2 onion, finely
+                      chopped
+                    </li>
+                    <li>
+                      <i class="fas fa-check-circle"></i> Smoky barbecue sauce
+                    </li>
+                  </ul>
+                </div>
+                <button class="btn-default btn-forward-alt">
+                  <i class="fas fa-angle-right"></i>
+                </button>
+              </div>
+
+              <div class="recipe-instruction-btn-box">
+                <button class="btn-default recipe-instructions-btn">
+                  How to cook
+                </button>
+                <p>
+                  This recipe is designed by
+                  <a
+                    href="https://www.simplyrecipes.com/recipes/buffalo_burger/"
+                    >Simply Recipes</a
+                  >
+                </p>
+              </div>
+            </div>
+
+            <div class="instructions">
+              <div class="btn-close-box">
+                <button class="btn-default btn-prev-alt btn-close">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+              Cook the onions: Sauté the onions in the olive oil over
+              medium-high heat until translucent. Turn off the heat and let it
+              cool. Mix onions, sage, salt, pepper into ground bison meat: When
+              the onions are cool enough to touch, use your (clean) hands to
+              gently mix them in with the bison burger meat, and add everything
+              else. Do not overwork the meat, it will result in a tough burger.
+              Just gently fold it until the onions, sage, salt and pepper are
+              well mixed in. Form patties: Form patties with the meat, using
+              about 1/4 to 1/3 of a pound of meat per patty. Here's a tip on
+              making the patty: if you press a slight indentation in the center
+              of each patty it will help keep the burgers in a nice disk shape
+              when cooking. Otherwise the burger will start to get a little
+              egg-shaped as the edges contract from cooking. Grill or fry the
+              burgers: Grill or fry the burgers on medium heat, about 6-7
+              minutes per side, less or more depending on the thickness of the
+              burger and the heat of the pan/grill, or until the internal
+              temperature is 140°F for medium rare, or 160°F for well done. A
+              note on internal temperature. If you are getting the ground meat
+              from a source you trust (we got ours from Whole Foods) that does
+              their own grinding on site, or you grind your own meat, you can
+              safely cook the burgers rare or medium rare. Otherwise you'll want
+              to cook the burgers until well done. Don’t press on your burgers
+              while cooking, and keep the flipping to a minimum. Let the burgers
+              rest about 5 minutes before serving. Serve the burger with lettuce
+              and tomato, topped with a smoky barbecue sauce.
+            </div>
+          </div> -->
+
+          <!-- ----------------------------------- -->
+          <!-- RECIPES MAIN MARKUP -->
+          <!-- ----------------------------------- -->
+          <div class="recipes-container">
+            <div class="recipes-box recipes-box-1 pizza-recipes">
+              <button class="btn-default btn-pagination btn-prev">
+                <i class="fas fa-angle-left"></i>
+              </button>
+
+              <a href="#90123" class="recipe pizza-recipe"
+                ><div class="img-box">
+                  <img src="../pizza-recipe-1.jpg" alt="Pizza" />
+                </div>
+                <span class="recipe-title">Home made pizza</span>
+              </a>
+
+              <a href="#90123" class="recipe pizza-recipe"
+                ><div class="img-box">
+                  <img
+                    src="../delish-homemade-pizza-horizontal-1542312378.png"
+                    alt="Pizza"
+                  />
+                </div>
+                <span class="recipe-title">Pizza veggies</span>
+              </a>
+
+              <a href="#90123" class="recipe pizza-recipe"
+                ><div class="img-box">
+                  <img src="../15-Minute-Pizza-WS-Thumbnail.png" alt="Pizza" />
+                </div>
+                <span class="recipe-title">Pepporoni pizza...</span>
+              </a>
+
+              <button class="btn-default btn-pagination btn-next">
+                <i class="fas fa-angle-right"></i>
+              </button>
+            </div>
+
+            <div class="recipes-box recipes-box-2 deserts-recipes">
+              <button class="btn-default btn-pagination btn-prev">
+                <i class="fas fa-angle-left"></i>
+              </button>
+
+              <a href="#90123" class="recipe pizza-recipe"
+                ><div class="img-box">
+                  <img src="../pizza-recipe-1.jpg" alt="Pizza" />
+                </div>
+                <span class="recipe-title">Home made pizza</span>
+              </a>
+
+              <a href="#90123" class="recipe pizza-recipe"
+                ><div class="img-box">
+                  <img
+                    src="../delish-homemade-pizza-horizontal-1542312378.png"
+                    alt="Pizza"
+                  />
+                </div>
+                <span class="recipe-title">Pizza veggies</span>
+              </a>
+
+              <a href="#90123" class="recipe pizza-recipe"
+                ><div class="img-box">
+                  <img src="../15-Minute-Pizza-WS-Thumbnail.png" alt="pizza" />
+                </div>
+                <span class="recipe-title">Pepporoni pizza...</span>
+              </a>
+
+              <button class="btn-default btn-pagination btn-next">
+                <i class="fas fa-angle-right"></i>
+              </button>
+            </div>
+
+            <div class="recipes-box recipes-box-3 fast-foods-recipes">
+              <button class="btn-default btn-pagination btn-prev">
+                <i class="fas fa-angle-left"></i>
+              </button>
+
+              <a href="#90123" class="recipe pizza-recipe"
+                ><div class="img-box">
+                  <img src="../pizza-recipe-1.jpg" alt="pizza" />
+                </div>
+                <span class="recipe-title">Home made pizza</span>
+              </a>
+
+              <a href="#90123" class="recipe pizza-recipe"
+                ><div class="img-box">
+                  <img
+                    src="../delish-homemade-pizza-horizontal-1542312378.png"
+                    alt="Pizza"
+                  />
+                </div>
+                <span class="recipe-title">Pizza veggies</span>
+              </a>
+
+              <a href="#90123" class="recipe pizza-recipe"
+                ><div class="img-box">
+                  <img src="../15-Minute-Pizza-WS-Thumbnail.png" alt="Pizza" />
+                </div>
+                <span class="recipe-title">Pepporoni pizza...</span>
+              </a>
+
+              <button class="btn-default btn-pagination btn-next">
+                <i class="fas fa-angle-right"></i>
+              </button>
+            </div>
+
+            <div class="recipes-box recipes-box-4 desi-foods-recipes">
+              <button class="btn-default btn-pagination btn-prev">
+                <i class="fas fa-angle-left"></i>
+              </button>
+
+              <a href="#90123" class="recipe pizza-recipe"
+                ><div class="img-box">
+                  <img src="../pizza-recipe-1.jpg" alt="pizza" />
+                </div>
+                <span class="recipe-title">Home made pizza</span>
+              </a>
+
+              <a href="#90123" class="recipe pizza-recipe"
+                ><div class="img-box">
+                  <img
+                    src="../delish-homemade-pizza-horizontal-1542312378.png"
+                    alt="Pizza"
+                  />
+                </div>
+                <span class="recipe-title">Pizza veggies</span>
+              </a>
+
+              <a href="#90123" class="recipe pizza-recipe"
+                ><div class="img-box">
+                  <img src="../15-Minute-Pizza-WS-Thumbnail.png" alt="Pizza" />
+                </div>
+                <span class="recipe-title">Pepporoni pizza...</span>
+              </a>
+
+              <button class="btn-default btn-pagination btn-next">
+                <i class="fas fa-angle-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- ----------------------------------- -->
+          <!-- AUTHOR RECIPES MARKUP -->
+          <!-- ----------------------------------- -->
+          <!-- <div class="author-title-box">
+            <h2 class="author-title">Recipes by Muhammad Sami</h2>
+          </div> -->
+
+          <!-- <div class="author-recipes-container">
+            <div class="recipes-box recipes-box-1 pizza-recipes">
+              <button class="btn-default btn-pagination btn-prev">
+                <i class="fas fa-angle-left"></i>
+              </button>
+
+              <a href="#90123" class="author-recipe pizza-recipe"
+                ><div class="img-box">
+                  <img src="../pizza-recipe-1.jpg" alt="Pizza" />
+                </div>
+                <span class="recipe-title">Home made pizza</span>
+                <div class="recipe-menu-btns-box">
+                  <button class="btn-default menu-btn edit-btn">Edit</button>
+                  <button class="btn-default menu-btn delete-btn">
+                    Delete
+                  </button>
+                </div>
+              </a>
+
+              <a href="#90123" class="author-recipe pizza-recipe"
+                ><div class="img-box">
+                  <img
+                    src="../delish-homemade-pizza-horizontal-1542312378.png"
+                    alt="Pizza"
+                  />
+                </div>
+                <span class="recipe-title">Pizza veggies</span>
+                <div class="recipe-menu-btns-box">
+                  <button class="btn-default menu-btn edit-btn">Edit</button>
+                  <button class="btn-default menu-btn delete-btn">
+                    Delete
+                  </button>
+                </div>
+              </a>
+
+              <a href="#90123" class="author-recipe pizza-recipe"
+                ><div class="img-box">
+                  <img src="../15-Minute-Pizza-WS-Thumbnail.png" alt="Pizza" />
+                </div>
+                <span class="recipe-title">Pepporoni pizza...</span>
+                <div class="recipe-menu-btns-box">
+                  <button class="btn-default menu-btn edit-btn">Edit</button>
+                  <button class="btn-default menu-btn delete-btn">
+                    Delete
+                  </button>
+                </div>
+              </a>
+
+              <button class="btn-default btn-pagination btn-next">
+                <i class="fas fa-angle-right"></i>
+              </button>
+            </div>
+
+            <div class="recipes-box recipes-box-2 deserts-recipes">
+              <button class="btn-default btn-pagination btn-prev">
+                <i class="fas fa-angle-left"></i>
+              </button>
+
+              <a href="#90123" class="author-recipe pizza-recipe"
+                ><div class="img-box">
+                  <img src="../pizza-recipe-1.jpg" alt="Pizza" />
+                </div>
+                <span class="recipe-title">Home made pizza</span>
+                <div class="recipe-menu-btns-box">
+                  <button class="btn-default menu-btn edit-btn">Edit</button>
+                  <button class="btn-default menu-btn delete-btn">
+                    Delete
+                  </button>
+                </div>
+              </a>
+
+              <a href="#90123" class="author-recipe pizza-recipe"
+                ><div class="img-box">
+                  <img
+                    src="../delish-homemade-pizza-horizontal-1542312378.png"
+                    alt="Pizza"
+                  />
+                </div>
+                <span class="recipe-title">Pizza veggies</span>
+                <div class="recipe-menu-btns-box">
+                  <button class="btn-default menu-btn edit-btn">Edit</button>
+                  <button class="btn-default menu-btn delete-btn">
+                    Delete
+                  </button>
+                </div>
+              </a>
+
+              <a href="#90123" class="author-recipe pizza-recipe"
+                ><div class="img-box">
+                  <img src="../15-Minute-Pizza-WS-Thumbnail.png" alt="pizza" />
+                </div>
+                <span class="recipe-title">Pepporoni pizza...</span>
+                <div class="recipe-menu-btns-box">
+                  <button class="btn-default menu-btn edit-btn">Edit</button>
+                  <button class="btn-default menu-btn delete-btn">
+                    Delete
+                  </button>
+                </div>
+              </a>
+
+              <button class="btn-default btn-pagination btn-next">
+                <i class="fas fa-angle-right"></i>
+              </button>
+            </div>
+
+            <div class="recipes-box recipes-box-3 fast-foods-recipes">
+              <button class="btn-default btn-pagination btn-prev">
+                <i class="fas fa-angle-left"></i>
+              </button>
+
+              <a href="#90123" class="author-recipe pizza-recipe"
+                ><div class="img-box">
+                  <img src="../pizza-recipe-1.jpg" alt="pizza" />
+                </div>
+                <span class="recipe-title">Home made pizza</span>
+                <div class="recipe-menu-btns-box">
+                  <button class="btn-default menu-btn edit-btn">Edit</button>
+                  <button class="btn-default menu-btn delete-btn">
+                    Delete
+                  </button>
+                </div>
+              </a>
+
+              <a href="#90123" class="author-recipe pizza-recipe"
+                ><div class="img-box">
+                  <img
+                    src="../delish-homemade-pizza-horizontal-1542312378.png"
+                    alt="Pizza"
+                  />
+                </div>
+                <span class="recipe-title">Pizza veggies</span>
+                <div class="recipe-menu-btns-box">
+                  <button class="btn-default menu-btn edit-btn">Edit</button>
+                  <button class="btn-default menu-btn delete-btn">
+                    Delete
+                  </button>
+                </div>
+              </a>
+
+              <a href="#90123" class="author-recipe pizza-recipe"
+                ><div class="img-box">
+                  <img src="../15-Minute-Pizza-WS-Thumbnail.png" alt="Pizza" />
+                </div>
+                <span class="recipe-title">Pepporoni pizza...</span>
+                <div class="recipe-menu-btns-box">
+                  <button class="btn-default menu-btn edit-btn">Edit</button>
+                  <button class="btn-default menu-btn delete-btn">
+                    Delete
+                  </button>
+                </div>
+              </a>
+
+              <button class="btn-default btn-pagination btn-next">
+                <i class="fas fa-angle-right"></i>
+              </button>
+            </div>
+
+            <div class="recipes-box recipes-box-4 desi-foods-recipes">
+              <button class="btn-default btn-pagination btn-prev">
+                <i class="fas fa-angle-left"></i>
+              </button>
+
+              <a href="#90123" class="author-recipe pizza-recipe"
+                ><div class="img-box">
+                  <img src="../pizza-recipe-1.jpg" alt="pizza" />
+                </div>
+                <span class="recipe-title">Home made pizza</span>
+                <div class="recipe-menu-btns-box">
+                  <button class="btn-default menu-btn edit-btn">Edit</button>
+                  <button class="btn-default menu-btn delete-btn">
+                    Delete
+                  </button>
+                </div>
+              </a>
+
+              <a href="#90123" class="author-recipe pizza-recipe"
+                ><div class="img-box">
+                  <img
+                    src="../delish-homemade-pizza-horizontal-1542312378.png"
+                    alt="Pizza"
+                  />
+                </div>
+                <span class="recipe-title">Pizza veggies</span>
+                <div class="recipe-menu-btns-box">
+                  <button class="btn-default menu-btn edit-btn">Edit</button>
+                  <button class="btn-default menu-btn delete-btn">
+                    Delete
+                  </button>
+                </div>
+              </a>
+
+              <a href="#90123" class="author-recipe pizza-recipe"
+                ><div class="img-box">
+                  <img src="../15-Minute-Pizza-WS-Thumbnail.png" alt="Pizza" />
+                </div>
+                <span class="recipe-title">Pepporoni pizza...</span>
+                <div class="recipe-menu-btns-box">
+                  <button class="btn-default menu-btn edit-btn">Edit</button>
+                  <button class="btn-default menu-btn delete-btn">
+                    Delete
+                  </button>
+                </div>
+              </a>
+
+              <button class="btn-default btn-pagination btn-next">
+                <i class="fas fa-angle-right"></i>
+              </button>
+            </div>
+          </div> -->
+        </section>
+
+        <section class="most-liked-recipes-section">
+          <h2>Most Liked Recipes</h2>
+          <aside class="most-liked-recipes--container">
+            <div class="most-liked-recipe">
+              <a href="#50S65">
+                <div class="img-box">
+                  <img src="../Spaghetti.jpg" alt="Spaghetti" />
+                </div>
+                <div class="recipe-details">
+                  <span class="most-like-recipe-title">Spaghetti...</span>
+                  <i class="far fa-heart like-icon"></i>
+                  <span class="likes">14</span>
+                </div>
+              </a>
+            </div>
+
+            <div class="most-liked-recipe">
+              <a href="#50S65">
+                <div class="img-box">
+                  <img src="../Spaghetti.jpg" alt="15 min Pizza" />
+                </div>
+                <div class="recipe-details">
+                  <span class="most-like-recipe-title">15 min Pizza</span>
+                  <i class="far fa-heart like-icon"></i>
+                  <span class="likes">12</span>
+                </div>
+              </a>
+            </div>
+
+            <div class="most-liked-recipe">
+              <a href="#50S65">
+                <div class="img-box">
+                  <img src="../Spaghetti.jpg" alt="Home made Pizza" />
+                </div>
+                <div class="recipe-details">
+                  <span class="most-like-recipe-title">Pizza Home...</span>
+                  <i class="far fa-heart like-icon"></i>
+                  <span class="likes">10</span>
+                </div>
+              </a>
+            </div>
+          </aside>
+        </section>
+
+        <footer>
+          &copy; by Muhammad Sami. powered by
+          <a href="https://spoonacular.com/food-api">spoonacular-api</a>
+        </footer>
+      </main>
+    </div>
+  <script src="js/bundle.js"></script></body>
+</html>
+
+<!-------------- TODO -------------->
+<!-- 1: Create recipe view UI. (DONE)-->
+<!-- 2: Create author recipes view UI. (DONE)-->
+<!-- 3: Create build recipes UI. (DONE)-->
+<!-- 4: Implement Skeleton loaders. (DONE)-->
+<!-- 5: Create modals for showing messages on successfull & on errors. (DONE)-->
+<!-- 5: Implement sliders for recipes. (Optional) -->
+<!-- 6: Implement spinner during signup/login. (Optional) -->
+<!-- 7: Error message fade away after 1sec. (DONE)-->
+<!-- ========================================= -->
+
+<!-- <i class="far fa-heart"></i> outlined-->
+<!-- <i class="fas fa-heart"></i> -->
+<!-- <i class="fas fa-hamburger"></i> Burgers-->
+<!-- <i class="fas fa-pizza-slice"></i> Pizzas-->
+<!-- <i class="fas fa-fish"></i> Desi foods-->
+<!-- <i class="fas fa-ice-cream"></i> Deserts-->
+<!-- <i class="fas fa-arrow-right"></i> right-->
+<!-- <i class="fas fa-arrow-left"></i> left-->
+<!-- ========================================= -->
+
+<!-- UN-USED MARKUP -->
+<!-- <i class="far fa-heart like-icon"></i> -->
+<!-- <span class="likes">4</span> -->
+<!-- <i class="fas fa-arrow-right"></i> -->
+<!-- <i class="fas fa-arrow-left"></i> -->
+<!-- <div class="recipes-box recipes-box-4 desi-foods-recipes"></div> -->
+
+<!-- ERROR MESSAGES -->
+<!-- 1: Username already exists ❌-->
+<!-- 2: Cannot find user 🧐❌-->
+<!-- 3: Couldn't find the recipe you are looking for 🧐  -->
+<!-- 4: You didn't add any indgredients in the recipe 🧐❌-->
+
+<!-- SUCCESS MESSAGES -->
+<!-- 1: Logged in/Signup successfull ✔️-->
+<!-- 2: Ingredient saved in recipe ✔️-->
+<!-- 3: Recipe saved successfully ✔️-->
