@@ -771,6 +771,9 @@ main {
   z-index: 100;
   visibility: hidden;
   opacity: 0;
+}
+
+.animation {
   animation: fadeAway 20s linear 0s 0.2;
 }
 

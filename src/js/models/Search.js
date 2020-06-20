@@ -34,4 +34,4 @@ export class Search {
 
 // 566c523054244b38a477795508ded7be
 // Getting image.
-// https://spoonacular.com/recipeImages/209785-636x393.jpg
+// https://spoonacular.com/recipeImages/492560-636x393.jpg
