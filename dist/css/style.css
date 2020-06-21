@@ -429,6 +429,7 @@ main {
   grid-gap: 1.8rem;
   align-items: center;
   justify-items: center;
+  position: relative;
 }
 
 .recipe {
