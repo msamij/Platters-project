@@ -417,7 +417,7 @@ main {
 }
 
 .author-recipes-container {
-  grid-template-rows: repeat(4 1fr);
+  grid-template-rows: repeat(4, 1fr);
   grid-row-gap: 1rem;
 }
 
@@ -429,7 +429,6 @@ main {
   grid-gap: 1.8rem;
   align-items: center;
   justify-items: center;
-  position: relative;
 }
 
 .recipe {
@@ -483,7 +482,7 @@ main {
 }
 
 .recipe-menu-btns-box {
-  margin-top: 16px;
+  margin-top: 8px;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -505,11 +504,6 @@ main {
   background: linear-gradient(to right bottom, #fbdb89, #f48982);
 }
 
-.delete-btn {
-  width: 70px;
-  background: #f48982;
-}
-
 .author-title-box {
   height: 70px;
   width: 80%;
@@ -525,6 +519,11 @@ main {
 /* <------------------------------------------------------> */
 /* <-------------------PAGINATION BUTTONS-----------------> */
 /* <------------------------------------------------------> */
+
+.btn-pagination-box {
+  width: 33px;
+}
+
 .btn-pagination {
   height: 33px;
   width: 33px;
@@ -712,8 +711,13 @@ main {
 }
 
 .btn-new-ingredient,
-.btn-update-recipe {
+.btn-update-recipe,
+.btn-delete-recipe {
   width: 10.5rem;
+}
+
+.btn-delete-recipe {
+  background: #f48982;
 }
 
 .ingredient-box,

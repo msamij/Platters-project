@@ -297,6 +297,9 @@
                   placeholder="Qty"
                 />
               </div>
+              <button class="btn-default btn-submit btn-delete-recipe">
+                Delete Recipe
+              </button>
               <button class="btn-default btn-submit btn-update-recipe">
                 Update Recipe
               </button>
@@ -418,12 +421,13 @@
           <!-- ----------------------------------- -->
           <!-- RECIPES MAIN MARKUP -->
           <!-- ----------------------------------- -->
-          <div class="recipes-container">
+          <!-- <div class="recipes-container">
             <div class="recipes-box recipes-box-1 pizza-recipes">
-              <button class="btn-default btn-pagination btn-prev">
-                <i class="fas fa-angle-left"></i>
-              </button>
-
+              <div class="btn-pagination-box">
+                <button class="btn-default btn-pagination btn-prev">
+                  <i class="fas fa-angle-left"></i>
+                </button>
+              </div>
               <a href="#90123" class="recipe pizza-recipe"
                 ><div class="img-box"></div>
                 <span class="recipe-title">Home made pizza</span>
@@ -439,15 +443,19 @@
                 <span class="recipe-title">Pepporoni pizza...</span>
               </a>
 
-              <button class="btn-default btn-pagination btn-next">
-                <i class="fas fa-angle-right"></i>
-              </button>
+              <div class="btn-pagination-box">
+                <button class="btn-default btn-pagination btn-next">
+                  <i class="fas fa-angle-right"></i>
+                </button>
+              </div>
             </div>
 
             <div class="recipes-box recipes-box-2 deserts-recipes">
-              <button class="btn-default btn-pagination btn-prev">
-                <i class="fas fa-angle-left"></i>
-              </button>
+              <div class="btn-pagination-box">
+                <button class="btn-default btn-pagination btn-prev">
+                  <i class="fas fa-angle-left"></i>
+                </button>
+              </div>
 
               <a href="#90123" class="recipe desert-recipe"
                 ><div class="img-box"></div>
@@ -464,15 +472,19 @@
                 <span class="recipe-title">Pepporoni pizza...</span>
               </a>
 
-              <button class="btn-default btn-pagination btn-next">
-                <i class="fas fa-angle-right"></i>
-              </button>
+              <div class="btn-pagination-box">
+                <button class="btn-default btn-pagination btn-next">
+                  <i class="fas fa-angle-right"></i>
+                </button>
+              </div>
             </div>
 
             <div class="recipes-box recipes-box-3 fast-foods-recipes">
-              <button class="btn-default btn-pagination btn-prev">
-                <i class="fas fa-angle-left"></i>
-              </button>
+              <div class="btn-pagination-box">
+                <button class="btn-default btn-pagination btn-prev">
+                  <i class="fas fa-angle-left"></i>
+                </button>
+              </div>
 
               <a href="#90123" class="recipe fast-food-recipe"
                 ><div class="img-box"></div>
@@ -489,15 +501,19 @@
                 <span class="recipe-title">Pepporoni pizza...</span>
               </a>
 
-              <button class="btn-default btn-pagination btn-next">
-                <i class="fas fa-angle-right"></i>
-              </button>
+              <div class="btn-pagination-box">
+                <button class="btn-default btn-pagination btn-next">
+                  <i class="fas fa-angle-right"></i>
+                </button>
+              </div>
             </div>
 
             <div class="recipes-box recipes-box-4 diet-foods-recipes">
-              <button class="btn-default btn-pagination btn-prev">
-                <i class="fas fa-angle-left"></i>
-              </button>
+              <div class="btn-pagination-box">
+                <button class="btn-default btn-pagination btn-prev">
+                  <i class="fas fa-angle-left"></i>
+                </button>
+              </div>
 
               <a href="#90123" class="recipe diet-food-recipe"
                 ><div class="img-box"></div>
@@ -514,11 +530,13 @@
                 <span class="recipe-title">Pepporoni pizza...</span>
               </a>
 
-              <button class="btn-default btn-pagination btn-next">
-                <i class="fas fa-angle-right"></i>
-              </button>
+              <div class="btn-pagination-box">
+                <button class="btn-default btn-pagination btn-next">
+                  <i class="fas fa-angle-right"></i>
+                </button>
+              </div>
             </div>
-          </div>
+          </div> -->
 
           <!-- ----------------------------------- -->
           <!-- AUTHOR RECIPES MARKUP -->
@@ -529,10 +547,11 @@
 
           <!-- <div class="author-recipes-container">
             <div class="recipes-box recipes-box-1">
-              <button class="btn-default btn-pagination btn-prev">
-                <i class="fas fa-angle-left"></i>
-              </button>
-
+              <div class="btn-pagination-box">
+                <button class="btn-default btn-pagination btn-prev">
+                  <i class="fas fa-angle-left"></i>
+                </button>
+              </div>
               <a href="#90123" class="author-recipe"
                 ><div class="img-box">
                   <img src="../pizza-recipe-1.jpg" alt="Pizza" />
@@ -540,9 +559,6 @@
                 <span class="recipe-title">Home made pizza</span>
                 <div class="recipe-menu-btns-box">
                   <button class="btn-default menu-btn edit-btn">Edit</button>
-                  <button class="btn-default menu-btn delete-btn">
-                    Delete
-                  </button>
                 </div>
               </a>
 
@@ -556,9 +572,6 @@
                 <span class="recipe-title">Pizza veggies</span>
                 <div class="recipe-menu-btns-box">
                   <button class="btn-default menu-btn edit-btn">Edit</button>
-                  <button class="btn-default menu-btn delete-btn">
-                    Delete
-                  </button>
                 </div>
               </a>
 
@@ -569,21 +582,22 @@
                 <span class="recipe-title">Pepporoni pizza...</span>
                 <div class="recipe-menu-btns-box">
                   <button class="btn-default menu-btn edit-btn">Edit</button>
-                  <button class="btn-default menu-btn delete-btn">
-                    Delete
-                  </button>
                 </div>
               </a>
 
-              <button class="btn-default btn-pagination btn-next">
-                <i class="fas fa-angle-right"></i>
-              </button>
+              <div class="btn-pagination-box">
+                <button class="btn-default btn-pagination btn-next">
+                  <i class="fas fa-angle-right"></i>
+                </button>
+              </div>
             </div>
 
             <div class="recipes-box recipes-box-2">
-              <button class="btn-default btn-pagination btn-prev">
-                <i class="fas fa-angle-left"></i>
-              </button>
+              <div class="btn-pagination-box">
+                <button class="btn-default btn-pagination btn-prev">
+                  <i class="fas fa-angle-left"></i>
+                </button>
+              </div>
 
               <a href="#90123" class="author-recipe"
                 ><div class="img-box">
@@ -592,9 +606,6 @@
                 <span class="recipe-title">Home made pizza</span>
                 <div class="recipe-menu-btns-box">
                   <button class="btn-default menu-btn edit-btn">Edit</button>
-                  <button class="btn-default menu-btn delete-btn">
-                    Delete
-                  </button>
                 </div>
               </a>
 
@@ -608,9 +619,6 @@
                 <span class="recipe-title">Pizza veggies</span>
                 <div class="recipe-menu-btns-box">
                   <button class="btn-default menu-btn edit-btn">Edit</button>
-                  <button class="btn-default menu-btn delete-btn">
-                    Delete
-                  </button>
                 </div>
               </a>
 
@@ -621,21 +629,22 @@
                 <span class="recipe-title">Pepporoni pizza...</span>
                 <div class="recipe-menu-btns-box">
                   <button class="btn-default menu-btn edit-btn">Edit</button>
-                  <button class="btn-default menu-btn delete-btn">
-                    Delete
-                  </button>
                 </div>
               </a>
 
-              <button class="btn-default btn-pagination btn-next">
-                <i class="fas fa-angle-right"></i>
-              </button>
+              <div class="btn-pagination-box">
+                <button class="btn-default btn-pagination btn-next">
+                  <i class="fas fa-angle-right"></i>
+                </button>
+              </div>
             </div>
 
             <div class="recipes-box recipes-box-3">
-              <button class="btn-default btn-pagination btn-prev">
-                <i class="fas fa-angle-left"></i>
-              </button>
+              <div class="btn-pagination-box">
+                <button class="btn-default btn-pagination btn-prev">
+                  <i class="fas fa-angle-left"></i>
+                </button>
+              </div>
 
               <a href="#90123" class="author-recipe"
                 ><div class="img-box">
@@ -644,9 +653,6 @@
                 <span class="recipe-title">Home made pizza</span>
                 <div class="recipe-menu-btns-box">
                   <button class="btn-default menu-btn edit-btn">Edit</button>
-                  <button class="btn-default menu-btn delete-btn">
-                    Delete
-                  </button>
                 </div>
               </a>
 
@@ -660,9 +666,6 @@
                 <span class="recipe-title">Pizza veggies</span>
                 <div class="recipe-menu-btns-box">
                   <button class="btn-default menu-btn edit-btn">Edit</button>
-                  <button class="btn-default menu-btn delete-btn">
-                    Delete
-                  </button>
                 </div>
               </a>
 
@@ -673,21 +676,22 @@
                 <span class="recipe-title">Pepporoni pizza...</span>
                 <div class="recipe-menu-btns-box">
                   <button class="btn-default menu-btn edit-btn">Edit</button>
-                  <button class="btn-default menu-btn delete-btn">
-                    Delete
-                  </button>
                 </div>
               </a>
 
-              <button class="btn-default btn-pagination btn-next">
-                <i class="fas fa-angle-right"></i>
-              </button>
+              <div class="btn-pagination-box">
+                <button class="btn-default btn-pagination btn-next">
+                  <i class="fas fa-angle-right"></i>
+                </button>
+              </div>
             </div>
 
             <div class="recipes-box recipes-box-4">
-              <button class="btn-default btn-pagination btn-prev">
-                <i class="fas fa-angle-left"></i>
-              </button>
+              <div class="btn-pagination-box">
+                <button class="btn-default btn-pagination btn-prev">
+                  <i class="fas fa-angle-left"></i>
+                </button>
+              </div>
 
               <a href="#90123" class="author-recipe"
                 ><div class="img-box">
@@ -696,9 +700,6 @@
                 <span class="recipe-title">Home made pizza</span>
                 <div class="recipe-menu-btns-box">
                   <button class="btn-default menu-btn edit-btn">Edit</button>
-                  <button class="btn-default menu-btn delete-btn">
-                    Delete
-                  </button>
                 </div>
               </a>
 
@@ -712,9 +713,6 @@
                 <span class="recipe-title">Pizza veggies</span>
                 <div class="recipe-menu-btns-box">
                   <button class="btn-default menu-btn edit-btn">Edit</button>
-                  <button class="btn-default menu-btn delete-btn">
-                    Delete
-                  </button>
                 </div>
               </a>
 
@@ -725,15 +723,14 @@
                 <span class="recipe-title">Pepporoni pizza...</span>
                 <div class="recipe-menu-btns-box">
                   <button class="btn-default menu-btn edit-btn">Edit</button>
-                  <button class="btn-default menu-btn delete-btn">
-                    Delete
-                  </button>
                 </div>
               </a>
 
-              <button class="btn-default btn-pagination btn-next">
-                <i class="fas fa-angle-right"></i>
-              </button>
+              <div class="btn-pagination-box">
+                <button class="btn-default btn-pagination btn-next">
+                  <i class="fas fa-angle-right"></i>
+                </button>
+              </div>
             </div>
           </div> -->
         </section>

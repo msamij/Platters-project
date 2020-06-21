@@ -9,7 +9,7 @@ export class Search {
       );
       return response.data.results;
     } catch (error) {
-      alert(error);
+      console.log(error);
     }
   }
 }
