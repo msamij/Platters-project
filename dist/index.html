@@ -72,21 +72,20 @@
           </div>
 
           <!-------------- MESSAGES ------------->
-          <!-- <div class="message success-message">
-            <h2>Logged in successfully ✔️</h2>
-          </div> -->
+          <div class="message success-message">
+            <h2 class="success"></h2>
+          </div>
 
-          <!-- <div class="message error-message">
-            <h2>Couldn't find the recipe you are looking for 🧐❌</h2>
-            <h2>You didn't add any indgredients in the recipe ❌</h2>
-          </div> -->
+          <div class="message error-message">
+            <h2 class="error"></h2>
+          </div>
           <!------------------------------>
 
           <div class="likes-box">
             <div class="likes-icon">
               <i class="fas fa-heart"></i>
             </div>
-            <div class="liked-items">
+            <!-- <div class="liked-items">
               <a href="#09067" class="liked-item">
                 <div class="liked-item--img">
                   <img src="../Spaghetti.jpg" alt="Spaghetti" />
@@ -100,7 +99,7 @@
                 </div>
                 <span>Home made spaghetti...</span>
               </a>
-            </div>
+            </div> -->
           </div>
         </div>
       </header>
@@ -118,11 +117,11 @@
             <button class="btn-default btn-categories btn-deserts">
               <i class="fas fa-ice-cream"></i> <span>Deserts</span>
             </button>
+            <button class="btn-default btn-categories btn-diet-foods">
+              <i class="fas fa-carrot"></i> <span>Diet Foods</span>
+            </button>
             <button class="btn-default btn-categories btn-fast-foods">
               <i class="fas fa-hamburger"></i> <span>Fast Foods</span>
-            </button>
-            <button class="btn-default btn-categories btn-desi-foods">
-              <i class="fas fa-fish"></i> <span>Desi Foods</span>
             </button>
           </nav>
         </section>
@@ -298,6 +297,9 @@
                   placeholder="Qty"
                 />
               </div>
+              <button class="btn-default btn-submit btn-delete-recipe">
+                Delete Recipe
+              </button>
               <button class="btn-default btn-submit btn-update-recipe">
                 Update Recipe
               </button>
@@ -420,140 +422,107 @@
           <!-- RECIPES MAIN MARKUP -->
           <!-- ----------------------------------- -->
           <div class="recipes-container">
-            <div class="recipes-box recipes-box-1 pizza-recipes">
-              <button class="btn-default btn-pagination btn-prev">
-                <i class="fas fa-angle-left"></i>
-              </button>
+            <div class="recipes-box recipes-box-1">
+              <div
+                class="btn-pagination-box btn-pagination-box-1 btn-pagination-box-prev"
+              ></div>
+              <div class="recipes recipes-1">
+                <a href="#" class="recipe"
+                  ><div class="img-box skeleton"></div>
+                  <span class="recipe-title skeleton"></span>
+                </a>
 
-              <a href="#90123" class="recipe pizza-recipe"
-                ><div class="img-box">
-                  <img src="../pizza-recipe-1.jpg" alt="Pizza" />
-                </div>
-                <span class="recipe-title">Home made pizza</span>
-              </a>
+                <a href="#" class="recipe"
+                  ><div class="img-box skeleton"></div>
+                  <span class="recipe-title skeleton"></span>
+                </a>
 
-              <a href="#90123" class="recipe pizza-recipe"
-                ><div class="img-box">
-                  <img
-                    src="../delish-homemade-pizza-horizontal-1542312378.png"
-                    alt="Pizza"
-                  />
-                </div>
-                <span class="recipe-title">Pizza veggies</span>
-              </a>
-
-              <a href="#90123" class="recipe pizza-recipe"
-                ><div class="img-box">
-                  <img src="../15-Minute-Pizza-WS-Thumbnail.png" alt="Pizza" />
-                </div>
-                <span class="recipe-title">Pepporoni pizza...</span>
-              </a>
-
-              <button class="btn-default btn-pagination btn-next">
-                <i class="fas fa-angle-right"></i>
-              </button>
+                <a href="#" class="recipe"
+                  ><div class="img-box skeleton"></div>
+                  <span class="recipe-title skeleton"></span>
+                </a>
+              </div>
+              <div
+                class="btn-pagination-box btn-pagination-box-1 btn-pagination-box-next"
+              ></div>
             </div>
 
-            <div class="recipes-box recipes-box-2 deserts-recipes">
-              <button class="btn-default btn-pagination btn-prev">
-                <i class="fas fa-angle-left"></i>
-              </button>
+            <div class="recipes-box recipes-box-2">
+              <div
+                class="btn-pagination-box btn-pagination-box-2 btn-pagination-box-prev"
+              ></div>
 
-              <a href="#90123" class="recipe pizza-recipe"
-                ><div class="img-box">
-                  <img src="../pizza-recipe-1.jpg" alt="Pizza" />
-                </div>
-                <span class="recipe-title">Home made pizza</span>
-              </a>
+              <div class="recipes recipes-2">
+                <a href="#" class="recipe"
+                  ><div class="img-box skeleton"></div>
+                  <span class="recipe-title skeleton"></span>
+                </a>
 
-              <a href="#90123" class="recipe pizza-recipe"
-                ><div class="img-box">
-                  <img
-                    src="../delish-homemade-pizza-horizontal-1542312378.png"
-                    alt="Pizza"
-                  />
-                </div>
-                <span class="recipe-title">Pizza veggies</span>
-              </a>
+                <a href="#" class="recipe"
+                  ><div class="img-box skeleton"></div>
+                  <span class="recipe-title skeleton"></span>
+                </a>
 
-              <a href="#90123" class="recipe pizza-recipe"
-                ><div class="img-box">
-                  <img src="../15-Minute-Pizza-WS-Thumbnail.png" alt="pizza" />
-                </div>
-                <span class="recipe-title">Pepporoni pizza...</span>
-              </a>
-
-              <button class="btn-default btn-pagination btn-next">
-                <i class="fas fa-angle-right"></i>
-              </button>
+                <a href="#" class="recipe"
+                  ><div class="img-box skeleton"></div>
+                  <span class="recipe-title skeleton"></span>
+                </a>
+              </div>
+              <div
+                class="btn-pagination-box btn-pagination-box-2 btn-pagination-box-next"
+              ></div>
             </div>
 
-            <div class="recipes-box recipes-box-3 fast-foods-recipes">
-              <button class="btn-default btn-pagination btn-prev">
-                <i class="fas fa-angle-left"></i>
-              </button>
+            <div class="recipes-box recipes-box-3">
+              <div
+                class="btn-pagination-box btn-pagination-box-3 btn-pagination-box-prev"
+              ></div>
 
-              <a href="#90123" class="recipe pizza-recipe"
-                ><div class="img-box">
-                  <img src="../pizza-recipe-1.jpg" alt="pizza" />
-                </div>
-                <span class="recipe-title">Home made pizza</span>
-              </a>
+              <div class="recipes recipes-3">
+                <a href="#" class="recipe"
+                  ><div class="img-box skeleton"></div>
+                  <span class="recipe-title skeleton"></span>
+                </a>
 
-              <a href="#90123" class="recipe pizza-recipe"
-                ><div class="img-box">
-                  <img
-                    src="../delish-homemade-pizza-horizontal-1542312378.png"
-                    alt="Pizza"
-                  />
-                </div>
-                <span class="recipe-title">Pizza veggies</span>
-              </a>
+                <a href="#" class="recipe"
+                  ><div class="img-box skeleton"></div>
+                  <span class="recipe-title skeleton"></span>
+                </a>
 
-              <a href="#90123" class="recipe pizza-recipe"
-                ><div class="img-box">
-                  <img src="../15-Minute-Pizza-WS-Thumbnail.png" alt="Pizza" />
-                </div>
-                <span class="recipe-title">Pepporoni pizza...</span>
-              </a>
-
-              <button class="btn-default btn-pagination btn-next">
-                <i class="fas fa-angle-right"></i>
-              </button>
+                <a href="#" class="recipe"
+                  ><div class="img-box skeleton"></div>
+                  <span class="recipe-title skeleton"></span>
+                </a>
+              </div>
+              <div
+                class="btn-pagination-box btn-pagination-box-3 btn-pagination-box-next"
+              ></div>
             </div>
 
-            <div class="recipes-box recipes-box-4 desi-foods-recipes">
-              <button class="btn-default btn-pagination btn-prev">
-                <i class="fas fa-angle-left"></i>
-              </button>
+            <div class="recipes-box recipes-box-4">
+              <div
+                class="btn-pagination-box btn-pagination-box-4 btn-pagination-box-prev"
+              ></div>
 
-              <a href="#90123" class="recipe pizza-recipe"
-                ><div class="img-box">
-                  <img src="../pizza-recipe-1.jpg" alt="pizza" />
-                </div>
-                <span class="recipe-title">Home made pizza</span>
-              </a>
+              <div class="recipes recipes-4">
+                <a href="#" class="recipe"
+                  ><div class="img-box skeleton"></div>
+                  <span class="recipe-title skeleton"></span>
+                </a>
 
-              <a href="#90123" class="recipe pizza-recipe"
-                ><div class="img-box">
-                  <img
-                    src="../delish-homemade-pizza-horizontal-1542312378.png"
-                    alt="Pizza"
-                  />
-                </div>
-                <span class="recipe-title">Pizza veggies</span>
-              </a>
+                <a href="#" class="recipe"
+                  ><div class="img-box skeleton"></div>
+                  <span class="recipe-title skeleton"></span>
+                </a>
 
-              <a href="#90123" class="recipe pizza-recipe"
-                ><div class="img-box">
-                  <img src="../15-Minute-Pizza-WS-Thumbnail.png" alt="Pizza" />
-                </div>
-                <span class="recipe-title">Pepporoni pizza...</span>
-              </a>
-
-              <button class="btn-default btn-pagination btn-next">
-                <i class="fas fa-angle-right"></i>
-              </button>
+                <a href="#" class="recipe"
+                  ><div class="img-box skeleton"></div>
+                  <span class="recipe-title skeleton"></span>
+                </a>
+              </div>
+              <div
+                class="btn-pagination-box btn-pagination-box-4 btn-pagination-box-next"
+              ></div>
             </div>
           </div>
 
@@ -565,219 +534,235 @@
           </div> -->
 
           <!-- <div class="author-recipes-container">
-            <div class="recipes-box recipes-box-1 pizza-recipes">
-              <button class="btn-default btn-pagination btn-prev">
-                <i class="fas fa-angle-left"></i>
-              </button>
+            <div class="recipes-box recipes-box-1">
+              <div
+                class="btn-pagination-box btn-pagination-box-1 btn-pagination-box-prev"
+              >
+                <button class="btn-default btn-pagination btn-prev">
+                  <i class="fas fa-angle-left"></i>
+                </button>
+              </div>
 
-              <a href="#90123" class="author-recipe pizza-recipe"
-                ><div class="img-box">
-                  <img src="../pizza-recipe-1.jpg" alt="Pizza" />
-                </div>
-                <span class="recipe-title">Home made pizza</span>
-                <div class="recipe-menu-btns-box">
-                  <button class="btn-default menu-btn edit-btn">Edit</button>
-                  <button class="btn-default menu-btn delete-btn">
-                    Delete
-                  </button>
-                </div>
-              </a>
+              <div class="recipes recipes-1">
+                <a href="#90123" class="author-recipe"
+                  ><div class="img-box">
+                    <img src="../pizza-recipe-1.jpg" alt="Pizza" />
+                  </div>
+                  <span class="recipe-title">Home made pizza</span>
+                  <div class="recipe-menu-btns-box">
+                    <button class="btn-default menu-btn edit-btn">Edit</button>
+                  </div>
+                </a>
 
-              <a href="#90123" class="author-recipe pizza-recipe"
-                ><div class="img-box">
-                  <img
-                    src="../delish-homemade-pizza-horizontal-1542312378.png"
-                    alt="Pizza"
-                  />
-                </div>
-                <span class="recipe-title">Pizza veggies</span>
-                <div class="recipe-menu-btns-box">
-                  <button class="btn-default menu-btn edit-btn">Edit</button>
-                  <button class="btn-default menu-btn delete-btn">
-                    Delete
-                  </button>
-                </div>
-              </a>
+                <a href="#90123" class="author-recipe"
+                  ><div class="img-box">
+                    <img
+                      src="../delish-homemade-pizza-horizontal-1542312378.png"
+                      alt="Pizza"
+                    />
+                  </div>
+                  <span class="recipe-title">Pizza veggies</span>
+                  <div class="recipe-menu-btns-box">
+                    <button class="btn-default menu-btn edit-btn">Edit</button>
+                  </div>
+                </a>
 
-              <a href="#90123" class="author-recipe pizza-recipe"
-                ><div class="img-box">
-                  <img src="../15-Minute-Pizza-WS-Thumbnail.png" alt="Pizza" />
-                </div>
-                <span class="recipe-title">Pepporoni pizza...</span>
-                <div class="recipe-menu-btns-box">
-                  <button class="btn-default menu-btn edit-btn">Edit</button>
-                  <button class="btn-default menu-btn delete-btn">
-                    Delete
-                  </button>
-                </div>
-              </a>
+                <a href="#90123" class="author-recipe"
+                  ><div class="img-box">
+                    <img
+                      src="../15-Minute-Pizza-WS-Thumbnail.png"
+                      alt="Pizza"
+                    />
+                  </div>
+                  <span class="recipe-title">Pepporoni pizza...</span>
+                  <div class="recipe-menu-btns-box">
+                    <button class="btn-default menu-btn edit-btn">Edit</button>
+                  </div>
+                </a>
+              </div>
 
-              <button class="btn-default btn-pagination btn-next">
-                <i class="fas fa-angle-right"></i>
-              </button>
+              <div
+                class="btn-pagination-box btn-pagination-box-1 btn-pagination-box-next"
+              >
+                <button class="btn-default btn-pagination btn-next">
+                  <i class="fas fa-angle-right"></i>
+                </button>
+              </div>
             </div>
 
-            <div class="recipes-box recipes-box-2 deserts-recipes">
-              <button class="btn-default btn-pagination btn-prev">
-                <i class="fas fa-angle-left"></i>
-              </button>
+            <div class="recipes-box recipes-box-2">
+              <div
+                class="btn-pagination-box btn-pagination-box-2 btn-pagination-box-prev"
+              >
+                <button class="btn-default btn-pagination btn-prev">
+                  <i class="fas fa-angle-left"></i>
+                </button>
+              </div>
 
-              <a href="#90123" class="author-recipe pizza-recipe"
-                ><div class="img-box">
-                  <img src="../pizza-recipe-1.jpg" alt="Pizza" />
-                </div>
-                <span class="recipe-title">Home made pizza</span>
-                <div class="recipe-menu-btns-box">
-                  <button class="btn-default menu-btn edit-btn">Edit</button>
-                  <button class="btn-default menu-btn delete-btn">
-                    Delete
-                  </button>
-                </div>
-              </a>
+              <div class="recipes recipes-2">
+                <a href="#90123" class="author-recipe"
+                  ><div class="img-box">
+                    <img src="../pizza-recipe-1.jpg" alt="Pizza" />
+                  </div>
+                  <span class="recipe-title">Home made pizza</span>
+                  <div class="recipe-menu-btns-box">
+                    <button class="btn-default menu-btn edit-btn">Edit</button>
+                  </div>
+                </a>
 
-              <a href="#90123" class="author-recipe pizza-recipe"
-                ><div class="img-box">
-                  <img
-                    src="../delish-homemade-pizza-horizontal-1542312378.png"
-                    alt="Pizza"
-                  />
-                </div>
-                <span class="recipe-title">Pizza veggies</span>
-                <div class="recipe-menu-btns-box">
-                  <button class="btn-default menu-btn edit-btn">Edit</button>
-                  <button class="btn-default menu-btn delete-btn">
-                    Delete
-                  </button>
-                </div>
-              </a>
+                <a href="#90123" class="author-recipe"
+                  ><div class="img-box">
+                    <img
+                      src="../delish-homemade-pizza-horizontal-1542312378.png"
+                      alt="Pizza"
+                    />
+                  </div>
+                  <span class="recipe-title">Pizza veggies</span>
+                  <div class="recipe-menu-btns-box">
+                    <button class="btn-default menu-btn edit-btn">Edit</button>
+                  </div>
+                </a>
 
-              <a href="#90123" class="author-recipe pizza-recipe"
-                ><div class="img-box">
-                  <img src="../15-Minute-Pizza-WS-Thumbnail.png" alt="pizza" />
-                </div>
-                <span class="recipe-title">Pepporoni pizza...</span>
-                <div class="recipe-menu-btns-box">
-                  <button class="btn-default menu-btn edit-btn">Edit</button>
-                  <button class="btn-default menu-btn delete-btn">
-                    Delete
-                  </button>
-                </div>
-              </a>
+                <a href="#90123" class="author-recipe"
+                  ><div class="img-box">
+                    <img
+                      src="../15-Minute-Pizza-WS-Thumbnail.png"
+                      alt="pizza"
+                    />
+                  </div>
+                  <span class="recipe-title">Pepporoni pizza...</span>
+                  <div class="recipe-menu-btns-box">
+                    <button class="btn-default menu-btn edit-btn">Edit</button>
+                  </div>
+                </a>
+              </div>
 
-              <button class="btn-default btn-pagination btn-next">
-                <i class="fas fa-angle-right"></i>
-              </button>
+              <div
+                class="btn-pagination-box btn-pagination-box-2 btn-pagination-box-next"
+              >
+                <button class="btn-default btn-pagination btn-next">
+                  <i class="fas fa-angle-right"></i>
+                </button>
+              </div>
             </div>
 
-            <div class="recipes-box recipes-box-3 fast-foods-recipes">
-              <button class="btn-default btn-pagination btn-prev">
-                <i class="fas fa-angle-left"></i>
-              </button>
+            <div class="recipes-box recipes-box-3">
+              <div
+                class="btn-pagination-box btn-pagination-box-3 btn-pagination-box-prev"
+              >
+                <button class="btn-default btn-pagination btn-prev">
+                  <i class="fas fa-angle-left"></i>
+                </button>
+              </div>
 
-              <a href="#90123" class="author-recipe pizza-recipe"
-                ><div class="img-box">
-                  <img src="../pizza-recipe-1.jpg" alt="pizza" />
-                </div>
-                <span class="recipe-title">Home made pizza</span>
-                <div class="recipe-menu-btns-box">
-                  <button class="btn-default menu-btn edit-btn">Edit</button>
-                  <button class="btn-default menu-btn delete-btn">
-                    Delete
-                  </button>
-                </div>
-              </a>
+              <div class="recipes recipes-3">
+                <a href="#90123" class="author-recipe"
+                  ><div class="img-box">
+                    <img src="../pizza-recipe-1.jpg" alt="pizza" />
+                  </div>
+                  <span class="recipe-title">Home made pizza</span>
+                  <div class="recipe-menu-btns-box">
+                    <button class="btn-default menu-btn edit-btn">Edit</button>
+                  </div>
+                </a>
 
-              <a href="#90123" class="author-recipe pizza-recipe"
-                ><div class="img-box">
-                  <img
-                    src="../delish-homemade-pizza-horizontal-1542312378.png"
-                    alt="Pizza"
-                  />
-                </div>
-                <span class="recipe-title">Pizza veggies</span>
-                <div class="recipe-menu-btns-box">
-                  <button class="btn-default menu-btn edit-btn">Edit</button>
-                  <button class="btn-default menu-btn delete-btn">
-                    Delete
-                  </button>
-                </div>
-              </a>
+                <a href="#90123" class="author-recipe"
+                  ><div class="img-box">
+                    <img
+                      src="../delish-homemade-pizza-horizontal-1542312378.png"
+                      alt="Pizza"
+                    />
+                  </div>
+                  <span class="recipe-title">Pizza veggies</span>
+                  <div class="recipe-menu-btns-box">
+                    <button class="btn-default menu-btn edit-btn">Edit</button>
+                  </div>
+                </a>
 
-              <a href="#90123" class="author-recipe pizza-recipe"
-                ><div class="img-box">
-                  <img src="../15-Minute-Pizza-WS-Thumbnail.png" alt="Pizza" />
-                </div>
-                <span class="recipe-title">Pepporoni pizza...</span>
-                <div class="recipe-menu-btns-box">
-                  <button class="btn-default menu-btn edit-btn">Edit</button>
-                  <button class="btn-default menu-btn delete-btn">
-                    Delete
-                  </button>
-                </div>
-              </a>
+                <a href="#90123" class="author-recipe"
+                  ><div class="img-box">
+                    <img
+                      src="../15-Minute-Pizza-WS-Thumbnail.png"
+                      alt="Pizza"
+                    />
+                  </div>
+                  <span class="recipe-title">Pepporoni pizza...</span>
+                  <div class="recipe-menu-btns-box">
+                    <button class="btn-default menu-btn edit-btn">Edit</button>
+                  </div>
+                </a>
+              </div>
 
-              <button class="btn-default btn-pagination btn-next">
-                <i class="fas fa-angle-right"></i>
-              </button>
+              <div
+                class="btn-pagination-box btn-pagination-box-3 btn-pagination-box-next"
+              >
+                <button class="btn-default btn-pagination btn-next">
+                  <i class="fas fa-angle-right"></i>
+                </button>
+              </div>
             </div>
 
-            <div class="recipes-box recipes-box-4 desi-foods-recipes">
-              <button class="btn-default btn-pagination btn-prev">
-                <i class="fas fa-angle-left"></i>
-              </button>
+            <div class="recipes-box recipes-box-4">
+              <div
+                class="btn-pagination-box btn-pagination-box-4 btn-pagination-box-prev"
+              >
+                <button class="btn-default btn-pagination btn-prev">
+                  <i class="fas fa-angle-left"></i>
+                </button>
+              </div>
 
-              <a href="#90123" class="author-recipe pizza-recipe"
-                ><div class="img-box">
-                  <img src="../pizza-recipe-1.jpg" alt="pizza" />
-                </div>
-                <span class="recipe-title">Home made pizza</span>
-                <div class="recipe-menu-btns-box">
-                  <button class="btn-default menu-btn edit-btn">Edit</button>
-                  <button class="btn-default menu-btn delete-btn">
-                    Delete
-                  </button>
-                </div>
-              </a>
+              <div class="recipes recipes-4">
+                <a href="#90123" class="author-recipe"
+                  ><div class="img-box">
+                    <img src="../pizza-recipe-1.jpg" alt="pizza" />
+                  </div>
+                  <span class="recipe-title">Home made pizza</span>
+                  <div class="recipe-menu-btns-box">
+                    <button class="btn-default menu-btn edit-btn">Edit</button>
+                  </div>
+                </a>
 
-              <a href="#90123" class="author-recipe pizza-recipe"
-                ><div class="img-box">
-                  <img
-                    src="../delish-homemade-pizza-horizontal-1542312378.png"
-                    alt="Pizza"
-                  />
-                </div>
-                <span class="recipe-title">Pizza veggies</span>
-                <div class="recipe-menu-btns-box">
-                  <button class="btn-default menu-btn edit-btn">Edit</button>
-                  <button class="btn-default menu-btn delete-btn">
-                    Delete
-                  </button>
-                </div>
-              </a>
+                <a href="#90123" class="author-recipe"
+                  ><div class="img-box">
+                    <img
+                      src="../delish-homemade-pizza-horizontal-1542312378.png"
+                      alt="Pizza"
+                    />
+                  </div>
+                  <span class="recipe-title">Pizza veggies</span>
+                  <div class="recipe-menu-btns-box">
+                    <button class="btn-default menu-btn edit-btn">Edit</button>
+                  </div>
+                </a>
 
-              <a href="#90123" class="author-recipe pizza-recipe"
-                ><div class="img-box">
-                  <img src="../15-Minute-Pizza-WS-Thumbnail.png" alt="Pizza" />
-                </div>
-                <span class="recipe-title">Pepporoni pizza...</span>
-                <div class="recipe-menu-btns-box">
-                  <button class="btn-default menu-btn edit-btn">Edit</button>
-                  <button class="btn-default menu-btn delete-btn">
-                    Delete
-                  </button>
-                </div>
-              </a>
+                <a href="#90123" class="author-recipe"
+                  ><div class="img-box">
+                    <img
+                      src="../15-Minute-Pizza-WS-Thumbnail.png"
+                      alt="Pizza"
+                    />
+                  </div>
+                  <span class="recipe-title">Pepporoni pizza...</span>
+                  <div class="recipe-menu-btns-box">
+                    <button class="btn-default menu-btn edit-btn">Edit</button>
+                  </div>
+                </a>
+              </div>
 
-              <button class="btn-default btn-pagination btn-next">
-                <i class="fas fa-angle-right"></i>
-              </button>
+              <div
+                class="btn-pagination-box btn-pagination-box-4 btn-pagination-box-next"
+              >
+                <button class="btn-default btn-pagination btn-next">
+                  <i class="fas fa-angle-right"></i>
+                </button>
+              </div>
             </div>
           </div> -->
         </section>
 
         <section class="most-liked-recipes-section">
           <h2>Most Liked Recipes</h2>
-          <aside class="most-liked-recipes--container">
+          <!-- <aside class="most-liked-recipes--container">
             <div class="most-liked-recipe">
               <a href="#50S65">
                 <div class="img-box">
@@ -816,7 +801,7 @@
                 </div>
               </a>
             </div>
-          </aside>
+          </aside> -->
         </section>
 
         <footer>
@@ -855,15 +840,22 @@
 <!-- <span class="likes">4</span> -->
 <!-- <i class="fas fa-arrow-right"></i> -->
 <!-- <i class="fas fa-arrow-left"></i> -->
-<!-- <div class="recipes-box recipes-box-4 desi-foods-recipes"></div> -->
+<!-- <div class="recipes-box recipes-box-4 diet-foods-recipes"></div> -->
+<!-- <button class="btn-default btn-pagination btn-prev">
+  <i class="fas fa-angle-left"></i>
+</button> -->
+<!-- <button class="btn-default btn-pagination btn-next">
+  <i class="fas fa-angle-right"></i>
+</button> -->
 
 <!-- ERROR MESSAGES -->
 <!-- 1: Username already exists ❌-->
 <!-- 2: Cannot find user 🧐❌-->
-<!-- 3: Couldn't find the recipe you are looking for 🧐  -->
-<!-- 4: You didn't add any indgredients in the recipe 🧐❌-->
+<!-- 3: Couldn't find the recipe you are looking for 🧐❌  -->
+<!-- 4: You didn't add any indgredients in the recipe ❌-->
 
 <!-- SUCCESS MESSAGES -->
 <!-- 1: Logged in/Signup successfull ✔️-->
-<!-- 2: Ingredient saved in recipe ✔️-->
-<!-- 3: Recipe saved successfully ✔️-->
+<!-- 2: Logged in successfully ✔️ -->
+<!-- 3: Ingredient saved in recipe ✔️-->
+<!-- 4: Recipe saved successfully ✔️-->

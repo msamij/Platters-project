@@ -421,14 +421,19 @@ main {
   grid-row-gap: 1rem;
 }
 
-.recipes-box {
-  padding: 0 20px;
+.recipes-box,
+.recipes {
   display: grid;
-  grid-template-columns: auto auto auto auto auto;
+  grid-template-columns: auto auto auto;
   justify-content: center;
-  grid-gap: 1.8rem;
+  grid-gap: 1.3rem;
   align-items: center;
   justify-items: center;
+}
+
+.recipes-box {
+  padding: 0 20px;
+  grid-gap: 1.2rem;
 }
 
 .recipe {
