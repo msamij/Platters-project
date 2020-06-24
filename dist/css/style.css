@@ -1089,3 +1089,28 @@ footer {
     opacity: 1;
   }
 }
+
+/* <------------------------------------------------> */
+/* <----------------(MEDIA QUERIES)-----------------> */
+/* <------------------------------------------------> */
+@media only screen and (max-width: 1300px) {
+  .search-form {
+    width: 23rem;
+  }
+  .btn-categories {
+    font-size: 0.9rem;
+  }
+  .most-liked-recipes-section h2 {
+    font-size: 1.1rem;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .search-form {
+    width: 20rem;
+  }
+  .btn-categories {
+    font-size: 0.8rem;
+    width: 90%;
+  }
+}
