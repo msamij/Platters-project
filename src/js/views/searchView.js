@@ -51,11 +51,11 @@ export const processRecipes = (
 };
 
 const renderRecipes = (recipe, recipeBoxNo, page, noOfResults, resPerPage) => {
-  const recipeMarkup = `<div class="recipes-box recipes-box-${recipeBoxNo} pizza-recipes">
+  const recipeMarkup = `<div class="recipes-box recipes-box-${recipeBoxNo}">
           <div class="btn-pagination-box btn-pagination-box-${recipeBoxNo} btn-pagination-box-prev"></div>
           
           <div class="recipes recipes-${recipeBoxNo}">
-          <a href="#${recipe[0].id}" class="recipe pizza-recipe">
+          <a href="#${recipe[0].id}" class="recipe">
             <div class="img-box">
               <img
                 src="https://spoonacular.com/recipeImages/${
@@ -69,7 +69,7 @@ const renderRecipes = (recipe, recipeBoxNo, page, noOfResults, resPerPage) => {
             )}</span>
           </a>
 
-          <a href="#${recipe[1].id}" class="recipe pizza-recipe">
+          <a href="#${recipe[1].id}" class="recipe">
             <div class="img-box">
               <img
                 src="https://spoonacular.com/recipeImages/${
@@ -83,7 +83,7 @@ const renderRecipes = (recipe, recipeBoxNo, page, noOfResults, resPerPage) => {
             )}</span>
           </a>
 
-          <a href="#${recipe[2].id}" class="recipe pizza-recipe">
+          <a href="#${recipe[2].id}" class="recipe">
             <div class="img-box">
               <img
                 src="https://spoonacular.com/recipeImages/${
@@ -115,7 +115,7 @@ const paginateRecipes = (
   let recipeMarkup;
   recipe.forEach((recipe) => {
     recipeMarkup = `
-      <a href="#${recipe.id}" class="recipe pizza-recipe">
+      <a href="#${recipe.id}" class="recipe">
           <div class="img-box">
             <img
               src="https://spoonacular.com/recipeImages/${
