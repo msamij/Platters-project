@@ -267,7 +267,7 @@ const removePaginationBtns = (paginationBoxNo) => {
 
 const parseRecipeTitle = (title, limit = 13) => {
   const strArr = title.split(" ");
-  const signs = ["-", ":", "=", ",", "/", "–", "-"];
+  const signs = ["-", ":", "=", ",", "/", "–"];
 
   // *- (Let's pretend that there are signs in a string).
   // *- 1: Split title into an array so that we can apply loop.
