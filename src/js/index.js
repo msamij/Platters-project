@@ -12,7 +12,7 @@ let state = {};
 // TODO:
 // 1: Render all recipes on load (DONE).
 // 2: Implement recipe Search (using form).
-// 3: Implement recipes pagination.
+// 3: Implement recipes pagination (DONE).
 // 4: Implement recipe details (ID).
 // 5: Implement error handling.
 // 6: Implement recipe liking model.
@@ -51,7 +51,7 @@ const controlAppLoad = async () => {
   !appLoadRecipes[1].length ||
   !appLoadRecipes[2].length ||
   !appLoadRecipes[3].length
-    ? renderRecipeloadError()
+    ? renderRecipeError(`Error loading Recipes Please try again 😕`)
     : searchView.processRecipes(appLoadRecipes);
   // <==============================================================================================>
   // <==============================================================================================>
@@ -62,8 +62,9 @@ const controlAppLoad = async () => {
   // 4: Render most liked recipes (if any).
 };
 
-const renderRecipeloadError = () => {
-  const recipeLoadErrorMarkup = `<h2 class="error"> Error loading Recipes Please try again 😕</h2>`;
+// *- Render errorMessage if for some reason recipes were not fetched.
+const renderRecipeError = (errorMessage) => {
+  const recipeLoadErrorMarkup = `<h2 class="error"> ${errorMessage}</h2>`;
   DOMStrings.errorMessage.insertAdjacentHTML(
     "afterbegin",
     recipeLoadErrorMarkup
@@ -72,6 +73,7 @@ const renderRecipeloadError = () => {
   searchView.removePrevRecipesMarkup();
 };
 
+// ******/ CONTROL PAGINATION \******
 const controlPagination = (event) => {
   let recipeBoxNo, page;
   // *- As in the markup we have 4 different boxex for different types of recipe boxes.
@@ -97,6 +99,37 @@ const controlPagination = (event) => {
   }
 };
 
+// ******/ CONTROL RECIPES \******
+// *- Render recipes fetched from the API (Using recipe name) (Through search form).
+// *- Render recipes of author fetched from author |MODEL| (Using recipe name) (Through search form).
+// *- Render recipe details based on the recipe ID (Either from API or from author recipes |MODEL|).
+const controlRecipes = async (event) => {
+  // *- Check if it's a recipe query from search form.
+  if (DOMStrings.searchInput.value) {
+    // *- Get search query from search input.
+    let query = DOMStrings.searchInput.value;
+    // *- Clear search input.
+    searchView.clearSearchInput();
+    // *- Fetch recipe from API and from author recipe |MODEL|.
+    // *- For instance recipe query is "pizza" it will try to find in author recipe |MODEL| and also fetch from API.
+    // *- If it finds from both render from both, From API and from author |MODEL|.
+    // *- If cannot find recipe from API, find in author |MODEL| and then render it.
+    // *- If cannot find from both API and from author |MODEL|, then render error.
+
+    // *- Fetch recipes from API.
+    const apiRecipes = await getSearchRecipes(query);
+    // *- Check if fetching was successfull ?.
+    !apiRecipes.length;
+    // *- Save apiRecipes in state.
+    state.apiRecipes = apiRecipes;
+    // *- Get recipes from author |MODEL|
+    // const authorRecipes = author.js;
+    // *- Save authorRecipes in state.
+    // state.authorRecipes = authorRecipes
+    console.log(state);
+  }
+};
+
 // ==============================================================
 // || Whenever browser window is loaded execute controlAppLoad ||
 // ==============================================================
@@ -107,4 +140,12 @@ window.addEventListener("load", controlAppLoad);
 // ===========================================
 DOMStrings.recipesContainer.addEventListener("click", (event) => {
   controlPagination(event);
+});
+
+// ====================================
+// || Event listener for Search form ||
+// ====================================
+DOMStrings.searchForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  controlRecipes(event);
 });

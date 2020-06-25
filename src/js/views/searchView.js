@@ -1,4 +1,5 @@
 import { DOMStrings } from "./base";
+import * as markupView from "./markupView";
 
 export const processRecipes = (
   recipes,
@@ -53,7 +54,7 @@ export const processRecipes = (
 const renderRecipes = (recipe, recipeBoxNo, page, noOfResults, resPerPage) => {
   const recipeMarkup = `<div class="recipes-box recipes-box-${recipeBoxNo}">
           <div class="btn-pagination-box btn-pagination-box-${recipeBoxNo} btn-pagination-box-prev"></div>
-          
+
           <div class="recipes recipes-${recipeBoxNo}">
           <a href="#${recipe[0].id}" class="recipe">
             <div class="img-box">
@@ -96,12 +97,13 @@ const renderRecipes = (recipe, recipeBoxNo, page, noOfResults, resPerPage) => {
               recipe[2].title
             )}</span>
           </a>
-          
+
       </div>
       <div class="btn-pagination-box btn-pagination-box-${recipeBoxNo} btn-pagination-box-next"></div>
     </div>`;
-
   DOMStrings.recipesContainer.insertAdjacentHTML("beforeend", recipeMarkup);
+  // const recipes = markupView.appLoadRecipes(recipe, recipeBoxNo);
+  // DOMStrings.recipesContainer.insertAdjacentHTML("beforeend", recipes);
   renderPaginationBtns(page, recipeBoxNo, noOfResults, resPerPage);
 };
 
@@ -157,6 +159,8 @@ export const removePrevRecipesMarkup = (recipeBoxNo) => {
   }
 };
 
+export const clearSearchInput = () => (DOMStrings.searchInput.value = "");
+
 const renderPaginationBtns = (page, recipeBoxNo, noOfResults, resPerPage) => {
   let totalPages = Math.ceil(noOfResults / resPerPage);
   let btnMarkup;
@@ -175,17 +179,18 @@ const renderPaginationBtns = (page, recipeBoxNo, noOfResults, resPerPage) => {
 
   // *- If we are on one of the middle page at that point we can go both ways so render both buttons.
   else if (page > 1 && page < totalPages) {
-    btnMarkup = `<button
-        class="btn-default btn-pagination btn-prev"
-        data-goto="${page - 1}"
-      >
+    btnMarkup = `
+      <button class="btn-default btn-pagination btn-prev" data-goto="${
+        page - 1
+      }">
         <i class="fas fa-angle-left"></i>
       </button>`;
     recipeBox.firstElementChild.insertAdjacentHTML("afterbegin", btnMarkup);
 
-    btnMarkup = `<button class="btn-default btn-pagination btn-next" data-goto="${
+    btnMarkup = `
+    <button class="btn-default btn-pagination btn-next" data-goto="${
       page + 1
-    }">
+    }" >
         <i class="fas fa-angle-right"></i>
       </button>`;
     recipeBox.lastElementChild.insertAdjacentHTML("afterbegin", btnMarkup);
