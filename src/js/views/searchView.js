@@ -52,58 +52,62 @@ export const processRecipes = (
 };
 
 const renderRecipes = (recipe, recipeBoxNo, page, noOfResults, resPerPage) => {
-  const recipeMarkup = `<div class="recipes-box recipes-box-${recipeBoxNo}">
-          <div class="btn-pagination-box btn-pagination-box-${recipeBoxNo} btn-pagination-box-prev"></div>
+  // const recipeMarkup = `<div class="recipes-box recipes-box-${recipeBoxNo} pizza-recipes">
+  //         <div class="btn-pagination-box btn-pagination-box-${recipeBoxNo} btn-pagination-box-prev"></div>
 
-          <div class="recipes recipes-${recipeBoxNo}">
-          <a href="#${recipe[0].id}" class="recipe">
-            <div class="img-box">
-              <img
-                src="https://spoonacular.com/recipeImages/${
-                  recipe[0].id
-                }-636x393.jpg"
-                alt="${parseRecipeTitle(recipe[0].title)}"
-              />
-            </div>
-            <span class="recipe-title">${parseRecipeTitle(
-              recipe[0].title
-            )}</span>
-          </a>
+  //         <div class="recipes recipes-${recipeBoxNo}">
+  //         <a href="#${recipe[0].id}" class="recipe pizza-recipe">
+  //           <div class="img-box">
+  //             <img
+  //               src="https://spoonacular.com/recipeImages/${
+  //                 recipe[0].id
+  //               }-636x393.jpg"
+  //               alt="${parseRecipeTitle(recipe[0].title)}"
+  //             />
+  //           </div>
+  //           <span class="recipe-title">${parseRecipeTitle(
+  //             recipe[0].title
+  //           )}</span>
+  //         </a>
 
-          <a href="#${recipe[1].id}" class="recipe">
-            <div class="img-box">
-              <img
-                src="https://spoonacular.com/recipeImages/${
-                  recipe[1].id
-                }-636x393.jpg"
-                alt="${parseRecipeTitle(recipe[1].title)}"
-              />
-            </div>
-            <span class="recipe-title">${parseRecipeTitle(
-              recipe[1].title
-            )}</span>
-          </a>
+  //         <a href="#${recipe[1].id}" class="recipe pizza-recipe">
+  //           <div class="img-box">
+  //             <img
+  //               src="https://spoonacular.com/recipeImages/${
+  //                 recipe[1].id
+  //               }-636x393.jpg"
+  //               alt="${parseRecipeTitle(recipe[1].title)}"
+  //             />
+  //           </div>
+  //           <span class="recipe-title">${parseRecipeTitle(
+  //             recipe[1].title
+  //           )}</span>
+  //         </a>
 
-          <a href="#${recipe[2].id}" class="recipe">
-            <div class="img-box">
-              <img
-                src="https://spoonacular.com/recipeImages/${
-                  recipe[2].id
-                }-636x393.jpg"
-                alt="${parseRecipeTitle(recipe[2].title)}"
-              />
-            </div>
-            <span class="recipe-title">${parseRecipeTitle(
-              recipe[2].title
-            )}</span>
-          </a>
+  //         <a href="#${recipe[2].id}" class="recipe pizza-recipe">
+  //           <div class="img-box">
+  //             <img
+  //               src="https://spoonacular.com/recipeImages/${
+  //                 recipe[2].id
+  //               }-636x393.jpg"
+  //               alt="${parseRecipeTitle(recipe[2].title)}"
+  //             />
+  //           </div>
+  //           <span class="recipe-title">${parseRecipeTitle(
+  //             recipe[2].title
+  //           )}</span>
+  //         </a>
 
-      </div>
-      <div class="btn-pagination-box btn-pagination-box-${recipeBoxNo} btn-pagination-box-next"></div>
-    </div>`;
-  DOMStrings.recipesContainer.insertAdjacentHTML("beforeend", recipeMarkup);
-  // const recipes = markupView.appLoadRecipes(recipe, recipeBoxNo);
-  // DOMStrings.recipesContainer.insertAdjacentHTML("beforeend", recipes);
+  //     </div>
+  //     <div class="btn-pagination-box btn-pagination-box-${recipeBoxNo} btn-pagination-box-next"></div>
+  //   </div>`;
+  // DOMStrings.recipesContainer.insertAdjacentHTML("beforeend", recipeMarkup);
+
+  recipe.forEach((recipe) => {
+    recipe.title = parseRecipeTitle(recipe.title);
+  });
+  const recipes = markupView.appLoadRecipes(recipe, recipeBoxNo);
+  DOMStrings.recipesContainer.insertAdjacentHTML("beforeend", recipes);
   renderPaginationBtns(page, recipeBoxNo, noOfResults, resPerPage);
 };
 
@@ -114,25 +118,31 @@ const paginateRecipes = (
   noOfResults,
   resPerPage
 ) => {
-  let recipeMarkup;
   recipe.forEach((recipe) => {
-    recipeMarkup = `
-      <a href="#${recipe.id}" class="recipe">
-          <div class="img-box">
-            <img
-              src="https://spoonacular.com/recipeImages/${
-                recipe.id
-              }-636x393.jpg"
-              alt="${parseRecipeTitle(recipe.title)}"
-            />
-          </div>
-          <span class="recipe-title">${parseRecipeTitle(recipe.title)}</span>
-      </a>`;
-
+    recipe.title = parseRecipeTitle(recipe.title);
     document
       .querySelector(`.recipes-${recipeBoxNo}`)
-      .insertAdjacentHTML("beforeend", recipeMarkup);
+      .insertAdjacentHTML("beforeend", markupView.paginateRecipes(recipe));
   });
+  // let recipeMarkup;
+  // recipe.forEach((recipe) => {
+  //   recipeMarkup = `
+  //     <a href="#${recipe.id}" class="recipe pizza-recipe">
+  //         <div class="img-box">
+  //           <img
+  //             src="https://spoonacular.com/recipeImages/${
+  //               recipe.id
+  //             }-636x393.jpg"
+  //             alt="${parseRecipeTitle(recipe.title)}"
+  //           />
+  //         </div>
+  //         <span class="recipe-title">${parseRecipeTitle(recipe.title)}</span>
+  //     </a>`;
+
+  //   document
+  //     .querySelector(`.recipes-${recipeBoxNo}`)
+  //     .insertAdjacentHTML("beforeend", recipeMarkup);
+  // });
   renderPaginationBtns(page, recipeBoxNo, noOfResults, resPerPage);
 };
 
@@ -179,18 +189,17 @@ const renderPaginationBtns = (page, recipeBoxNo, noOfResults, resPerPage) => {
 
   // *- If we are on one of the middle page at that point we can go both ways so render both buttons.
   else if (page > 1 && page < totalPages) {
-    btnMarkup = `
-      <button class="btn-default btn-pagination btn-prev" data-goto="${
-        page - 1
-      }">
+    btnMarkup = `<button
+        class="btn-default btn-pagination btn-prev"
+        data-goto="${page - 1}"
+      >
         <i class="fas fa-angle-left"></i>
       </button>`;
     recipeBox.firstElementChild.insertAdjacentHTML("afterbegin", btnMarkup);
 
-    btnMarkup = `
-    <button class="btn-default btn-pagination btn-next" data-goto="${
+    btnMarkup = `<button class="btn-default btn-pagination btn-next" data-goto="${
       page + 1
-    }" >
+    }">
         <i class="fas fa-angle-right"></i>
       </button>`;
     recipeBox.lastElementChild.insertAdjacentHTML("afterbegin", btnMarkup);
