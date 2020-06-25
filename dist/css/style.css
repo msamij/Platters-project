@@ -1097,6 +1097,9 @@ footer {
   .search-form {
     width: 23rem;
   }
+  .search-form:focus-within {
+    width: 23.4rem;
+  }
   .btn-categories {
     font-size: 0.9rem;
   }
@@ -1108,6 +1111,9 @@ footer {
 @media only screen and (max-width: 1200px) {
   .search-form {
     width: 20rem;
+  }
+  .search-form:focus-within {
+    width: 20.3rem;
   }
   .btn-categories {
     font-size: 0.8rem;

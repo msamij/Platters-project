@@ -44,6 +44,7 @@ const controlAppLoad = async () => {
   }
   // *- Save recipes in state.
   state.appLoadRecipes = appLoadRecipes;
+  // console.log(state.appLoadRecipes);
   // *- Now in the recipe[] we have 4 different types of recipes[] that can be rendered on the UI.
   // *- If there's an error while fetching recipes render error on UI, else render recipes.
   // appLoadRecipes[0] = [];

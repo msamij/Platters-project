@@ -139,7 +139,7 @@ export const appLoadRecipes = (recipe, recipeBoxNo) => {
   return appLoadRecipes;
 };
 
-export const paginateRecipes = (recipe) => {
+export const paginationRecipes = (recipe) => {
   const recipeMarkup = ` <a href="#${recipe.id}" class="recipe pizza-recipe">
     <div class="img-box">
       <img
@@ -150,4 +150,13 @@ export const paginateRecipes = (recipe) => {
     <span class="recipe-title">${recipe.title}</span>
     </a>`;
   return recipeMarkup;
+};
+
+export const paginationbtn = (isNext, page) => {
+  const btnMarkup = `<button class="btn-default btn-pagination btn-${
+    isNext === "next" ? "next" : "prev"
+  }" data-goto="${isNext === "next" ? page + 1 : page - 1}">
+  <i class="fas fa-angle-${isNext === "next" ? "right" : "left"}"></i>
+</button>`;
+  return btnMarkup;
 };

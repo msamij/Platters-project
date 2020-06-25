@@ -7,6 +7,21 @@ export const processRecipes = (
   page = 1,
   resPerPage = 3
 ) => {
+  // *- Pagination Algorithm:
+  // *- First we need to determine how many recipes we want to render per page (let's it's 3 recipes per page).
+  // *- And we have total 9 recipes which are store in an array as objects.
+  // *- So we need to have a startPoint and an endPoint for the array of recipes that we want to render.
+  // *- Let's say that we want to render first three recipes which are stored in an array.
+  // *- So the startPoint of the array would be (0) and endPoint would be (2) so it will render 3 recipes.
+  // *- But to make it more dynamic we can say that the startPoint would be the page we (currently are in -1).
+  // *- The page is let's say 1 page = 1 and so (1 - 1 = 0) * (resultsPerPage which is = 3) = 0 so the startpoint would be 0.
+  // *- Which is exactly what we want so we start at 0 and end at page = 1 * resultsPerPage = 3 which would be 3.
+  // *- So it will render first three recipes just as we defined startPoint = 0 and endPoint = 3.
+  // *- And now let's say page is 2 and so this time it will render next three recipes.
+  // *- So.. startPoint = (page = 2 - 1) = 1 * resultsPerPage = 3 which would be 3.
+  // *- Before we started at 0 and ended at 3.
+  // *- Now because we are rendering next page we will start at 3 and end at 6 and for next page we will start at 6 and end at 9.
+  // *- So this will work exactly the same for every page.
   let startPoint = (page - 1) * resPerPage;
   let endPoint = page * resPerPage;
 
@@ -17,7 +32,7 @@ export const processRecipes = (
     // *- Recipes[] will contain recipes objects which will be rendered.
     // *- First we slice the recipes.
     // *- Example: let's say our recipes are {0:{....}, 1:{....}, 2:{....}, 3:{....}}
-    // *- As we have already rendered first 3 recipes from 0 - 2 as the array is 0 based.
+    // *- As we have already rendered first 3 recipes from 0 - 2 since the array is 0 based.
     // *- Now we will render from 3 - 5
     // *- So we slice it (from start to end) where recipeBoxNo is the actual object index in recipes array.
     // *- Basically there are 4 types of recipes objects in an array [obj1={..}, obj2={...}, obj3={...}, obj4={...}].
@@ -122,7 +137,7 @@ const paginateRecipes = (
     recipe.title = parseRecipeTitle(recipe.title);
     document
       .querySelector(`.recipes-${recipeBoxNo}`)
-      .insertAdjacentHTML("beforeend", markupView.paginateRecipes(recipe));
+      .insertAdjacentHTML("beforeend", markupView.paginationRecipes(recipe));
   });
   // let recipeMarkup;
   // recipe.forEach((recipe) => {
@@ -172,49 +187,67 @@ export const removePrevRecipesMarkup = (recipeBoxNo) => {
 export const clearSearchInput = () => (DOMStrings.searchInput.value = "");
 
 const renderPaginationBtns = (page, recipeBoxNo, noOfResults, resPerPage) => {
+  // *- Initially we set the page to 1.
+  // *- Let's say that there are 3 Total pages.
+  // *- And we are on page 1 when we are on first page and there are more pages only render next button.
+  // *- With the data attribute set to page which is 1 to (page + 1) because we want to goto second page.
+  // *- For going backwards it's exactly same with (page let's say 2 - 1) so we are on second page and we want to go to first page.
+  // *- So it would be 1.
   let totalPages = Math.ceil(noOfResults / resPerPage);
-  let btnMarkup;
+  let btn;
   let recipeBox = document.querySelector(`.recipes-box-${recipeBoxNo}`);
 
   // *- If we are on first page and there's an another page then render next button.
   // *- If button is next it will insert in the last child of recipeBox which is (btn-pagination-box-next), Look in the markup.
   if (page === 1 && page < totalPages) {
-    btnMarkup = `<button class="btn-default btn-pagination btn-next" data-goto="${
-      page + 1
-    }">
-        <i class="fas fa-angle-right"></i>
-      </button>`;
-    recipeBox.lastElementChild.insertAdjacentHTML("afterbegin", btnMarkup);
+    // btnMarkup = `<button class="btn-default btn-pagination btn-next" data-goto="${
+    //   page + 1
+    // }">
+    //     <i class="fas fa-angle-right"></i>
+    //   </button>`;
+    // recipeBox.lastElementChild.insertAdjacentHTML("afterbegin", btnMarkup);
+
+    btn = markupView.paginationbtn("next", page);
+    recipeBox.lastElementChild.insertAdjacentHTML("afterbegin", btn);
   }
 
-  // *- If we are on one of the middle page at that point we can go both ways so render both buttons.
+  // *- If we are on one of the middle page that means we can go both ways so render both buttons.
   else if (page > 1 && page < totalPages) {
-    btnMarkup = `<button
-        class="btn-default btn-pagination btn-prev"
-        data-goto="${page - 1}"
-      >
-        <i class="fas fa-angle-left"></i>
-      </button>`;
-    recipeBox.firstElementChild.insertAdjacentHTML("afterbegin", btnMarkup);
+    // btnMarkup = `<button
+    //     class="btn-default btn-pagination btn-prev"
+    //     data-goto="${page - 1}"
+    //   >
+    //     <i class="fas fa-angle-left"></i>
+    //   </button>`;
+    // recipeBox.firstElementChild.insertAdjacentHTML("afterbegin", btnMarkup);
 
-    btnMarkup = `<button class="btn-default btn-pagination btn-next" data-goto="${
-      page + 1
-    }">
-        <i class="fas fa-angle-right"></i>
-      </button>`;
-    recipeBox.lastElementChild.insertAdjacentHTML("afterbegin", btnMarkup);
+    btn = markupView.paginationbtn("prev", page);
+    recipeBox.firstElementChild.insertAdjacentHTML("afterbegin", btn);
+
+    // btnMarkup = `<button class="btn-default btn-pagination btn-next" data-goto="${
+    //   page + 1
+    // }">
+    //     <i class="fas fa-angle-right"></i>
+    //   </button>`;
+    // recipeBox.lastElementChild.insertAdjacentHTML("afterbegin", btnMarkup);
+
+    btn = markupView.paginationbtn("next", page);
+    recipeBox.lastElementChild.insertAdjacentHTML("afterbegin", btn);
   }
 
   // *- If we are on the last page that means we can only go backwards so render only prev button.
   // *- If button is previous it will insert in the first child of recipeBox which is (btn-pagination-box-prev), Look in the markup.
   else if (page === totalPages) {
-    btnMarkup = `<button
-        class="btn-default btn-pagination btn-prev"
-        data-goto="${page - 1}"
-      >
-        <i class="fas fa-angle-left"></i>
-      </button>`;
-    recipeBox.firstElementChild.insertAdjacentHTML("afterbegin", btnMarkup);
+    // btnMarkup = `<button
+    //     class="btn-default btn-pagination btn-prev"
+    //     data-goto="${page - 1}"
+    //   >
+    //     <i class="fas fa-angle-left"></i>
+    //   </button>`;
+    // recipeBox.firstElementChild.insertAdjacentHTML("afterbegin", btnMarkup);
+
+    btn = markupView.paginationbtn("prev", page);
+    recipeBox.firstElementChild.insertAdjacentHTML("afterbegin", btn);
   }
 };
 
@@ -234,7 +267,7 @@ const removePaginationBtns = (paginationBoxNo) => {
 
 const parseRecipeTitle = (title, limit = 13) => {
   const strArr = title.split(" ");
-  const signs = ["-", ":", "=", ",", "/", "–"];
+  const signs = ["-", ":", "=", ",", "/", "–", "-"];
 
   // *- (Let's pretend that there are signs in a string).
   // *- 1: Split title into an array so that we can apply loop.
