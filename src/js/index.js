@@ -27,16 +27,17 @@ let state = {};
 // *- Controls rendering most liked recipes on appload.
 // *- Controls rendering Users/Author account on appload.
 const controlAppLoad = async () => {
-  // 1: Execute init function.
+  // 1: Render skeleton Loader.
+  searchView.renderSkeletonRecipes();
   // <==========================================================================================>
   // <==========================================================================================>
   // <==========================================================================================>
 
-  // 2: Get recipes from Recipes.js.
   // *- Using an array of different types of recipe queries to fetch from API.
   const recipeQueries = [`pizzas`, `deserts`, `diet foods`, `fast foods`];
   let appLoadRecipes = [];
 
+  // 2: Get recipes from Recipes.js.
   // *- As on the appload we need to render 4 different types of recipes so ⬇⬇.
   // *- Looping through every recipe["query"], get recipe object using current ["query"] and save it in results[].
   for (const rec of recipeQueries) {
@@ -44,7 +45,6 @@ const controlAppLoad = async () => {
   }
   // *- Save recipes in state.
   state.appLoadRecipes = appLoadRecipes;
-  // console.log(state.appLoadRecipes);
   // *- Now in the recipe[] we have 4 different types of recipes[] that can be rendered on the UI.
   // *- If there's an error while fetching recipes render error on UI, else render recipes.
   // appLoadRecipes[0] = [];
@@ -127,7 +127,6 @@ const controlRecipes = async (event) => {
     // const authorRecipes = author.js;
     // *- Save authorRecipes in state.
     // state.authorRecipes = authorRecipes
-    console.log(state);
   }
 };
 

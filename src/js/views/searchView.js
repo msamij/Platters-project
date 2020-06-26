@@ -14,7 +14,7 @@ export const processRecipes = (
   // *- Let's say that we want to render first three recipes which are stored in an array.
   // *- So the startPoint of the array would be (0) and endPoint would be (2) so it will render 3 recipes.
   // *- But to make it more dynamic we can say that the startPoint would be the page we (currently are in -1).
-  // *- The page is let's say 1 page = 1 and so (1 - 1 = 0) * (resultsPerPage which is = 3) = 0 so the startpoint would be 0.
+  // *- The page is let's say that page = 1 and so (1 - 1 = 0) * (resultsPerPage which is = 3) = 0 so the startpoint would be 0.
   // *- Which is exactly what we want so we start at 0 and end at page = 1 * resultsPerPage = 3 which would be 3.
   // *- So it will render first three recipes just as we defined startPoint = 0 and endPoint = 3.
   // *- And now let's say page is 2 and so this time it will render next three recipes.
@@ -67,57 +67,6 @@ export const processRecipes = (
 };
 
 const renderRecipes = (recipe, recipeBoxNo, page, noOfResults, resPerPage) => {
-  // const recipeMarkup = `<div class="recipes-box recipes-box-${recipeBoxNo} pizza-recipes">
-  //         <div class="btn-pagination-box btn-pagination-box-${recipeBoxNo} btn-pagination-box-prev"></div>
-
-  //         <div class="recipes recipes-${recipeBoxNo}">
-  //         <a href="#${recipe[0].id}" class="recipe pizza-recipe">
-  //           <div class="img-box">
-  //             <img
-  //               src="https://spoonacular.com/recipeImages/${
-  //                 recipe[0].id
-  //               }-636x393.jpg"
-  //               alt="${parseRecipeTitle(recipe[0].title)}"
-  //             />
-  //           </div>
-  //           <span class="recipe-title">${parseRecipeTitle(
-  //             recipe[0].title
-  //           )}</span>
-  //         </a>
-
-  //         <a href="#${recipe[1].id}" class="recipe pizza-recipe">
-  //           <div class="img-box">
-  //             <img
-  //               src="https://spoonacular.com/recipeImages/${
-  //                 recipe[1].id
-  //               }-636x393.jpg"
-  //               alt="${parseRecipeTitle(recipe[1].title)}"
-  //             />
-  //           </div>
-  //           <span class="recipe-title">${parseRecipeTitle(
-  //             recipe[1].title
-  //           )}</span>
-  //         </a>
-
-  //         <a href="#${recipe[2].id}" class="recipe pizza-recipe">
-  //           <div class="img-box">
-  //             <img
-  //               src="https://spoonacular.com/recipeImages/${
-  //                 recipe[2].id
-  //               }-636x393.jpg"
-  //               alt="${parseRecipeTitle(recipe[2].title)}"
-  //             />
-  //           </div>
-  //           <span class="recipe-title">${parseRecipeTitle(
-  //             recipe[2].title
-  //           )}</span>
-  //         </a>
-
-  //     </div>
-  //     <div class="btn-pagination-box btn-pagination-box-${recipeBoxNo} btn-pagination-box-next"></div>
-  //   </div>`;
-  // DOMStrings.recipesContainer.insertAdjacentHTML("beforeend", recipeMarkup);
-
   recipe.forEach((recipe) => {
     recipe.title = parseRecipeTitle(recipe.title);
   });
@@ -139,25 +88,6 @@ const paginateRecipes = (
       .querySelector(`.recipes-${recipeBoxNo}`)
       .insertAdjacentHTML("beforeend", markupView.paginationRecipes(recipe));
   });
-  // let recipeMarkup;
-  // recipe.forEach((recipe) => {
-  //   recipeMarkup = `
-  //     <a href="#${recipe.id}" class="recipe pizza-recipe">
-  //         <div class="img-box">
-  //           <img
-  //             src="https://spoonacular.com/recipeImages/${
-  //               recipe.id
-  //             }-636x393.jpg"
-  //             alt="${parseRecipeTitle(recipe.title)}"
-  //           />
-  //         </div>
-  //         <span class="recipe-title">${parseRecipeTitle(recipe.title)}</span>
-  //     </a>`;
-
-  //   document
-  //     .querySelector(`.recipes-${recipeBoxNo}`)
-  //     .insertAdjacentHTML("beforeend", recipeMarkup);
-  // });
   renderPaginationBtns(page, recipeBoxNo, noOfResults, resPerPage);
 };
 
@@ -178,76 +108,58 @@ export const removePrevRecipesMarkup = (recipeBoxNo) => {
   }
   // *- When rendering recipes on appload remove all the recipes skeleton.
   else {
-    DOMStrings.recipesBox.forEach((el) => {
-      el.parentElement.removeChild(el);
-    });
+    const recipesBox = DOMStrings.recipesContainer.childNodes;
+    recipesBox.forEach((el) => el.parentElement.removeChild(el));
   }
 };
 
+export const renderSkeletonRecipes = () =>
+  DOMStrings.recipesContainer.insertAdjacentHTML(
+    "afterbegin",
+    markupView.skeletonRecipes()
+  );
 export const clearSearchInput = () => (DOMStrings.searchInput.value = "");
 
 const renderPaginationBtns = (page, recipeBoxNo, noOfResults, resPerPage) => {
   // *- Initially we set the page to 1.
   // *- Let's say that there are 3 Total pages.
   // *- And we are on page 1 when we are on first page and there are more pages only render next button.
-  // *- With the data attribute set to page which is 1 to (page + 1) because we want to goto second page.
-  // *- For going backwards it's exactly same with (page let's say 2 - 1) so we are on second page and we want to go to first page.
+  // *- When rendering next button set data attribute to page which is let's 1 to page + 1.
+  // *- So if are on page 1 and we want to goto second page we will set data attribute for next button to page + 1.
+  // *- For going backwards it's exactly same with (page is 2) (so 2 - 1) = 1 so we are on second page and we want to go to first page.
   // *- So it would be 1.
   let totalPages = Math.ceil(noOfResults / resPerPage);
-  let btn;
   let recipeBox = document.querySelector(`.recipes-box-${recipeBoxNo}`);
 
   // *- If we are on first page and there's an another page then render next button.
   // *- If button is next it will insert in the last child of recipeBox which is (btn-pagination-box-next), Look in the markup.
   if (page === 1 && page < totalPages) {
-    // btnMarkup = `<button class="btn-default btn-pagination btn-next" data-goto="${
-    //   page + 1
-    // }">
-    //     <i class="fas fa-angle-right"></i>
-    //   </button>`;
-    // recipeBox.lastElementChild.insertAdjacentHTML("afterbegin", btnMarkup);
-
-    btn = markupView.paginationbtn("next", page);
-    recipeBox.lastElementChild.insertAdjacentHTML("afterbegin", btn);
+    recipeBox.lastElementChild.insertAdjacentHTML(
+      "afterbegin",
+      markupView.paginationbtn("next", page)
+    );
   }
 
   // *- If we are on one of the middle page that means we can go both ways so render both buttons.
   else if (page > 1 && page < totalPages) {
-    // btnMarkup = `<button
-    //     class="btn-default btn-pagination btn-prev"
-    //     data-goto="${page - 1}"
-    //   >
-    //     <i class="fas fa-angle-left"></i>
-    //   </button>`;
-    // recipeBox.firstElementChild.insertAdjacentHTML("afterbegin", btnMarkup);
+    recipeBox.firstElementChild.insertAdjacentHTML(
+      "afterbegin",
+      markupView.paginationbtn("prev", page)
+    );
 
-    btn = markupView.paginationbtn("prev", page);
-    recipeBox.firstElementChild.insertAdjacentHTML("afterbegin", btn);
-
-    // btnMarkup = `<button class="btn-default btn-pagination btn-next" data-goto="${
-    //   page + 1
-    // }">
-    //     <i class="fas fa-angle-right"></i>
-    //   </button>`;
-    // recipeBox.lastElementChild.insertAdjacentHTML("afterbegin", btnMarkup);
-
-    btn = markupView.paginationbtn("next", page);
-    recipeBox.lastElementChild.insertAdjacentHTML("afterbegin", btn);
+    recipeBox.lastElementChild.insertAdjacentHTML(
+      "afterbegin",
+      markupView.paginationbtn("next", page)
+    );
   }
 
   // *- If we are on the last page that means we can only go backwards so render only prev button.
   // *- If button is previous it will insert in the first child of recipeBox which is (btn-pagination-box-prev), Look in the markup.
   else if (page === totalPages) {
-    // btnMarkup = `<button
-    //     class="btn-default btn-pagination btn-prev"
-    //     data-goto="${page - 1}"
-    //   >
-    //     <i class="fas fa-angle-left"></i>
-    //   </button>`;
-    // recipeBox.firstElementChild.insertAdjacentHTML("afterbegin", btnMarkup);
-
-    btn = markupView.paginationbtn("prev", page);
-    recipeBox.firstElementChild.insertAdjacentHTML("afterbegin", btn);
+    recipeBox.firstElementChild.insertAdjacentHTML(
+      "afterbegin",
+      markupView.paginationbtn("prev", page)
+    );
   }
 };
 

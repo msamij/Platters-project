@@ -1,4 +1,5 @@
-export const skeletonRecipes = () => `<div class="recipes-box recipes-box-1">
+export const skeletonRecipes = () => {
+  const skeletonRecipes = `<div class="recipes-box recipes-box-1">
               <div class="btn-pagination-box btn-pagination-box-1 btn-pagination-box-prev"></div>
               <div class="recipes recipes-1">
                 <a href="#" class="recipe"
@@ -98,6 +99,8 @@ export const skeletonRecipes = () => `<div class="recipes-box recipes-box-1">
                 class="btn-pagination-box btn-pagination-box-4 btn-pagination-box-next"
               ></div>
           </div>`;
+  return skeletonRecipes;
+};
 
 export const appLoadRecipes = (recipe, recipeBoxNo) => {
   const appLoadRecipes = `<div class="recipes-box recipes-box-${recipeBoxNo}">
