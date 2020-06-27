@@ -65,11 +65,6 @@ export const processRecipes = (
       recipe.title = parseRecipeTitle(recipe.title);
     });
 
-    // const recipe = markupView.renderRecipes(
-    //   recipes.slice(startPoint, endPoint),
-    //   "1"
-    // );
-    // DOMStrings.recipesContainer.insertAdjacentHTML("afterbegin", recipe);
     DOMStrings.recipesContainer.insertAdjacentHTML(
       "afterbegin",
       markupView.renderRecipes(recipes.slice(startPoint, endPoint), "1")
@@ -138,7 +133,6 @@ export const removePrevRecipesMarkup = (recipeBoxNo) => {
   else {
     const recipesBox = DOMStrings.recipesContainer.childNodes;
     Array.from(recipesBox).forEach((el) => el.parentElement.removeChild(el));
-    // recipesBox.forEach((el) => el.parentElement.removeChild(el));
   }
 };
 
