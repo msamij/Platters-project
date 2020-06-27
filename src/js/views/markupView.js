@@ -102,8 +102,8 @@ export const skeletonRecipes = () => {
   return skeletonRecipes;
 };
 
-export const appLoadRecipes = (recipe, recipeBoxNo) => {
-  const appLoadRecipes = `<div class="recipes-box recipes-box-${recipeBoxNo}">
+export const renderRecipes = (recipe, recipeBoxNo) => {
+  const renderRecipes = `<div class="recipes-box recipes-box-${recipeBoxNo}">
       <div class="btn-pagination-box btn-pagination-box-${recipeBoxNo} btn-pagination-box-prev"></div>
 
       <div class="recipes recipes-${recipeBoxNo}">
@@ -139,11 +139,11 @@ export const appLoadRecipes = (recipe, recipeBoxNo) => {
       </div>
       <div class="btn-pagination-box btn-pagination-box-${recipeBoxNo} btn-pagination-box-next"></div>
     </div>`;
-  return appLoadRecipes;
+  return renderRecipes;
 };
 
 export const paginationRecipes = (recipe) => {
-  const recipeMarkup = ` <a href="#${recipe.id}" class="recipe pizza-recipe">
+  const recipeMarkup = ` <a href="#${recipe.id}" class="recipe">
     <div class="img-box">
       <img
         src="https://spoonacular.com/recipeImages/${recipe.id}-636x393.jpg"

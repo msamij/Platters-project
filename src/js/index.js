@@ -35,25 +35,37 @@ const controlAppLoad = async () => {
 
   // *- Using an array of different types of recipe queries to fetch from API.
   const recipeQueries = [`pizzas`, `deserts`, `diet foods`, `fast foods`];
-  let appLoadRecipes = [];
+  let recipes = [];
 
   // 2: Get recipes from Recipes.js.
   // *- As on the appload we need to render 4 different types of recipes so ⬇⬇.
   // *- Looping through every recipe["query"], get recipe object using current ["query"] and save it in results[].
   for (const rec of recipeQueries) {
-    appLoadRecipes.push(await getSearchRecipes(rec));
+    recipes.push(await getSearchRecipes(rec));
   }
   // *- Save recipes in state.
-  state.appLoadRecipes = appLoadRecipes;
+  state.recipes = recipes;
+
+  // *- A flag for rendering query recipes.
+  // *- appLoadRecipes have an array [] in which we also have 4 different types of recipes array [[rec1], [rec2], [rec3], [rec4],].
+  // *- So when we are doing pagination, the paginateRecipe method will try to access recipes at certain index.
+  // *- Let's say it's accessing [[0],[1], [2], [3]] recipe array [0].
+  // *- But in the case of query recipe we only have one array of recipes ([rec1] like this).
+  // *- It wil throw an error when we try to access a recipe that doesn't exist'.
+  // *- So if we did a query search we set the isQueryRecipes to true.
+  // *- So that it only access the array of recipe. (like this [recipe]) (Not Like this [[rec1], [rec2], [rec3]]).
+  // *- Look at the paginateRecipe method.
+
+  state.isQueryRecipes = false;
   // *- Now in the recipe[] we have 4 different types of recipes[] that can be rendered on the UI.
   // *- If there's an error while fetching recipes render error on UI, else render recipes.
-  // appLoadRecipes[0] = [];
-  !appLoadRecipes[0].length ||
-  !appLoadRecipes[1].length ||
-  !appLoadRecipes[2].length ||
-  !appLoadRecipes[3].length
+  // recipes[0] = [];
+  !recipes[0].length ||
+  !recipes[1].length ||
+  !recipes[2].length ||
+  !recipes[3].length
     ? renderRecipeError(`Error loading Recipes Please try again 😕`)
-    : searchView.processRecipes(appLoadRecipes);
+    : searchView.processRecipes(recipes);
   // <==============================================================================================>
   // <==============================================================================================>
   // <==============================================================================================>
@@ -79,8 +91,8 @@ const controlPagination = (event) => {
   let recipeBoxNo, page;
   // *- As in the markup we have 4 different boxex for different types of recipe boxes.
   // *- So we need to dettermine on which recipe box (1, 2, 3, 4 ?) (pagination btn) event has triggered.
-  // *- And based on that recipe box no it will paginate recipes.
-  // *- Let's assume that it's on recipe-box-1 so on that box we will paginate recipes.
+  // *- And based on that recipe box no it will do pagination of recipes.
+  // *- Let's assume that it's on recipe-box-1 so on that box we will do pagination of recipes.
 
   // *- First it will check if the event is fired on pagination btn or not only then process.
   if (event.target.closest(".btn-pagination")) {
@@ -96,7 +108,10 @@ const controlPagination = (event) => {
       .closest(".btn-pagination")
       .parentElement.parentElement.className.split(" ")[1]
       .split("-")[2];
-    searchView.processRecipes(state.appLoadRecipes, recipeBoxNo, page);
+
+    state.isQueryRecipes
+      ? searchView.processRecipes(state.recipes, true, "1", page)
+      : searchView.processRecipes(state.recipes, false, recipeBoxNo, page);
   }
 };
 
@@ -111,22 +126,48 @@ const controlRecipes = async (event) => {
     let query = DOMStrings.searchInput.value;
     // *- Clear search input.
     searchView.clearSearchInput();
+
     // *- Fetch recipe from API and from author recipe |MODEL|.
     // *- For instance recipe query is "pizza" it will try to find in author recipe |MODEL| and also fetch from API.
     // *- If it finds from both render from both, From API and from author |MODEL|.
     // *- If cannot find recipe from API, find in author |MODEL| and then render it.
     // *- If cannot find from both API and from author |MODEL|, then render error.
 
+    // *- Remove previous recipes.
+    searchView.removePrevRecipesMarkup();
+    // *- Render skeleton loaders.
+    searchView.renderSkeletonRecipes();
     // *- Fetch recipes from API.
-    const apiRecipes = await getSearchRecipes(query);
-    // *- Check if fetching was successfull ?.
-    !apiRecipes.length;
+    let queryRecipes = ([] = await getSearchRecipes(query));
     // *- Save apiRecipes in state.
-    state.apiRecipes = apiRecipes;
+    state.recipes = queryRecipes;
+    // *- Set the flag to true.
+    state.isQueryRecipes = true;
+
+    // <=============TO BE IMPLEMENTED=============>
     // *- Get recipes from author |MODEL|
-    // const authorRecipes = author.js;
+    // let authorRecipes;
     // *- Save authorRecipes in state.
-    // state.authorRecipes = authorRecipes
+    // state.authorRecipes = authorRecipes;
+
+    // // *- If recipe is found in both MODEL and from API.
+    // if (state.apiRecipes && state.authorRecipes)
+    //   searchView.processRecipes(state.authorRecipes);
+    // // *- If recipe is found only from API.
+    // else if (state.apiRecipes) searchView.processRecipes(state.apiRecipes, "1");
+    // // *- If recipe is found only in MODEL.
+    // else if (state.authorRecipes)
+    //   searchView.processRecipes(state.authorRecipes, "1");
+    // // *- Render error if recipe was not found.
+    // else renderRecipeError("Couldn't find the recipe you are looking for 🧐❌");
+    // <=============================================================================>
+
+    if (state.recipes.length > 0)
+      searchView.processRecipes(state.recipes, true);
+    else {
+      renderRecipeError("Couldn't find the recipe you are looking for 🧐❌");
+      controlAppLoad();
+    }
   }
 };
 
