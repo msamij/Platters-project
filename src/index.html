@@ -3,8 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Platters --> Create Recipes</title>
+    <title>Platters ___ Search & Create Recipes</title>
     <link rel="stylesheet" href="./css/style.css" />
+    <link rel="shortcut icon" href="./img/hamburger.svg" type="image/x-icon" />
     <script
       src="https://kit.fontawesome.com/62d35d416a.js"
       crossorigin="anonymous"
@@ -12,6 +13,7 @@
   </head>
   <body>
     <div class="container">
+      <div class="backdrop"></div>
       <header>
         <div class="box-left">
           <div class="logo-box">
@@ -26,7 +28,7 @@
               placeholder="Search for recipes"
             />
             <button class="btn-search btn-default">
-              <span>Search</span><i class="fas fa-search"></i>
+              <i class="fas fa-search"></i>
             </button>
           </form>
 
@@ -54,7 +56,7 @@
           </div> -->
 
           <div class="account-box author-account--box">
-            <div class="account-username author-account--username">MS</div>
+            <!-- <div class="account-username author-account--username">MS</div>
             <div class="account-box--inner box-inner--author">
               <ul class="account-menu author-account--menu">
                 <li>
@@ -68,7 +70,7 @@
                   </div>
                 </li>
               </ul>
-            </div>
+            </div> -->
           </div>
 
           <!-------------- MESSAGES ------------->
@@ -82,10 +84,10 @@
           <!------------------------------>
 
           <div class="likes-box">
-            <div class="likes-icon">
+            <!-- <div class="likes-icon">
               <i class="fas fa-heart"></i>
             </div>
-            <!-- <div class="liked-items">
+            <div class="liked-items">
               <a href="#09067" class="liked-item">
                 <div class="liked-item--img">
                   <img src="../Spaghetti.jpg" alt="Spaghetti" />
@@ -105,7 +107,6 @@
       </header>
 
       <main>
-        <!-- <div class="backdrop"></div> -->
         <section class="categories-section">
           <nav class="categories-box">
             <button class="btn-default btn-categories btn-all-foods">
@@ -130,10 +131,10 @@
           <!-- ----------------------------------- -->
           <!-- AUTHORS FORM MARKUP -->
           <!-- ----------------------------------- -->
-          <!-- <div class="form-container">
+          <div class="form-container author-form-container">
             <form class="account-form authors-form">
               <div class="btn-close-box closeform-btn-box">
-                <button class="btn-default btn-prev-alt btn-close">
+                <button class="btn-default btn-prev-alt btn-close-author-form">
                   <i class="fas fa-times"></i>
                 </button>
               </div>
@@ -162,15 +163,15 @@
               </button>
               <button class="btn-default btn-submit btn-login">Login</button>
             </form>
-          </div> -->
+          </div>
 
           <!-- ----------------------------------- -->
           <!-- USERS FORM MARKUP -->
           <!-- ----------------------------------- -->
-          <!-- <div class="form-container">
+          <div class="form-container user-form-container">
             <form class="account-form users-form">
               <div class="btn-close-box closeform-btn-box">
-                <button class="btn-default btn-prev-alt btn-close">
+                <button class="btn-default btn-prev-alt btn-close-user-form">
                   <i class="fas fa-times"></i>
                 </button>
               </div>
@@ -199,15 +200,17 @@
               </button>
               <button class="btn-default btn-submit btn-login">Login</button>
             </form>
-          </div> -->
+          </div>
 
           <!-- ----------------------------------- -->
           <!-- CREATE RECIPES MARKUP -->
           <!-- ----------------------------------- -->
-          <!-- <div class="create-recipe-container">
+          <div class="create-recipe-container">
             <form class="recipe-form">
               <div class="btn-close-box closeform-btn-box">
-                <button class="btn-default btn-prev-alt btn-close">
+                <button
+                  class="btn-default btn-prev-alt btn-close-create-recipe"
+                >
                   <i class="fas fa-times"></i>
                 </button>
               </div>
@@ -251,15 +254,15 @@
                 New Recipe
               </button>
             </form>
-          </div> -->
+          </div>
 
           <!-- ----------------------------------- -->
           <!-- EDIT RECIPIES MARKUP -->
           <!-- ----------------------------------- -->
-          <!-- <div class="edit-recipe-container">
+          <div class="edit-recipe-container">
             <form class="recipe-form edit-recipe-form">
               <div class="btn-close-box closeform-btn-box">
-                <button class="btn-default btn-prev-alt btn-close">
+                <button class="btn-default btn-prev-alt btn-close-edit-recipe">
                   <i class="fas fa-times"></i>
                 </button>
               </div>
@@ -304,7 +307,7 @@
                 Update Recipe
               </button>
             </form>
-          </div> -->
+          </div>
 
           <!-- ----------------------------------- -->
           <!-- RECIPIES VIEW MARKUP -->
@@ -316,7 +319,7 @@
                 alt="Bison Burger"
               />
               <div class="recipe-btns-box">
-                <button class="btn-default btn-prev-alt">
+                <button class="btn-default btn-prev-alt btn-close-recipe">
                   <i class="fas fa-angle-left"></i>
                 </button>
                 <button class="btn-default like-btn">
@@ -325,49 +328,42 @@
               </div>
               <div class="recipe-title-box">
                 <h2 class="recipe-title-main">
-                  Bison Burger
+                  WINTER GREEN SALAD WITH HONEY APPLE CIDER VINAIGRETTE
                 </h2>
               </div>
             </figure>
 
             <div class="recipe-details-box">
-              <h2 class="recipe-ingredient-title">
-                Ingredients
-              </h2>
-              <div class="recipe-ingredients-box">
-                <button class="btn-default btn-prev-alt">
-                  <i class="fas fa-angle-left"></i>
-                </button>
-
-                <div class="ingredients">
-                  <ul>
-                    <li>
-                      <i class="fas fa-check-circle"></i> 2 pounds ground bison
-                      (buffalo)
-                    </li>
-                    <li>
-                      <i class="fas fa-check-circle"></i> 2 tablespoons finely
-                      chopped fresh sage
-                    </li>
-                    <li>
-                      <i class="fas fa-check-circle"></i> 1 1/2 teaspoons salt
-                    </li>
-                    <li>
-                      <i class="fas fa-check-circle"></i> 2 teaspoons black
-                      pepper
-                    </li>
-                    <li>
-                      <i class="fas fa-check-circle"></i> 1/2 onion, finely
-                      chopped
-                    </li>
-                    <li>
-                      <i class="fas fa-check-circle"></i> Smoky barbecue sauce
-                    </li>
-                  </ul>
+              <div class="ingredients-container">
+                <div class="ingredient-title-box">
+                  <h2 class="recipe-ingredient-title">
+                    Ingredients
+                  </h2>
                 </div>
-                <button class="btn-default btn-forward-alt">
-                  <i class="fas fa-angle-right"></i>
-                </button>
+                <div class="recipe-ingredients-box">
+                  <div class="btn-ingredient-box ingredient-btn-box-prev">
+                    <button class="btn-default btn-ingredient btn-prev-alt">
+                      <i class="fas fa-angle-left"></i>
+                    </button>
+                  </div>
+
+                  <div class="ingredients">
+                    <ul class="ingredient-list">
+                      <li>
+                        <div>
+                          <i class="fas fa-check-circle"></i>
+                        </div>
+                        <span> 2 pounds ground bison (buffalo)</span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div class="btn-ingredient-box ingredient-btn-box-next">
+                    <button class="btn-default btn-ingredient btn-forward-alt">
+                      <i class="fas fa-angle-right"></i>
+                    </button>
+                  </div>
+                </div>
               </div>
 
               <div class="recipe-instruction-btn-box">
@@ -381,40 +377,46 @@
                     >Simply Recipes</a
                   >
                 </p>
+                <div class="instructions">
+                  <div class="btn-close-box">
+                    <button
+                      class="btn-default btn-prev-alt btn-close-ingredient"
+                    >
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+                  <span>
+                    Cook the onions: Sauté the onions in the olive oil over
+                    medium-high heat until translucent. Turn off the heat and
+                    let it cool. Mix onions, sage, salt, pepper into ground
+                    bison meat: When the onions are cool enough to touch, use
+                    your (clean) hands to gently mix them in with the bison
+                    burger meat, and add everything else. Do not overwork the
+                    meat, it will result in a tough burger. Just gently fold it
+                    until the onions, sage, salt and pepper are well mixed in.
+                    Form patties: Form patties with the meat, using about 1/4 to
+                    1/3 of a pound of meat per patty. Here's a tip on making the
+                    patty: if you press a slight indentation in the center of
+                    each patty it will help keep the burgers in a nice disk
+                    shape when cooking. Otherwise the burger will start to get a
+                    little egg-shaped as the edges contract from cooking. Grill
+                    or fry the burgers: Grill or fry the burgers on medium heat,
+                    about 6-7 minutes per side, less or more depending on the
+                    thickness of the burger and the heat of the pan/grill, or
+                    until the internal temperature is 140°F for medium rare, or
+                    160°F for well done. A note on internal temperature. If you
+                    are getting the ground meat from a source you trust (we got
+                    ours from Whole Foods) that does their own grinding on site,
+                    or you grind your own meat, you can safely cook the burgers
+                    rare or medium rare. Otherwise you'll want to cook the
+                    burgers until well done. Don’t press on your burgers while
+                    cooking, and keep the flipping to a minimum. Let the burgers
+                    rest about 5 minutes before serving. Serve the burger with
+                    lettuce and tomato, topped with a smoky barbecue
+                    sauce.</span
+                  >
+                </div>
               </div>
-            </div>
-
-            <div class="instructions">
-              <div class="btn-close-box">
-                <button class="btn-default btn-prev-alt btn-close">
-                  <i class="fas fa-times"></i>
-                </button>
-              </div>
-              Cook the onions: Sauté the onions in the olive oil over
-              medium-high heat until translucent. Turn off the heat and let it
-              cool. Mix onions, sage, salt, pepper into ground bison meat: When
-              the onions are cool enough to touch, use your (clean) hands to
-              gently mix them in with the bison burger meat, and add everything
-              else. Do not overwork the meat, it will result in a tough burger.
-              Just gently fold it until the onions, sage, salt and pepper are
-              well mixed in. Form patties: Form patties with the meat, using
-              about 1/4 to 1/3 of a pound of meat per patty. Here's a tip on
-              making the patty: if you press a slight indentation in the center
-              of each patty it will help keep the burgers in a nice disk shape
-              when cooking. Otherwise the burger will start to get a little
-              egg-shaped as the edges contract from cooking. Grill or fry the
-              burgers: Grill or fry the burgers on medium heat, about 6-7
-              minutes per side, less or more depending on the thickness of the
-              burger and the heat of the pan/grill, or until the internal
-              temperature is 140°F for medium rare, or 160°F for well done. A
-              note on internal temperature. If you are getting the ground meat
-              from a source you trust (we got ours from Whole Foods) that does
-              their own grinding on site, or you grind your own meat, you can
-              safely cook the burgers rare or medium rare. Otherwise you'll want
-              to cook the burgers until well done. Don’t press on your burgers
-              while cooking, and keep the flipping to a minimum. Let the burgers
-              rest about 5 minutes before serving. Serve the burger with lettuce
-              and tomato, topped with a smoky barbecue sauce.
             </div>
           </div> -->
 
@@ -436,14 +438,9 @@
                   ><div class="img-box skeleton"></div>
                   <span class="recipe-title skeleton"></span>
                 </a>
-
-                <a href="#" class="recipe"
-                  ><div class="img-box skeleton"></div>
-                  <span class="recipe-title skeleton"></span>
-                </a>
               </div>
               <div
-                class="btn-pagination-box btn-pagination-box-1 btn-pagination-box-next"
+                class="btn-pagination-box btn-pagination-box-1 btn-pagination-box-prev"
               ></div>
             </div>
 
@@ -453,11 +450,6 @@
               ></div>
 
               <div class="recipes recipes-2">
-                <a href="#" class="recipe"
-                  ><div class="img-box skeleton"></div>
-                  <span class="recipe-title skeleton"></span>
-                </a>
-
                 <a href="#" class="recipe"
                   ><div class="img-box skeleton"></div>
                   <span class="recipe-title skeleton"></span>
@@ -488,11 +480,6 @@
                   ><div class="img-box skeleton"></div>
                   <span class="recipe-title skeleton"></span>
                 </a>
-
-                <a href="#" class="recipe"
-                  ><div class="img-box skeleton"></div>
-                  <span class="recipe-title skeleton"></span>
-                </a>
               </div>
               <div
                 class="btn-pagination-box btn-pagination-box-3 btn-pagination-box-next"
@@ -514,11 +501,6 @@
                   ><div class="img-box skeleton"></div>
                   <span class="recipe-title skeleton"></span>
                 </a>
-
-                <a href="#" class="recipe"
-                  ><div class="img-box skeleton"></div>
-                  <span class="recipe-title skeleton"></span>
-                </a>
               </div>
               <div
                 class="btn-pagination-box btn-pagination-box-4 btn-pagination-box-next"
@@ -529,19 +511,11 @@
           <!-- ----------------------------------- -->
           <!-- AUTHOR RECIPES MARKUP -->
           <!-- ----------------------------------- -->
-          <!-- <div class="author-title-box">
-            <h2 class="author-title">Recipes by Muhammad Sami</h2>
-          </div> -->
-
           <!-- <div class="author-recipes-container">
             <div class="recipes-box recipes-box-1">
               <div
                 class="btn-pagination-box btn-pagination-box-1 btn-pagination-box-prev"
-              >
-                <button class="btn-default btn-pagination btn-prev">
-                  <i class="fas fa-angle-left"></i>
-                </button>
-              </div>
+              ></div>
 
               <div class="recipes recipes-1">
                 <a href="#90123" class="author-recipe"
@@ -566,38 +540,17 @@
                     <button class="btn-default menu-btn edit-btn">Edit</button>
                   </div>
                 </a>
-
-                <a href="#90123" class="author-recipe"
-                  ><div class="img-box">
-                    <img
-                      src="../15-Minute-Pizza-WS-Thumbnail.png"
-                      alt="Pizza"
-                    />
-                  </div>
-                  <span class="recipe-title">Pepporoni pizza...</span>
-                  <div class="recipe-menu-btns-box">
-                    <button class="btn-default menu-btn edit-btn">Edit</button>
-                  </div>
-                </a>
               </div>
 
               <div
                 class="btn-pagination-box btn-pagination-box-1 btn-pagination-box-next"
-              >
-                <button class="btn-default btn-pagination btn-next">
-                  <i class="fas fa-angle-right"></i>
-                </button>
-              </div>
+              ></div>
             </div>
 
             <div class="recipes-box recipes-box-2">
               <div
                 class="btn-pagination-box btn-pagination-box-2 btn-pagination-box-prev"
-              >
-                <button class="btn-default btn-pagination btn-prev">
-                  <i class="fas fa-angle-left"></i>
-                </button>
-              </div>
+              ></div>
 
               <div class="recipes recipes-2">
                 <a href="#90123" class="author-recipe"
@@ -622,38 +575,17 @@
                     <button class="btn-default menu-btn edit-btn">Edit</button>
                   </div>
                 </a>
-
-                <a href="#90123" class="author-recipe"
-                  ><div class="img-box">
-                    <img
-                      src="../15-Minute-Pizza-WS-Thumbnail.png"
-                      alt="pizza"
-                    />
-                  </div>
-                  <span class="recipe-title">Pepporoni pizza...</span>
-                  <div class="recipe-menu-btns-box">
-                    <button class="btn-default menu-btn edit-btn">Edit</button>
-                  </div>
-                </a>
               </div>
 
               <div
                 class="btn-pagination-box btn-pagination-box-2 btn-pagination-box-next"
-              >
-                <button class="btn-default btn-pagination btn-next">
-                  <i class="fas fa-angle-right"></i>
-                </button>
-              </div>
+              ></div>
             </div>
 
             <div class="recipes-box recipes-box-3">
               <div
                 class="btn-pagination-box btn-pagination-box-3 btn-pagination-box-prev"
-              >
-                <button class="btn-default btn-pagination btn-prev">
-                  <i class="fas fa-angle-left"></i>
-                </button>
-              </div>
+              ></div>
 
               <div class="recipes recipes-3">
                 <a href="#90123" class="author-recipe"
@@ -678,38 +610,17 @@
                     <button class="btn-default menu-btn edit-btn">Edit</button>
                   </div>
                 </a>
-
-                <a href="#90123" class="author-recipe"
-                  ><div class="img-box">
-                    <img
-                      src="../15-Minute-Pizza-WS-Thumbnail.png"
-                      alt="Pizza"
-                    />
-                  </div>
-                  <span class="recipe-title">Pepporoni pizza...</span>
-                  <div class="recipe-menu-btns-box">
-                    <button class="btn-default menu-btn edit-btn">Edit</button>
-                  </div>
-                </a>
               </div>
 
               <div
                 class="btn-pagination-box btn-pagination-box-3 btn-pagination-box-next"
-              >
-                <button class="btn-default btn-pagination btn-next">
-                  <i class="fas fa-angle-right"></i>
-                </button>
-              </div>
+              ></div>
             </div>
 
             <div class="recipes-box recipes-box-4">
               <div
                 class="btn-pagination-box btn-pagination-box-4 btn-pagination-box-prev"
-              >
-                <button class="btn-default btn-pagination btn-prev">
-                  <i class="fas fa-angle-left"></i>
-                </button>
-              </div>
+              ></div>
 
               <div class="recipes recipes-4">
                 <a href="#90123" class="author-recipe"
@@ -734,28 +645,11 @@
                     <button class="btn-default menu-btn edit-btn">Edit</button>
                   </div>
                 </a>
-
-                <a href="#90123" class="author-recipe"
-                  ><div class="img-box">
-                    <img
-                      src="../15-Minute-Pizza-WS-Thumbnail.png"
-                      alt="Pizza"
-                    />
-                  </div>
-                  <span class="recipe-title">Pepporoni pizza...</span>
-                  <div class="recipe-menu-btns-box">
-                    <button class="btn-default menu-btn edit-btn">Edit</button>
-                  </div>
-                </a>
               </div>
 
               <div
                 class="btn-pagination-box btn-pagination-box-4 btn-pagination-box-next"
-              >
-                <button class="btn-default btn-pagination btn-next">
-                  <i class="fas fa-angle-right"></i>
-                </button>
-              </div>
+              ></div>
             </div>
           </div> -->
         </section>
@@ -810,6 +704,7 @@
         </footer>
       </main>
     </div>
+    <!-- <script src="js/bundle.js"></script> -->
   </body>
 </html>
 

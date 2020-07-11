@@ -1,6 +1,8 @@
 import { DOMStrings } from "./views/base";
 import { getSearchRecipes } from "../js/models/Search";
+import Recipe from "./models/Recipes";
 import * as searchView from "./views/searchView";
+import * as recipeView from "./views/recipeView";
 
 // ******/ GLOBAL STATE OBJECT \******
 // *- Stores current recipe object.
@@ -27,7 +29,9 @@ let state = {};
 // *- Controls rendering most liked recipes on appload.
 // *- Controls rendering Users/Author account on appload.
 const controlAppLoad = async () => {
-  // 1: Render skeleton Loader.
+  // *- Remove apploadHTML
+  appLoadHTML(`hidden`, `0`);
+  // *- Render skeleton Loader.
   searchView.renderSkeletonRecipes();
   // <==========================================================================================>
   // <==========================================================================================>
@@ -37,7 +41,7 @@ const controlAppLoad = async () => {
   const recipeQueries = [`pizzas`, `deserts`, `diet foods`, `fast foods`];
   let recipes = [];
 
-  // 2: Get recipes from Recipes.js.
+  // 1: Get recipes from Recipes.js.
   // *- As on the appload we need to render 4 different types of recipes so ⬇⬇.
   // *- Looping through every recipe["query"], get recipe object using current ["query"] and save it in results[].
   for (const rec of recipeQueries) {
@@ -45,11 +49,14 @@ const controlAppLoad = async () => {
   }
   // *- Save recipes in state.
   state.recipes = recipes;
+  // *- Render apploadHTML
+  appLoadHTML(`visible`, `1`);
 
   // *- A flag for rendering query recipes.
   // *- appLoadRecipes have an array [] in which we also have 4 different types of recipes array [[rec1], [rec2], [rec3], [rec4],].
   // *- So when we are doing pagination, the paginateRecipe method will try to access recipes at certain index.
-  // *- Let's say it's accessing [[0],[1], [2], [3]] recipe array [0].
+  // *- Let's say it's accessing [[0], [1], [2], [3]] recipe array [0] where each index is also an array of recipes.
+  // *- Eg [[0] at 0 we have an array desert recipes and at [1] we have an array of fast foods recipes].
   // *- But in the case of query recipe we only have one array of recipes ([rec1] like this).
   // *- It wil throw an error when we try to access a recipe that doesn't exist'.
   // *- So if we did a query search we set the isQueryRecipes to true.
@@ -57,6 +64,7 @@ const controlAppLoad = async () => {
   // *- Look at the paginateRecipe method.
 
   state.isQueryRecipes = false;
+
   // *- Now in the recipe[] we have 4 different types of recipes[] that can be rendered on the UI.
   // *- If there's an error while fetching recipes render error on UI, else render recipes.
   // recipes[0] = [];
@@ -70,9 +78,19 @@ const controlAppLoad = async () => {
   // <==============================================================================================>
   // <==============================================================================================>
 
-  // 3: If user || author is logged in (render account menu) if ! (DO NOT render account menu).
-  // 4: Render liked recipes of user || author (if any).
+  // 2: If user || author is logged in (render account menu) if ! (DO NOT render account menu).
+  // 3: Render liked recipes of user || author (if any).
   // 4: Render most liked recipes (if any).
+};
+const appLoadHTML = (visibility, opacity) => {
+  [
+    DOMStrings.createRecipeBox,
+    DOMStrings.categoriesBox,
+    DOMStrings.searchForm,
+  ].forEach((item) => {
+    item.style.visibility = visibility;
+    item.style.opacity = opacity;
+  });
 };
 
 // *- Render errorMessage if for some reason recipes were not fetched.
@@ -82,7 +100,7 @@ const renderRecipeError = (errorMessage) => {
     "afterbegin",
     recipeLoadErrorMarkup
   );
-  DOMStrings.errorMessage.classList.add("animation");
+  DOMStrings.errorMessage.classList.add(`animation`);
   searchView.removePrevRecipesMarkup();
 };
 
@@ -95,9 +113,9 @@ const controlPagination = (event) => {
   // *- Let's assume that it's on recipe-box-1 so on that box we will do pagination of recipes.
 
   // *- First it will check if the event is fired on pagination btn or not only then process.
-  if (event.target.closest(".btn-pagination")) {
+  if (event.target.closest(`.btn-pagination`)) {
     // *- Get the data-attribute for page value.
-    page = parseInt(event.target.closest(".btn-pagination").dataset.goto);
+    page = parseInt(event.target.closest(`.btn-pagination`).dataset.goto);
     // *- Get recipe-box-no from DOM.
     // *- Move up to the recipe box in the DOM and get the className of that recipe box.
     // *- Now classNames in an array is ['recipes-box', 'recipes-box-1'] since we split it by "".
@@ -105,24 +123,23 @@ const controlPagination = (event) => {
     // *- And no we have an array of ['recipe', 'box', '1'].
     // *- And finally we retreive the recipe box no which is in this case is the 2 element in an array [2] = ['1'].
     recipeBoxNo = event.target
-      .closest(".btn-pagination")
+      .closest(`.btn-pagination`)
       .parentElement.parentElement.className.split(" ")[1]
       .split("-")[2];
 
     state.isQueryRecipes
-      ? searchView.processRecipes(state.recipes, true, "1", page)
+      ? searchView.processRecipes(state.recipes, true, `1`, page)
       : searchView.processRecipes(state.recipes, false, recipeBoxNo, page);
   }
 };
 
-// ******/ CONTROL RECIPES \******
+// ******/ CONTROL SEARCH RECIPES \******
 // *- Render recipes fetched from the API (Using recipe name) (Through search form).
 // *- Render recipes of author fetched from author |MODEL| (Using recipe name) (Through search form).
-// *- Render recipe details based on the recipe ID (Either from API or from author recipes |MODEL|).
-const controlRecipes = async (event) => {
-  // *- Check if it's a recipe query from search form.
+const controlSearchRecipes = async () => {
+  // *- Validate recipe query from search form.
   if (DOMStrings.searchInput.value) {
-    // *- Get search query from search input.
+    // *- Get search query from search input form.
     let query = DOMStrings.searchInput.value;
     // *- Clear search input.
     searchView.clearSearchInput();
@@ -143,7 +160,6 @@ const controlRecipes = async (event) => {
     state.recipes = queryRecipes;
     // *- Set the flag to true.
     state.isQueryRecipes = true;
-
     // <=============TO BE IMPLEMENTED=============>
     // *- Get recipes from author |MODEL|
     // let authorRecipes;
@@ -165,28 +181,93 @@ const controlRecipes = async (event) => {
     if (state.recipes.length > 0)
       searchView.processRecipes(state.recipes, true);
     else {
-      renderRecipeError("Couldn't find the recipe you are looking for 🧐❌");
+      renderRecipeError(`Couldn't find the recipe you are looking for 🧐❌`);
       controlAppLoad();
     }
   }
 };
 
-// ==============================================================
-// || Whenever browser window is loaded execute controlAppLoad ||
-// ==============================================================
-window.addEventListener("load", controlAppLoad);
+// ******/ CONTROL RECIPES \******
+// *- Render recipe details based on the recipe ID (Either from API or from author recipes |MODEL|).
+const controlRecipes = async () => {
+  // *- Get recipe ID from URL.
+  const ID = parseInt(window.location.hash.split("#").join(""));
+  // *- Validate ID.
+  if (ID) {
+    // *- Remove appLoadHTML.
+    appLoadHTML(`hidden`, `0`);
+    // *- Render skelteton.
+    recipeView.renderSkeletonRecipeDetails();
+    const recipe = new Recipe(ID);
+    await recipe.getRecipes();
+    // *- Save in state.
+    state.recipeDetails = recipe;
+    // *- Remove skelteton.
+    recipeView.removeRecipeDetailsMarkup();
+    // *- Render recipe
+    recipeView.processRecipeDetails(recipe);
+    // *- Render the recipe which was clicked.
+    // *- Check if recipe ID is from API recipes or from author |MODEL|.
+    // *- If recipe ID is author |MODEL|.
+    // if (isAuthorRecipe) {
+    // *- Get recipe details from author |MODEL| using ID.
+    // }
+    // *- Else it's an API recipe get recipe details from API using ID.
+  }
+};
+
+// ============================================================================
+// || Event listeners for whenever browser window is loaded and for hashchange ||
+// ============================================================================
+[`load`, `hashchange`].forEach((event) => {
+  window.addEventListener(event, () => {
+    event === `load` ? controlAppLoad() : controlRecipes();
+  });
+});
 
 // ===========================================
 // || Event listener for pagination buttons ||
 // ===========================================
-DOMStrings.recipesContainer.addEventListener("click", (event) => {
+DOMStrings.recipesContainer.addEventListener(`click`, (event) => {
   controlPagination(event);
 });
 
 // ====================================
 // || Event listener for Search form ||
 // ====================================
-DOMStrings.searchForm.addEventListener("submit", (event) => {
+DOMStrings.searchForm.addEventListener(`submit`, (event) => {
   event.preventDefault();
-  controlRecipes(event);
+  controlSearchRecipes();
+});
+
+// ===============================================================================================
+// || Event listeners for [`like button`, `close recipe button`, `ingredient pagination buttons`,
+// || `How To cook button`, `Close instruction button`]
+// ===============================================================================================
+DOMStrings.recipesSection.addEventListener(`click`, (event) => {
+  let page;
+  // *- Event listener to paginate ingredients.
+  if (event.target.closest(`.btn-ingredient`)) {
+    page = parseInt(event.target.closest(`.btn-ingredient`).dataset.goto);
+    recipeView.paginateRecipeIngredient(state.recipeDetails.ingredients, page);
+  }
+  // *- Event listener to render recipeInstructions.
+  else if (event.target.closest(`.recipe-instructions-btn`)) {
+    const instructions = document.querySelector(`.instructions`);
+    instructions.style.visibility = `visible`;
+    instructions.style.opacity = `1`;
+  }
+  // *- Event listener to close recipeInstructions.
+  else if (event.target.closest(`.btn-close-ingredient`)) {
+    const instructions = document.querySelector(`.instructions`);
+    instructions.style.visibility = `hidden`;
+    instructions.style.opacity = `0`;
+  }
+  // *- Event listener to remove recipeDetails.
+  else if (event.target.closest(`.btn-close-recipe`)) {
+    // *- Remove recipeDetails.
+    recipeView.removeRecipeDetailsMarkup(true);
+    // *- Render searchForm and categories buttons.
+    appLoadHTML(`visible`, `1`);
+  }
 });
