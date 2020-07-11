@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400");
-/* @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400&display=swap"); */
 /* <---------------------------------> */
 /* <-----------BASIC RESET-----------> */
 /* <---------------------------------> */
@@ -28,10 +27,6 @@ body {
   justify-content: center;
   align-items: center;
   background: linear-gradient(to right bottom, #ffcb74, #ff9595);
-  /* background: #ff9a76; */
-  /* background: #fbd46d; */
-  /* background: #ffa5b0; */
-  /* background: linear-gradient(to right bottom, #fbc687, #ffa5b0); */
 }
 
 .container {
@@ -119,25 +114,11 @@ header {
   align-items: center;
   justify-content: center;
   background: linear-gradient(to right bottom, #ffcb74, #ff9595);
-  /* background: #888888; */
-  /* background: #f7f7f7; */
 }
 
 .logo i {
   font-size: 1.3rem;
   color: #fff;
-  /* background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background: linear-gradient(to right bottom, #ffcb74, #ff9595); */
-  /* color: #ff9595; */
-  /* color: #888888; */
-  /* color: #ffa5b0; */
-  /* background: linear-gradient(to right bottom, #fbdb89, #f48982); */
-  /* background: linear-gradient(to right bottom, #ffcb74, #ff9595);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent; */
 }
 
 .account-username:hover + .account-box--inner,
@@ -178,7 +159,6 @@ header {
   color: #fff;
   transition: all 0.3s;
   background: linear-gradient(to right bottom, #ffcb74, #ff9595);
-  /* background: linear-gradient(to right bottom, #fbdb89, #f48982); */
 }
 
 .logout-btn:hover,
@@ -192,7 +172,6 @@ header {
 .search-form {
   height: 2.7rem;
   width: 20rem;
-  /* border-radius: 20px; */
   border-radius: 10px;
   margin: 0 auto;
   display: flex;
@@ -226,14 +205,6 @@ header {
   display: flex;
   align-items: center;
   color: #888888;
-  /* height: 2.7rem;
-  width: 130px; */
-  /* padding: 0px 10px; */
-  /* border-radius: 20px; */
-  /* font-size: 0.9rem; */
-  /* justify-content: flex-end; */
-  /* color: #c0c0c0; */
-  /* background: linear-gradient(to right bottom, #fbdb89, #f48982); */
 }
 
 .btn-search i {
@@ -323,9 +294,6 @@ header {
   cursor: pointer;
   transition: all 0.4s;
   color: #ffa299;
-  /* color: #f59a83; */
-  /* color: #ffa5b0; */
-  /* color: #ff9595; */
 }
 
 .liked-item,
@@ -377,8 +345,6 @@ main {
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   position: relative;
-  /* grid-template-columns: 1fr 4fr 1fr; */
-  /* grid-template-columns: 1fr 3fr 1fr; */
 }
 
 /* <---------------------------------------------------> */
@@ -387,7 +353,6 @@ main {
 .categories-section {
   border-bottom-left-radius: 5px;
   background: linear-gradient(to right bottom, #ffcb74, #ff9595);
-  /* background: linesar-gradient(to right bottom, #fbdb89, #f48982); */
 }
 
 .categories-box {
@@ -409,30 +374,12 @@ main {
   letter-spacing: 2px;
   transition: all 0.4s;
   text-transform: uppercase;
-  /* border-radius: 0 2px 2px 0; */
-  /* border-radius: 0px; */
-  /* color: #888888; */
-  /* color: rgb(145, 143, 143); */
-  /* padding: 20px 0 20px 15px; */
 }
 
 .btn-categories:hover,
 .btn-categories:focus {
-  /* color: #fff; */
-  /* background: #ff9595; */
-  /* background: #f7f7f7; */
-  background: #fff;
   color: #ffcb74;
-  /* border-radius: 0 20px 20px 0; */
-  /* border-radius: 10px; */
-  /* background: linear-gradient(to right bottom, #ffcb74, #ff9595);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent; */
-  /* border-left: 5px solid #fff; */
-  /* background: linear-gradient(to right bottom, #ffcb74, #ff9595); */
-
-  /* background: linear-gradient(to right bottom, #fbc687, #ffa5b0); */
+  background: #fff;
 }
 
 /* <---------------------------------------------------> */
@@ -475,7 +422,6 @@ main {
   transform: translateX(-50%);
   z-index: 1;
   width: 100%;
-  /* transform: translate(-50%, -10%); */
 }
 
 .author-recipes-container {
@@ -495,12 +441,10 @@ main {
 .recipes {
   grid-gap: 3rem;
   grid-template-columns: auto auto;
-  /* grid-gap: 1.3rem; */
 }
 
 .recipes-box {
   grid-gap: 1.2rem;
-  /* padding: 0 20px; */
 }
 
 .recipe {
@@ -551,7 +495,6 @@ main {
   margin-right: 5px;
   color: #fff;
   background: linear-gradient(to right bottom, #ffcb74, #ff9595);
-  /* background: linear-gradient(to right bottom, #fbdb89, #f48982); */
 }
 
 .recipe-menu-btns-box {
@@ -598,7 +541,6 @@ main {
 .btn-pagination i {
   font-size: 1rem;
   line-height: 33px;
-  /* background: linear-gradient(to right bottom, #fbdb89, #f48982); */
   background: linear-gradient(to right bottom, #ffcb74, #ff9595);
   background-clip: text;
   -webkit-background-clip: text;
@@ -757,7 +699,6 @@ main {
   font-family: inherit;
   letter-spacing: 2px;
   color: #fff;
-  /* background: linear-gradient(to right bottom, #fbdb89, #f48982); */
   background: linear-gradient(to right bottom, #ffcb74, #ff9595);
 
   transition: all 0.3s;
@@ -871,7 +812,6 @@ main {
 }
 
 .success-message {
-  /* background: linear-gradient(to right bottom, #fbdb89, #f48982); */
   background: linear-gradient(to right bottom, #ffcb74, #ff9595);
 }
 
@@ -945,9 +885,6 @@ main {
   transition: all 0.4s;
   color: #fff;
   background: linear-gradient(to right bottom, #ffcb74, #ff9595);
-  /* background: #f7f7f7; */
-  /* background: linear-gradient(to right bottom, #fbdb89, #f48982); */
-  /* background: linear-gradient(to right bottom, #fbc687, #ffa5b0); */
 }
 .like-btn i,
 .btn-prev-alt i,
@@ -957,16 +894,12 @@ main {
 
 .btn-prev-alt,
 .btn-forward-alt {
-  /* background: #fff; */
   background: linear-gradient(to right bottom, #ffcb74, #ff9595);
-
-  /* background: linear-gradient(to right bottom, #fbc687, #ffa5b0); */
 }
 
 .btn-prev-alt i,
 .btn-forward-alt i {
   color: #fff;
-  /* color: #ffa5b0; */
 }
 
 .like-btn:hover {
@@ -986,14 +919,6 @@ main {
   top: 65%;
   transform: translateY(-65%) skewY(-9deg);
   background: linear-gradient(to right bottom, #ffcb74, #ff9595);
-  /* background: #f7f7f7; */
-  /* transform: skewY(-9deg); */
-  /* background: linear-gradient(to right bottom, #fbdb89, #f48982); */
-  /* background: #ffa5b0; */
-  /* background: linear-gradient(to right bottom, #fbc687, #ffa5b0); */
-  /* background: linear-gradient(to right bottom, #fbc687, #ffa5b0); */
-
-  /* background: linear-gradient(to right bottom, #fbc687, #ffa5b0); */
 }
 
 .recipe-title-main,
@@ -1005,7 +930,6 @@ main {
   text-transform: uppercase;
   line-height: 1.1;
   letter-spacing: 1px;
-  /* color: #ffa5b0; */
 }
 
 /* <---------------------------------------------------------------------------------------> */
@@ -1030,14 +954,7 @@ main {
   text-align: center;
   padding: 20px;
   color: #fff;
-  /* background: linear-gradient(to right bottom, #fbdb89, #f48982); */
-  /*  background: #ffa5b0; */
-  /* background: linear-gradient(to right bottom, #fbc687, #ffa5b0); */
-  /* background: #ffff; */
-  /* color: #ffa5b0; */
   background: linear-gradient(to right bottom, #ffcb74, #ff9595);
-
-  /* background: linear-gradient(to right bottom, #fbc687, #ffa5b0); */
 }
 
 .ingredients-container {
@@ -1045,7 +962,6 @@ main {
 }
 
 .recipe-ingredients-box {
-  /* height: 55%; */
   height: 73%;
   width: 100%;
   display: flex;
@@ -1059,19 +975,6 @@ main {
   width: 35px;
   font-size: 1rem;
 }
-
-/* .recipe-ingredients-box .btn-prev-alt {
-  position: absolute;
-  left: 8%;
-  transform: translateX(-8%);
-} */
-
-/* .btn-forward-alt {
-  position: absolute;
-  right: 8%;
-  transform: translateX(-8%);
-  padding-left: 2px;
-} */
 
 .ingredient-btn-box-next {
   position: absolute;
@@ -1106,14 +1009,6 @@ main {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  /* background: #ffa5b0; */
-  /* background: linear-gradient(to right bottom, #fbc687, #ffa5b0); */
-  /* background: #fbc687; */
-
-  /* background-image: linear-gradient(to right bottom, #fbdb89, #f48982); */
-  /* background: linear-gradient(to right bottom, #fbc687, #ffa5b0); */
-  /* background: #ffff; */
-  /* color: #ffa5b0; */
 }
 
 .ingredients ul {
@@ -1152,10 +1047,6 @@ main {
   color: #fff;
   transition: all 0.3s;
   background: linear-gradient(to right bottom, #ffcb74, #ff9595);
-  /* background: #ffa5b0; */
-  /* background: linear-gradient(to right bottom, #fbc687, #ffa5b0); */
-
-  /* background: linear-gradient(to right bottom, #fbdb89, #f48982); */
 }
 
 .recipe-instructions-btn:hover {
