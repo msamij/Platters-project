@@ -1,7 +1,7 @@
 import { DOMStrings } from "./base";
 import * as markupView from "./markupView";
 
-export const processRecipeDetails = (recipe, page) => {
+export const processRecipeDetails = (recipe) => {
   // *- Parse the recipe title.
   recipe.title = parseRecipeTitle(recipe.title);
 
@@ -34,6 +34,10 @@ export const removeRecipeDetailsMarkup = (backToRecipes) => {
   }
 };
 
+export const prevRecipeDetails = () =>
+  document.querySelector(`.recipe-view-container`);
+
+// console.log("next");
 // *- Will render skeleton for recipe.
 export const renderSkeletonRecipeDetails = () =>
   DOMStrings.recipesSection.insertAdjacentHTML(
@@ -109,33 +113,35 @@ const renderRecipeInstructions = (instructions, sourceName, sourceUrl) => {
 const renderIngredientBtns = (page, noOfResults, resPerPage) => {
   let totalPages = Math.ceil(noOfResults / resPerPage);
 
-  if (page === 1 && page < totalPages) {
-    document
-      .querySelector(`.ingredient-btn-box-next`)
-      .insertAdjacentHTML(
-        `beforeend`,
-        markupView.ingredientButtons("next", page)
-      );
-  } else if (page > 1 && page < totalPages) {
-    document
-      .querySelector(`.ingredient-btn-box-prev`)
-      .insertAdjacentHTML(
-        `afterbegin`,
-        markupView.ingredientButtons("prev", page)
-      );
-    document
-      .querySelector(`.ingredient-btn-box-next`)
-      .insertAdjacentHTML(
-        `beforeend`,
-        markupView.ingredientButtons("next", page)
-      );
-  } else if (page === totalPages) {
-    document
-      .querySelector(`.ingredient-btn-box-prev`)
-      .insertAdjacentHTML(
-        `afterbegin`,
-        markupView.ingredientButtons("prev", page)
-      );
+  if (noOfResults > resPerPage) {
+    if (page === 1 && page < totalPages) {
+      document
+        .querySelector(`.ingredient-btn-box-next`)
+        .insertAdjacentHTML(
+          `beforeend`,
+          markupView.ingredientButtons("next", page)
+        );
+    } else if (page > 1 && page < totalPages) {
+      document
+        .querySelector(`.ingredient-btn-box-prev`)
+        .insertAdjacentHTML(
+          `afterbegin`,
+          markupView.ingredientButtons("prev", page)
+        );
+      document
+        .querySelector(`.ingredient-btn-box-next`)
+        .insertAdjacentHTML(
+          `beforeend`,
+          markupView.ingredientButtons("next", page)
+        );
+    } else if (page === totalPages) {
+      document
+        .querySelector(`.ingredient-btn-box-prev`)
+        .insertAdjacentHTML(
+          `afterbegin`,
+          markupView.ingredientButtons("prev", page)
+        );
+    }
   }
 };
 

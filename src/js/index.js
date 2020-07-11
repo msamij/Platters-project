@@ -64,7 +64,6 @@ const controlAppLoad = async () => {
   // *- Look at the paginateRecipe method.
 
   state.isQueryRecipes = false;
-
   // *- Now in the recipe[] we have 4 different types of recipes[] that can be rendered on the UI.
   // *- If there's an error while fetching recipes render error on UI, else render recipes.
   // recipes[0] = [];
@@ -194,6 +193,9 @@ const controlRecipes = async () => {
   const ID = parseInt(window.location.hash.split("#").join(""));
   // *- Validate ID.
   if (ID) {
+    // *- If there's already a recipe remove it from DOM.
+    if (recipeView.prevRecipeDetails())
+      recipeView.removeRecipeDetailsMarkup(true);
     // *- Remove appLoadHTML.
     appLoadHTML(`hidden`, `0`);
     // *- Render skelteton.

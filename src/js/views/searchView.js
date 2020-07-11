@@ -163,35 +163,37 @@ const renderPaginationBtns = (page, recipeBoxNo, noOfResults, resPerPage) => {
   let totalPages = Math.ceil(noOfResults / resPerPage);
   let recipeBox = document.querySelector(`.recipes-box-${recipeBoxNo}`);
 
-  // *- If we are on first page and there's an another page then render next button.
-  // *- If button is next it will insert in the last child of recipeBox which is (btn-pagination-box-next), Look in the markup.
-  if (page === 1 && page < totalPages) {
-    recipeBox.lastElementChild.insertAdjacentHTML(
-      `afterbegin`,
-      markupView.paginationbtn(`next`, page)
-    );
-  }
+  if (noOfResults > resPerPage) {
+    // *- If we are on first page and there's an another page then render next button.
+    // *- If button is next it will insert in the last child of recipeBox which is (btn-pagination-box-next), Look in the markup.
+    if (page === 1 && page < totalPages) {
+      recipeBox.lastElementChild.insertAdjacentHTML(
+        `afterbegin`,
+        markupView.paginationbtn(`next`, page)
+      );
+    }
 
-  // *- If we are on one of the middle page that means we can go both ways so render both buttons.
-  else if (page > 1 && page < totalPages) {
-    recipeBox.firstElementChild.insertAdjacentHTML(
-      `afterbegin`,
-      markupView.paginationbtn(`prev`, page)
-    );
+    // *- If we are on one of the middle page that means we can go both ways so render both buttons.
+    else if (page > 1 && page < totalPages) {
+      recipeBox.firstElementChild.insertAdjacentHTML(
+        `afterbegin`,
+        markupView.paginationbtn(`prev`, page)
+      );
 
-    recipeBox.lastElementChild.insertAdjacentHTML(
-      `afterbegin`,
-      markupView.paginationbtn(`next`, page)
-    );
-  }
+      recipeBox.lastElementChild.insertAdjacentHTML(
+        `afterbegin`,
+        markupView.paginationbtn(`next`, page)
+      );
+    }
 
-  // *- If we are on the last page that means we can only go backwards so render only prev button.
-  // *- If button is previous it will insert in the first child of recipeBox which is (btn-pagination-box-prev), Look in the markup.
-  else if (page === totalPages) {
-    recipeBox.firstElementChild.insertAdjacentHTML(
-      `afterbegin`,
-      markupView.paginationbtn(`prev`, page)
-    );
+    // *- If we are on the last page that means we can only go backwards so render only prev button.
+    // *- If button is previous it will insert in the first child of recipeBox which is (btn-pagination-box-prev), Look in the markup.
+    else if (page === totalPages) {
+      recipeBox.firstElementChild.insertAdjacentHTML(
+        `afterbegin`,
+        markupView.paginationbtn(`prev`, page)
+      );
+    }
   }
 };
 
