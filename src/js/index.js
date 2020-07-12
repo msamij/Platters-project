@@ -132,58 +132,66 @@ const controlPagination = (event) => {
   }
 };
 
-// ******/ CONTROL SEARCH RECIPES \******
-// *- Render recipes fetched from the API (Using recipe name) (Through search form).
-// *- Render recipes of author fetched from author |MODEL| (Using recipe name) (Through search form).
-const controlSearchRecipes = async () => {
-  // *- Validate recipe query from search form.
+// ******/ CONTROL QUERY  \******
+// *- Checks if query is from Search form or from categories buttons
+const controlQuery = (btnQuery) => {
+  // *- If query is from search form
   if (DOMStrings.searchInput.value) {
     // *- Get search query from search input form.
     let query = DOMStrings.searchInput.value;
     // *- Clear search input.
     searchView.clearSearchInput();
 
-    // *- Fetch recipe from API and from author recipe |MODEL|.
-    // *- For instance recipe query is "pizza" it will try to find in author recipe |MODEL| and also fetch from API.
-    // *- If it finds from both render from both, From API and from author |MODEL|.
-    // *- If cannot find recipe from API, find in author |MODEL| and then render it.
-    // *- If cannot find from both API and from author |MODEL|, then render error.
-
-    // *- Remove previous recipes.
-    searchView.removePrevRecipesMarkup();
-    // *- Render skeleton loaders.
-    searchView.renderSkeletonRecipes();
-    // *- Fetch recipes from API.
-    let queryRecipes = ([] = await getSearchRecipes(query));
-    // *- Save apiRecipes in state.
-    state.recipes = queryRecipes;
-    // *- Set the flag to true.
-    state.isQueryRecipes = true;
-    // <=============TO BE IMPLEMENTED=============>
-    // *- Get recipes from author |MODEL|
-    // let authorRecipes;
-    // *- Save authorRecipes in state.
-    // state.authorRecipes = authorRecipes;
-
-    // // *- If recipe is found in both MODEL and from API.
-    // if (state.apiRecipes && state.authorRecipes)
-    //   searchView.processRecipes(state.authorRecipes);
-    // // *- If recipe is found only from API.
-    // else if (state.apiRecipes) searchView.processRecipes(state.apiRecipes, "1");
-    // // *- If recipe is found only in MODEL.
-    // else if (state.authorRecipes)
-    //   searchView.processRecipes(state.authorRecipes, "1");
-    // // *- Render error if recipe was not found.
-    // else renderRecipeError("Couldn't find the recipe you are looking for 🧐❌");
-    // <=============================================================================>
-
-    if (state.recipes.length > 0)
-      searchView.processRecipes(state.recipes, true);
-    else {
-      renderRecipeError(`Couldn't find the recipe you are looking for 🧐❌`);
-      controlAppLoad();
-    }
+    // *- Get query recipe.
+    controlQueryRecipes(query);
   }
+  // *- If query is from categories buttons.
+  else if (btnQuery) controlQueryRecipes(btnQuery);
+};
+
+// ******/ CONTROL QUERY RECIPES \******
+// *- Render recipes fetched from the API (Using recipe name) (Through search form).
+// *- Render recipes of author fetched from author |MODEL| (Using recipe name) (Through search form).
+const controlQueryRecipes = async (query) => {
+  // *- Fetch recipe from API and from author recipe |MODEL|.
+  // *- For instance recipe query is "pizza" it will try to find in author recipe |MODEL| and also fetch from API.
+  // *- If it finds from both render from both, From API and from author |MODEL|.
+  // *- If cannot find recipe from API, find in author |MODEL| and then render it.
+  // *- If cannot find from both API and from author |MODEL|, then render error.
+
+  // *- Remove previous recipes.
+  searchView.removePrevRecipesMarkup();
+  // *- Render skeleton loaders.
+  searchView.renderSkeletonRecipes();
+  // *- Fetch recipes from API.
+  let queryRecipes = ([] = await getSearchRecipes(query));
+  // *- Save apiRecipes in state.
+  state.recipes = queryRecipes;
+  // *- Set the flag to true.
+  state.isQueryRecipes = true;
+
+  if (state.recipes.length > 0) searchView.processRecipes(state.recipes, true);
+  else {
+    renderRecipeError(`Couldn't find the recipe you are looking for 🧐❌`);
+    controlAppLoad();
+  }
+  // <=============TO BE IMPLEMENTED=============>
+  // *- Get recipes from author |MODEL|
+  // let authorRecipes;
+  // *- Save authorRecipes in state.
+  // state.authorRecipes = authorRecipes;
+
+  // // *- If recipe is found in both MODEL and from API.
+  // if (state.apiRecipes && state.authorRecipes)
+  //   searchView.processRecipes(state.authorRecipes);
+  // // *- If recipe is found only from API.
+  // else if (state.apiRecipes) searchView.processRecipes(state.apiRecipes, "1");
+  // // *- If recipe is found only in MODEL.
+  // else if (state.authorRecipes)
+  //   searchView.processRecipes(state.authorRecipes, "1");
+  // // *- Render error if recipe was not found.
+  // else renderRecipeError("Couldn't find the recipe you are looking for 🧐❌");
+  // <=============================================================================>
 };
 
 // ******/ CONTROL RECIPES \******
@@ -239,7 +247,7 @@ DOMStrings.recipesContainer.addEventListener(`click`, (event) => {
 // ====================================
 DOMStrings.searchForm.addEventListener(`submit`, (event) => {
   event.preventDefault();
-  controlSearchRecipes();
+  controlQuery();
 });
 
 // ===============================================================================================
@@ -271,5 +279,19 @@ DOMStrings.recipesSection.addEventListener(`click`, (event) => {
     recipeView.removeRecipeDetailsMarkup(true);
     // *- Render searchForm and categories buttons.
     appLoadHTML(`visible`, `1`);
+  }
+});
+
+// ===========================================
+// || Event listener for categories buttons ||
+// ===========================================
+DOMStrings.categoriesBox.addEventListener(`click`, (event) => {
+  if (event.target.closest(`.btn-categories`)) {
+    const btnText = event.target.closest(`.btn-categories`).textContent;
+    if (btnText.includes(`All`)) {
+      // *- Remove Appload Recipes So it Won't duplicate
+      searchView.removePrevRecipesMarkup();
+      controlAppLoad();
+    } else controlQuery(btnText);
   }
 });
