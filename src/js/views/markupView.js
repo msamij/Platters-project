@@ -82,14 +82,13 @@ export const skeletonRecipes = () =>
 
 export const skeletonRecipeDetails = () =>
   `<div class="recipe-view-container">
-      <figure class="recipe-img-box skeleton-dark">
-      </figure>
-      <div class="recipe-details-box">
-        <div class="recipe-ingredients-box">
-          <div class="ingredients skeleton-dark"></div>
-        </div>
+    <figure class="recipe-img-box skeleton-dark"></figure>
+    <div class="recipe-details-box">
+      <div class="recipe-ingredients-box">
+        <div class="ingredients skeleton-dark"></div>
       </div>
-    </div>`;
+    </div>
+  </div>`;
 
 export const renderRecipes = (recipe, recipeBoxNo) =>
   `<div class="recipes-box recipes-box-${recipeBoxNo}">
@@ -146,8 +145,7 @@ export const ingredientsMarkup = () =>
     <div class="recipe-ingredients-box">
       <div class="btn-ingredient-box ingredient-btn-box-prev"></div>
       <div class="ingredients">
-        <ul class="ingredient-list">
-        </ul>
+        <ul class="ingredient-list"></ul>
       </div>
       <div class="btn-ingredient-box ingredient-btn-box-next"></div>
     </div>
@@ -170,24 +168,22 @@ export const ingredientButtons = (isNext, page) =>
 
 export const renderInstructionBtn = (sourceUrl, sourceName) =>
   `<div class="recipe-instruction-btn-box">
-        <button class="btn-default recipe-instructions-btn">How to cook</button>
-        <p>
-          This recipe is designed by
-          <a href="${sourceUrl}">
-          ${sourceName}
-          </a>
-        </p>
-      </div>`;
+    <button class="btn-default recipe-instructions-btn">How to cook</button>
+    <p>
+      This recipe is designed by
+      <a href="${sourceUrl}">${sourceName}</a>
+    </p>
+  </div>`;
 
 export const renderRecipeInstructions = (instructions) =>
   `<div class="instructions">
-      <div class="btn-close-box">
-        <button class="btn-default btn-prev-alt btn-close-ingredient">
-          <i class="fas fa-times"></i>
-        </button>
-      </div>
-      <span>${instructions}</span>
-    </div>`;
+    <div class="btn-close-box">
+      <button class="btn-default btn-prev-alt btn-close-ingredient">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <span>${instructions}</span>
+  </div>`;
 
 export const paginationRecipes = (recipe) =>
   ` <a href="#${recipe.id}" class="recipe">
@@ -206,3 +202,54 @@ export const paginationbtn = (isNext, page) =>
   }" data-goto="${isNext === "next" ? page + 1 : page - 1}">
   <i class="fas fa-angle-${isNext === "next" ? "right" : "left"}"></i>
 </button>`;
+
+export const renderAuthorAccountMenu = (accountName) =>
+  `<div class="account-box author-account--box">
+    <div class="account-username author-account--username">${accountName}</div>
+    <div class="account-box--inner box-inner--author">
+      <ul class="account-menu author-account--menu">
+        <li>
+          <div class="account-menu--controls">
+            <button class="btn-default logout-btn author-btn--logout">
+              Logout
+            </button>
+            <button class="btn-default view-recipe-btn">View Recipes</button>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>`;
+
+export const renderUserAccountMenu = (accountName) =>
+  `<div class="account-box user-account--box">
+    <div class="account-username user-account--username">${accountName}</div>
+    <div class="account-box--inner box-inner--user">
+      <ul class="account-menu user-account--menu">
+        <li>
+          <div class="account-menu--controls">
+            <button class="btn-default logout-btn user-btn--logout">
+              Logout
+            </button>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>`;
+
+export const renderLikedRecipesMenu = () =>
+  `<div class="likes-icon">
+      <i class="fas fa-heart"></i>
+    </div>
+    <div class="liked-items">
+  </div>`;
+
+export const renderLikedRecipe = (recipe) =>
+  `<a href="#${recipe.id}" class="liked-item">
+    <div class="liked-item--img">
+      <img
+        src="https://spoonacular.com/recipeImages/${recipe.id}-636x393.jpg"
+        alt="${recipe.title}"
+      />
+    </div>
+    <span>${recipe.title}</span>
+  </a>`;

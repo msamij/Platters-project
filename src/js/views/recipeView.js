@@ -37,11 +37,10 @@ export const removeRecipeDetailsMarkup = (backToRecipes) => {
 export const prevRecipeDetails = () =>
   document.querySelector(`.recipe-view-container`);
 
-// console.log("next");
 // *- Will render skeleton for recipe.
 export const renderSkeletonRecipeDetails = () =>
   DOMStrings.recipesSection.insertAdjacentHTML(
-    `afterbegin`,
+    `beforeend`,
     markupView.skeletonRecipeDetails()
   );
 
@@ -119,27 +118,27 @@ const renderIngredientBtns = (page, noOfResults, resPerPage) => {
         .querySelector(`.ingredient-btn-box-next`)
         .insertAdjacentHTML(
           `beforeend`,
-          markupView.ingredientButtons("next", page)
+          markupView.ingredientButtons(`next`, page)
         );
     } else if (page > 1 && page < totalPages) {
       document
         .querySelector(`.ingredient-btn-box-prev`)
         .insertAdjacentHTML(
           `afterbegin`,
-          markupView.ingredientButtons("prev", page)
+          markupView.ingredientButtons(`prev`, page)
         );
       document
         .querySelector(`.ingredient-btn-box-next`)
         .insertAdjacentHTML(
           `beforeend`,
-          markupView.ingredientButtons("next", page)
+          markupView.ingredientButtons(`next`, page)
         );
     } else if (page === totalPages) {
       document
         .querySelector(`.ingredient-btn-box-prev`)
         .insertAdjacentHTML(
           `afterbegin`,
-          markupView.ingredientButtons("prev", page)
+          markupView.ingredientButtons(`prev`, page)
         );
     }
   }
@@ -181,18 +180,18 @@ const parseRecipeTitle = (title) => {
     `>`,
   ];
 
-  const strArr = title.split(" ");
+  const strArr = title.split(` `);
   strArr.forEach((el, index) => {
     signs.forEach((sign) => {
       if (el.includes(sign)) {
-        strArr[index] = el.replace(sign, " ");
+        strArr[index] = el.replace(sign, ` `);
       }
     });
   });
   strArr.forEach((el, index) => {
-    if (el === " ") strArr.splice(index, 1);
+    if (el === ` `) strArr.splice(index, 1);
   });
-  return strArr.join(" ");
+  return strArr.join(` `);
 };
 
 const parseRecipeIngredients = (ingredients) => {
@@ -257,7 +256,7 @@ const parseRecipeIngredients = (ingredients) => {
             // *- Here we set index + 1 that's because we skip the first element.
             // *- So let's element 2 have the sign and index is at 0 so that's why we have to add + 1.
             // *- Because index always starts at 0 even if we skip the first element.
-            ingArr[index + 1] = ing.replace(sign, "");
+            ingArr[index + 1] = ing.replace(sign, ``);
           }
         });
       });
@@ -265,7 +264,7 @@ const parseRecipeIngredients = (ingredients) => {
       ingArr.forEach((ing, index) => {
         signs.forEach((sign) => {
           if (ing.includes(sign)) {
-            ingArr[index] = ing.replace(sign, "");
+            ingArr[index] = ing.replace(sign, ``);
           }
         });
       });
@@ -285,7 +284,7 @@ const parseRecipeIngredients = (ingredients) => {
   // *- Now we only have one array and in there we have ingredient strings --> like this ["", "", "", "", "", ""].
   // *- We do this so that we can loop easily and render ingredients on the UI.
   newIng.forEach((ingArr, index) => {
-    newIng[index] = ingArr.join(" ");
+    newIng[index] = ingArr.join(` `);
   });
 
   return newIng;

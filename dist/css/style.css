@@ -166,9 +166,9 @@ header {
   transform: scale(1.1);
 }
 
-/* <---------------------------------------------------------------------> */
+/* <-----------------------------------------------------------------------> */
 /* <-----------FORM (FORM INPUT, SUBMIT & CREATE RECIPE BUTTONS)-----------> */
-/* <---------------------------------------------------------------------> */
+/* <-----------------------------------------------------------------------> */
 .search-form {
   height: 2.7rem;
   width: 20rem;
@@ -395,9 +395,9 @@ main {
   height: 100%;
   width: 100%;
   position: absolute;
-  background: rgba(0, 0, 0, 0.644);
+  background: rgba(0, 0, 0, 0.534);
   z-index: 3;
-  opacity: 0.4;
+  opacity: 0.3;
   display: none;
 }
 
@@ -634,12 +634,14 @@ main {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 5px;
   z-index: 4;
-  display: none;
+  display: flex;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.3s;
 }
 
 .create-recipe-container,
@@ -785,23 +787,7 @@ main {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 6;
-  visibility: hidden;
-  opacity: 0;
-}
-
-.animation {
-  animation: fadeAway 20s linear 0s 0.2;
-}
-
-@keyframes fadeAway {
-  0% {
-    opacity: 1;
-    visibility: visible;
-  }
-  100% {
-    opacity: 0;
-    visibility: hidden;
-  }
+  display: none;
 }
 
 .message h2 {

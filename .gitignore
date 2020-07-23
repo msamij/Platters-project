@@ -1,3 +1,7 @@
-config.txt
-node_modules
+#dependencies
+node_modules/
+# Configuration
+webpack.config.js
+.babelrc
 unusedMarkup.txt
+config.txt

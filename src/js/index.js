@@ -1,9 +1,13 @@
 import { DOMStrings } from "./views/base";
-import { getSearchRecipes } from "../js/models/Search";
+import { getSearchRecipes } from "./models/Search";
 import Recipe from "./models/Recipes";
+import Users from "./models/Users";
+import AuthorRecipes from "./models/AuthorRecipes";
+import * as LikedRecipes from "./models/LikedRecipes";
 import * as searchView from "./views/searchView";
 import * as recipeView from "./views/recipeView";
-
+import * as accountView from "./views/accountView";
+import * as likesView from "./views/likesView";
 // ******/ GLOBAL STATE OBJECT \******
 // *- Stores current recipe object.
 // *- Stores current author object.
@@ -15,13 +19,14 @@ let state = {};
 // 1: Render all recipes on load (DONE).
 // 2: Implement recipe Search (using form).
 // 3: Implement recipes pagination (DONE).
-// 4: Implement recipe details (ID).
-// 5: Implement error handling.
-// 6: Implement recipe liking model.
-// 7: Implement user & author sign in model.
+// 4: Implement recipe details (ID) (DONE).
+// 5: Implement error handling (DONE).
+// 7: Implement user & author sign in model (DONE).
+// 6: Implement recipe liking model (DONE).
 // 8: Implement recipe builder model.
 // 9: Implement recipe edit feature.
 // 10: Implement recipe delete feature.
+// 11: Implement view author recipes feature.
 
 // ******/ CONTROL APPLOAD \******
 // *- Controls rendering recipes on appload.
@@ -71,7 +76,7 @@ const controlAppLoad = async () => {
   !recipes[1].length ||
   !recipes[2].length ||
   !recipes[3].length
-    ? renderRecipeError(`Error loading Recipes Please try again 😕`)
+    ? renderMessage(true, `Error loading Recipes Please try again 😕`, true)
     : searchView.processRecipes(recipes);
   // <==============================================================================================>
   // <==============================================================================================>
@@ -92,15 +97,19 @@ const appLoadHTML = (visibility, opacity) => {
   });
 };
 
-// *- Render errorMessage if for some reason recipes were not fetched.
-const renderRecipeError = (errorMessage) => {
-  const recipeLoadErrorMarkup = `<h2 class="error"> ${errorMessage}</h2>`;
-  DOMStrings.errorMessage.insertAdjacentHTML(
-    "afterbegin",
-    recipeLoadErrorMarkup
-  );
-  DOMStrings.errorMessage.classList.add(`animation`);
-  searchView.removePrevRecipesMarkup();
+const renderMessage = (isError, message, isRemovePrevRecipe) => {
+  if (isError) {
+    DOMStrings.error.textContent = message;
+    DOMStrings.errorMessage.style.display = `block`;
+    // *- After 2s message will fadeout.
+    setTimeout(() => (DOMStrings.errorMessage.style.display = `none`), 3000);
+    if (isRemovePrevRecipe) searchView.removePrevRecipesMarkup();
+  } else {
+    DOMStrings.success.textContent = message;
+    DOMStrings.successMessage.style.display = `block`;
+    // *- After 2s message will fadeout.
+    setTimeout(() => (DOMStrings.successMessage.style.display = `none`), 3000);
+  }
 };
 
 // ******/ CONTROL PAGINATION \******
@@ -123,7 +132,7 @@ const controlPagination = (event) => {
     // *- And finally we retreive the recipe box no which is in this case is the 2 element in an array [2] = ['1'].
     recipeBoxNo = event.target
       .closest(`.btn-pagination`)
-      .parentElement.parentElement.className.split(" ")[1]
+      .parentElement.parentElement.className.split(` `)[1]
       .split("-")[2];
 
     state.isQueryRecipes
@@ -172,7 +181,11 @@ const controlQueryRecipes = async (query) => {
 
   if (state.recipes.length > 0) searchView.processRecipes(state.recipes, true);
   else {
-    renderRecipeError(`Couldn't find the recipe you are looking for 🧐❌`);
+    renderMessage(
+      true,
+      `Couldn't find the recipe you are looking for 🧐❌`,
+      true
+    );
     controlAppLoad();
   }
   // <=============TO BE IMPLEMENTED=============>
@@ -190,7 +203,7 @@ const controlQueryRecipes = async (query) => {
   // else if (state.authorRecipes)
   //   searchView.processRecipes(state.authorRecipes, "1");
   // // *- Render error if recipe was not found.
-  // else renderRecipeError("Couldn't find the recipe you are looking for 🧐❌");
+  // else renderMessage(true,"Couldn't find the recipe you are looking for 🧐❌",true);
   // <=============================================================================>
 };
 
@@ -198,7 +211,7 @@ const controlQueryRecipes = async (query) => {
 // *- Render recipe details based on the recipe ID (Either from API or from author recipes |MODEL|).
 const controlRecipes = async () => {
   // *- Get recipe ID from URL.
-  const ID = parseInt(window.location.hash.split("#").join(""));
+  const ID = parseInt(window.location.hash.split(`#`).join(``));
   // *- Validate ID.
   if (ID) {
     // *- If there's already a recipe remove it from DOM.
@@ -209,6 +222,7 @@ const controlRecipes = async () => {
     // *- Render skelteton.
     recipeView.renderSkeletonRecipeDetails();
     const recipe = new Recipe(ID);
+    // *- Fetch recipe.
     await recipe.getRecipes();
     // *- Save in state.
     state.recipeDetails = recipe;
@@ -216,6 +230,11 @@ const controlRecipes = async () => {
     recipeView.removeRecipeDetailsMarkup();
     // *- Render recipe
     recipeView.processRecipeDetails(recipe);
+    // *- Toggle liked icon on UI if recipe is Liked.
+    if (state.user) isIDRecipeLiked(state.recipeDetails.id, state.user);
+    else if (state.author)
+      isIDRecipeLiked(state.recipeDetails.id, state.author);
+    // *- Render recipe
     // *- Render the recipe which was clicked.
     // *- Check if recipe ID is from API recipes or from author |MODEL|.
     // *- If recipe ID is author |MODEL|.
@@ -224,6 +243,210 @@ const controlRecipes = async () => {
     // }
     // *- Else it's an API recipe get recipe details from API using ID.
   }
+};
+
+// ******/ CONTROL VALIDATION OF LIKING RECIPE \******
+// *- Like recipe only when user or author is logged in.
+// *- Otherwise render Login/Signup form.
+const validateRecipeLike = () => {
+  if (state.user) controlRecipeLike(state.user);
+  else if (state.author) controlRecipeLike(state.author);
+  else {
+    DOMStrings.formContainer.style.visibility = `visible`;
+    DOMStrings.formContainer.style.opacity = `1`;
+    DOMStrings.backdrop.style.display = `block`;
+  }
+};
+
+// ******/ CONTROL VALIDATION OF ACCOUNT FORM \******
+// *- Validate fields.
+// *- Check if action is login or signup.
+// *- Check if it's user's form or author form to render account menu.
+const validateLoginSignup = (btnType, isAuthor) => {
+  // *- Read userName & password
+  const userName = accountView.userNameValue();
+  const password = accountView.passwordValue();
+
+  btnType === `btn-login`
+    ? controlLogin(userName, password, isAuthor)
+    : controlSignup(userName, password, isAuthor);
+};
+
+// ******/ CONTROLS ACCOUNT MENU \******
+// *- Checks if user is active or author.
+// *- Checks if event target is logout or viewRecipes.
+const controlAccountMenu = (event) => {
+  if (state.user) {
+    // *- If action is to logout.
+    if (event.target.closest(`.logout-btn`)) {
+      // *- Remove account from state.
+      state.user = ``;
+      // *- Remove account menu from UI.
+      accountView.removeAccountMenu(false);
+      // *- Remove any liked Recipes.
+      likesView.removeLikedRecipe(false);
+      // *- Remove Like icon from current recipe (only if recipe is being viewed).
+      if (recipeView.prevRecipeDetails()) likesView.toggleLikeBtn(false);
+    }
+  }
+};
+
+// ******/ CHECKS ID RECIPE IS LIKED \******
+// *- When recipe is clicked check if user or author is logged in or not.
+// *- And if logged in check the recipe that's being displayed is liked by user or author.
+// *- If liked then render likedIcon.
+const isIDRecipeLiked = (recID, userOrAuthor) => {
+  if (!AuthorRecipes.findRecipe(recID)) {
+    // *- If recipe is liked then render Like on the UI.
+    if (userOrAuthor.isRecipeLiked(true, userOrAuthor.userName, recID))
+      likesView.toggleLikeBtn(true);
+  }
+};
+
+// ******/ CONTROL RECIPE LIKE \******
+// *- Keep track which recipe was liked and by which user or author.
+// *- Check if recipe ID is from API recipes or from author |MODEL|.
+// *- If it's' from API save in user or author data structure LikedAPIRecipes[].
+// *- If it's' from Author recipes save in user or author data = {LikedAuthorRecipes[]}.
+// *- Save in LikedRecipes model with recipe ID and add like to that recipe.
+// *- If recipe is already liked unlike recipe remove it from user or author data and remove like from likedRecipes.
+const controlRecipeLike = (userOrAuthor) => {
+  // *- Get recipeID from URL.
+  const recipe = state.recipeDetails;
+  // *- If recipe is NOT from author |MODEL| in other words (if it's an API Recipe).
+  if (!AuthorRecipes.findRecipe(recipe.id)) {
+    // *- If recipe is not liked yet.
+    if (!userOrAuthor.isRecipeLiked(true, userOrAuthor.userName, recipe.id)) {
+      // *- Add like in userOrauthor datastructure.
+      userOrAuthor.likeRecipe(true, userOrAuthor.userName, recipe);
+      // *- Add like in Likes MODEL.
+      LikedRecipes.likeRecipe(true, recipe);
+      // *- Add LikedRecipe in state.
+      state.likedRecipe = state.recipeDetails;
+      // *- Toggle likeIcon on the current recipe.
+      likesView.toggleLikeBtn(true);
+      // *- Render LikedRecipe on the UI.
+      likesView.renderLikedRecipes([recipe]);
+    }
+    // *- Unlike recipe if it's already liked.
+    else {
+      // *- Unlike from user or author account.
+      userOrAuthor.unlikeRecipe(true, userOrAuthor.userName, recipe.id);
+      // *- Remove like from likes MODEL.
+      LikedRecipes.unlikeRecipe(true, recipe.id);
+      // *- Remove likeIcon on the current recipe.
+      likesView.toggleLikeBtn(false);
+      // *- Remove likedRecipe from the UI.
+      likesView.removeLikedRecipe(
+        userOrAuthor.likedRecipes(true, userOrAuthor.userName),
+        recipe.id
+      );
+      // *- Remove likedRecipe from state.
+      state.likedRecipe = ``;
+    }
+  }
+};
+
+// ******/ CONTROL RENDERING LIKED RECIPES ON LOGIN \******
+// *- Render recipes liked by user or author.
+// *- Check for each recipe if it's API or author recipe.
+const renderLoginLikedRecipes = (recipes) => {
+  // *- Render liked recipes on the UI.
+  likesView.renderLikedRecipes(recipes);
+  // *- Validate recipe if it's an API or author recipe |MODEL|.
+  if (!AuthorRecipes.findRecipe(state.recipeDetails.id)) {
+    // *- Toggle likeIcon on the recipe if recipe that is currently being displayed is already liked.
+    if (
+      state.user.isRecipeLiked(
+        true,
+        state.user.userName,
+        state.recipeDetails.id
+      )
+    )
+      likesView.toggleLikeBtn(true);
+  }
+};
+
+const controlLogin = (userName, password, isAuthor) => {
+  // *- Remove First Name and Last Name when logging in.
+  controlInputFields(`none`);
+
+  // *- Clear fields.
+  accountView.clearFields();
+
+  if (userName && password) {
+    // *- Check if it's user account.
+    if (!isAuthor) {
+      // *- Verify account.
+      if (Users.checkUser(userName, password)) {
+        // *- Save user in state.
+        state.user = Users.checkUser(userName, password);
+        // *- Render login success message.
+        renderMessage(false, `Logged in successfully 😃👍`, false);
+        // *- RemoveForm
+        removeForm(DOMStrings.formContainer);
+        // *- Render user account menu.
+        accountView.renderAccountMenu(
+          isAuthor,
+          state.user.firstName,
+          state.user.lastName
+        );
+        // *- Get the liked recipes.
+        const likedRecipes = state.user.getLikedRecipes(state.user.userName);
+        renderLoginLikedRecipes(likedRecipes);
+        // *- if current recipe that is being viewed is  liked then render liked icon.
+      } else renderMessage(true, `Couldn't find the user 🧐❌`, false);
+    }
+    // else for author
+  }
+};
+
+const controlSignup = (userName, password, isAuthor) => {
+  // *- Render First Name and Last Name when signing up.
+  controlInputFields(`block`);
+
+  // *- Read first name and last name from DOM.
+  const firstName = accountView.firstNameValue(isAuthor);
+  const lastName = accountView.lastNameValue(isAuthor);
+
+  // *- Clear fields.
+  accountView.clearFields();
+
+  if (firstName && lastName && userName && password) {
+    // *- Check if it's user account.
+    if (!isAuthor) {
+      // *- Verify userName (If userName dosen't exist only then create new account).
+      if (!Users.isUserName(userName)) {
+        // *- Create new user account and save it in state.
+        state.user = new Users(firstName, lastName, userName, password);
+        // *- Save account in users Datastructure.
+        state.user.saveUser(state.user);
+        // *- Render signup successful message.
+        renderMessage(false, `Signup successful 😃👍`, false);
+        // *- RemoveForm
+        removeForm(DOMStrings.formContainer);
+        // *- Render user account menu.
+        accountView.renderAccountMenu(
+          isAuthor,
+          state.user.firstName,
+          state.user.lastName
+        );
+      } else {
+        renderMessage(true, `Username already exists 🙁👎`, false);
+      }
+    }
+  }
+};
+
+const controlInputFields = (property) => {
+  DOMStrings.inputFirstName.style.display = `${property}`;
+  DOMStrings.inputLastName.style.display = `${property}`;
+};
+
+const removeForm = (formType) => {
+  formType.style.opacity = `0`;
+  formType.style.visibility = `hidden`;
+  DOMStrings.backdrop.style.display = `none`;
 };
 
 // ============================================================================
@@ -279,7 +502,7 @@ DOMStrings.recipesSection.addEventListener(`click`, (event) => {
     recipeView.removeRecipeDetailsMarkup(true);
     // *- Render searchForm and categories buttons.
     appLoadHTML(`visible`, `1`);
-  }
+  } else if (event.target.closest(`.like-btn`)) validateRecipeLike();
 });
 
 // ===========================================
@@ -287,6 +510,7 @@ DOMStrings.recipesSection.addEventListener(`click`, (event) => {
 // ===========================================
 DOMStrings.categoriesBox.addEventListener(`click`, (event) => {
   if (event.target.closest(`.btn-categories`)) {
+    // *- Get button text query to fetch recipe.
     const btnText = event.target.closest(`.btn-categories`).textContent;
     if (btnText.includes(`All`)) {
       // *- Remove Appload Recipes So it Won't duplicate
@@ -295,3 +519,26 @@ DOMStrings.categoriesBox.addEventListener(`click`, (event) => {
     } else controlQuery(btnText);
   }
 });
+
+// ===========================================
+// || Event listener for Login/Signup form ||
+// ===========================================
+DOMStrings.accountForm.addEventListener(`click`, (event) => {
+  event.preventDefault();
+  if (event.target.closest(`.btn-login`) || event.target.closest(`.btn-signup`))
+    validateLoginSignup(
+      // *- Pass the btn type (signup or login).
+      event.target.className.split(` `)[2],
+      state.isAuthor
+    );
+  // *- If event target is close form button.
+  else if (event.target.closest(`.btn-close-form`))
+    removeForm(DOMStrings.formContainer);
+});
+
+// ==============================================
+// || Event listener for logging out from account ||
+// ==============================================
+DOMStrings.boxRight.addEventListener(`click`, (event) =>
+  controlAccountMenu(event)
+);
