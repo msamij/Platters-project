@@ -644,6 +644,15 @@ main {
   transition: all 0.3s;
 }
 
+.form-text {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  background: linear-gradient(to right bottom, #ffcb74, #ff9595);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .create-recipe-container,
 .edit-recipe-container {
   height: 90%;

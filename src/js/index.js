@@ -371,6 +371,9 @@ const controlLogin = (userName, password, isAuthor) => {
   // *- Remove First Name and Last Name when logging in.
   controlInputFields(`none`);
 
+  // *- Change h2 text.
+  DOMStrings.formText.textContent = `Login to your account`;
+
   // *- Clear fields.
   accountView.clearFields();
 
@@ -404,6 +407,9 @@ const controlLogin = (userName, password, isAuthor) => {
 const controlSignup = (userName, password, isAuthor) => {
   // *- Render First Name and Last Name when signing up.
   controlInputFields(`block`);
+
+  // *- Change h2 text.
+  DOMStrings.formText.textContent = `Signup to Continue`;
 
   // *- Read first name and last name from DOM.
   const firstName = accountView.firstNameValue(isAuthor);

@@ -10,6 +10,7 @@ export const DOMStrings = {
   likesBox: document.querySelector(`.likes-box`),
   formContainer: document.querySelector(`.form-container`),
   accountForm: document.querySelector(`.account-form`),
+  formText: document.querySelector(`.form-text`),
   inputFirstName: document.querySelector(`.input-first-name`),
   inputLastName: document.querySelector(`.input-last-name`),
   inputUserName: document.querySelector(`.input-user-name`),
