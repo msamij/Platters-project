@@ -342,10 +342,6 @@ const controlRecipeLike = (isUser, userOrAuthor) => {
       // *- Remove likeIcon on the current recipe.
       likesView.toggleLikeBtn(false);
       // *- Remove likedRecipe from the UI.
-      // likesView.removeLikedRecipe(
-      //   userOrAuthor.likedRecipes(true, userOrAuthor.userName),
-      //   recipe.id
-      // );
       likesView.removeLikedRecipe(
         Account.getLikedRecipes(isUser, userOrAuthor.userName),
         recipe.id
@@ -386,14 +382,6 @@ const renderLoginLikedRecipes = (isUser, recipes) => {
       )
     )
       likesView.toggleLikeBtn(true);
-    // if (
-    //   state.user.isRecipeLiked(
-    //     true,
-    //     state.user.userName,
-    //     state.recipeDetails.id
-    //   )
-    // )
-    //   likesView.toggleLikeBtn(true);
   }
 };
 
@@ -427,7 +415,6 @@ const controlLogin = (userName, password, isAuthor) => {
           state.user.lastName
         );
         // *- Get the liked recipes.
-        // const likedRecipes = state.user.getLikedRecipes(state.user.userName);
         const likedRecipes = Account.getLikedRecipes(true, state.user.userName);
         renderLoginLikedRecipes(true, likedRecipes);
         // *- if current recipe that is being viewed is  liked then render liked icon.
@@ -459,7 +446,6 @@ const controlSignup = (userName, password, isAuthor) => {
         // *- Create new user account and save it in state.
         state.user = new Users(firstName, lastName, userName, password);
         // *- Save account in users Datastructure.
-        // state.user.saveUser(state.user);
         Account.signup(true, state.user);
         // *- Render signup successful message.
         renderMessage(false, `Signup successful 😃👍`, false);
