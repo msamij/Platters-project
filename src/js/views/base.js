@@ -6,6 +6,7 @@ export const DOMStrings = {
   searchForm: document.querySelector(`.search-form`),
   searchInput: document.querySelector(`.search-input`),
   createRecipeBox: document.querySelector(`.create-recipe-box`),
+  createRecipeBtn: document.querySelector(`.create-recipe-btn`),
   boxRight: document.querySelector(`.box-right`),
   likesBox: document.querySelector(`.likes-box`),
   formContainer: document.querySelector(`.form-container`),

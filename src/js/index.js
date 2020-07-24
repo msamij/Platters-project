@@ -4,6 +4,7 @@ import Recipe from "./models/Recipes";
 import Users from "./models/Users";
 import AuthorRecipes from "./models/AuthorRecipes";
 import * as LikedRecipes from "./models/LikedRecipes";
+import * as Account from "./models/Account";
 import * as searchView from "./views/searchView";
 import * as recipeView from "./views/recipeView";
 import * as accountView from "./views/accountView";
@@ -231,9 +232,9 @@ const controlRecipes = async () => {
     // *- Render recipe
     recipeView.processRecipeDetails(recipe);
     // *- Toggle liked icon on UI if recipe is Liked.
-    if (state.user) isIDRecipeLiked(state.recipeDetails.id, state.user);
+    if (state.user) isIDRecipeLiked(state.recipeDetails.id, true, state.user);
     else if (state.author)
-      isIDRecipeLiked(state.recipeDetails.id, state.author);
+      isIDRecipeLiked(state.recipeDetails.id, false, state.author);
     // *- Render recipe
     // *- Render the recipe which was clicked.
     // *- Check if recipe ID is from API recipes or from author |MODEL|.
@@ -249,8 +250,8 @@ const controlRecipes = async () => {
 // *- Like recipe only when user or author is logged in.
 // *- Otherwise render Login/Signup form.
 const validateRecipeLike = () => {
-  if (state.user) controlRecipeLike(state.user);
-  else if (state.author) controlRecipeLike(state.author);
+  if (state.user) controlRecipeLike(true, state.user);
+  else if (state.author) controlRecipeLike(false, state.author);
   else {
     DOMStrings.formContainer.style.visibility = `visible`;
     DOMStrings.formContainer.style.opacity = `1`;
@@ -284,8 +285,10 @@ const controlAccountMenu = (event) => {
       // *- Remove account menu from UI.
       accountView.removeAccountMenu(false);
       // *- Remove any liked Recipes.
-      likesView.removeLikedRecipe(false);
-      // *- Remove Like icon from current recipe (only if recipe is being viewed).
+      likesView.removeLikedRecipe([]);
+      // *- Render create recipe Btn.
+      DOMStrings.createRecipeBtn.style.display = `block`;
+      // *- Toggle of Like icon from current recipe (only if recipe is being viewed).
       if (recipeView.prevRecipeDetails()) likesView.toggleLikeBtn(false);
     }
   }
@@ -295,10 +298,10 @@ const controlAccountMenu = (event) => {
 // *- When recipe is clicked check if user or author is logged in or not.
 // *- And if logged in check the recipe that's being displayed is liked by user or author.
 // *- If liked then render likedIcon.
-const isIDRecipeLiked = (recID, userOrAuthor) => {
+const isIDRecipeLiked = (recID, isUser, userOrAuthor) => {
   if (!AuthorRecipes.findRecipe(recID)) {
     // *- If recipe is liked then render Like on the UI.
-    if (userOrAuthor.isRecipeLiked(true, userOrAuthor.userName, recID))
+    if (Account.isRecipeLiked(isUser, true, userOrAuthor.userName, recID))
       likesView.toggleLikeBtn(true);
   }
 };
@@ -306,19 +309,21 @@ const isIDRecipeLiked = (recID, userOrAuthor) => {
 // ******/ CONTROL RECIPE LIKE \******
 // *- Keep track which recipe was liked and by which user or author.
 // *- Check if recipe ID is from API recipes or from author |MODEL|.
-// *- If it's' from API save in user or author data structure LikedAPIRecipes[].
-// *- If it's' from Author recipes save in user or author data = {LikedAuthorRecipes[]}.
+// *- If it's from API save in user or author data structure LikedAPIRecipes[].
+// *- If it's from Author recipes save in user or author data structure = LikedAuthorRecipes[].
 // *- Save in LikedRecipes model with recipe ID and add like to that recipe.
 // *- If recipe is already liked unlike recipe remove it from user or author data and remove like from likedRecipes.
-const controlRecipeLike = (userOrAuthor) => {
+const controlRecipeLike = (isUser, userOrAuthor) => {
   // *- Get recipeID from URL.
   const recipe = state.recipeDetails;
   // *- If recipe is NOT from author |MODEL| in other words (if it's an API Recipe).
   if (!AuthorRecipes.findRecipe(recipe.id)) {
     // *- If recipe is not liked yet.
-    if (!userOrAuthor.isRecipeLiked(true, userOrAuthor.userName, recipe.id)) {
+    if (
+      !Account.isRecipeLiked(isUser, true, userOrAuthor.userName, recipe.id)
+    ) {
       // *- Add like in userOrauthor datastructure.
-      userOrAuthor.likeRecipe(true, userOrAuthor.userName, recipe);
+      Account.likeRecipe(isUser, true, userOrAuthor.userName, recipe);
       // *- Add like in Likes MODEL.
       LikedRecipes.likeRecipe(true, recipe);
       // *- Add LikedRecipe in state.
@@ -331,14 +336,18 @@ const controlRecipeLike = (userOrAuthor) => {
     // *- Unlike recipe if it's already liked.
     else {
       // *- Unlike from user or author account.
-      userOrAuthor.unlikeRecipe(true, userOrAuthor.userName, recipe.id);
+      Account.unlikeRecipe(isUser, true, userOrAuthor.userName, recipe.id);
       // *- Remove like from likes MODEL.
       LikedRecipes.unlikeRecipe(true, recipe.id);
       // *- Remove likeIcon on the current recipe.
       likesView.toggleLikeBtn(false);
       // *- Remove likedRecipe from the UI.
+      // likesView.removeLikedRecipe(
+      //   userOrAuthor.likedRecipes(true, userOrAuthor.userName),
+      //   recipe.id
+      // );
       likesView.removeLikedRecipe(
-        userOrAuthor.likedRecipes(true, userOrAuthor.userName),
+        Account.getLikedRecipes(isUser, userOrAuthor.userName),
         recipe.id
       );
       // *- Remove likedRecipe from state.
@@ -350,20 +359,41 @@ const controlRecipeLike = (userOrAuthor) => {
 // ******/ CONTROL RENDERING LIKED RECIPES ON LOGIN \******
 // *- Render recipes liked by user or author.
 // *- Check for each recipe if it's API or author recipe.
-const renderLoginLikedRecipes = (recipes) => {
+const renderLoginLikedRecipes = (isUser, recipes) => {
   // *- Render liked recipes on the UI.
   likesView.renderLikedRecipes(recipes);
   // *- Validate recipe if it's an API or author recipe |MODEL|.
   if (!AuthorRecipes.findRecipe(state.recipeDetails.id)) {
-    // *- Toggle likeIcon on the recipe if recipe that is currently being displayed is already liked.
-    if (
-      state.user.isRecipeLiked(
+    // *- Validate if it user is active or author.
+    if (isUser) {
+      // *- Toggle likeIcon on the recipe if recipe that is currently being displayed is already liked.
+      if (
+        Account.isRecipeLiked(
+          true,
+          true,
+          state.user.userName,
+          state.recipeDetails.id
+        )
+      )
+        // *- If liked then toggle like icon on recipe.
+        likesView.toggleLikeBtn(true);
+    } else if (
+      Account.isRecipeLiked(
+        false,
         true,
-        state.user.userName,
+        state.author.userName,
         state.recipeDetails.id
       )
     )
       likesView.toggleLikeBtn(true);
+    // if (
+    //   state.user.isRecipeLiked(
+    //     true,
+    //     state.user.userName,
+    //     state.recipeDetails.id
+    //   )
+    // )
+    //   likesView.toggleLikeBtn(true);
   }
 };
 
@@ -380,14 +410,16 @@ const controlLogin = (userName, password, isAuthor) => {
   if (userName && password) {
     // *- Check if it's user account.
     if (!isAuthor) {
-      // *- Verify account.
-      if (Users.checkUser(userName, password)) {
+      // *- Verify account (As User).
+      if (Account.verifyAccount(true, userName, password)) {
         // *- Save user in state.
-        state.user = Users.checkUser(userName, password);
+        state.user = Account.verifyAccount(true, userName, password);
         // *- Render login success message.
         renderMessage(false, `Logged in successfully 😃👍`, false);
         // *- RemoveForm
         removeForm(DOMStrings.formContainer);
+        // *- Remove create recipe btn.
+        DOMStrings.createRecipeBtn.style.display = `none`;
         // *- Render user account menu.
         accountView.renderAccountMenu(
           isAuthor,
@@ -395,8 +427,9 @@ const controlLogin = (userName, password, isAuthor) => {
           state.user.lastName
         );
         // *- Get the liked recipes.
-        const likedRecipes = state.user.getLikedRecipes(state.user.userName);
-        renderLoginLikedRecipes(likedRecipes);
+        // const likedRecipes = state.user.getLikedRecipes(state.user.userName);
+        const likedRecipes = Account.getLikedRecipes(true, state.user.userName);
+        renderLoginLikedRecipes(true, likedRecipes);
         // *- if current recipe that is being viewed is  liked then render liked icon.
       } else renderMessage(true, `Couldn't find the user 🧐❌`, false);
     }
@@ -422,15 +455,18 @@ const controlSignup = (userName, password, isAuthor) => {
     // *- Check if it's user account.
     if (!isAuthor) {
       // *- Verify userName (If userName dosen't exist only then create new account).
-      if (!Users.isUserName(userName)) {
+      if (!Account.isUserName(true, userName)) {
         // *- Create new user account and save it in state.
         state.user = new Users(firstName, lastName, userName, password);
         // *- Save account in users Datastructure.
-        state.user.saveUser(state.user);
+        // state.user.saveUser(state.user);
+        Account.signup(true, state.user);
         // *- Render signup successful message.
         renderMessage(false, `Signup successful 😃👍`, false);
         // *- RemoveForm
         removeForm(DOMStrings.formContainer);
+        // *- Remove create recipe btn.
+        DOMStrings.createRecipeBtn.style.display = `none`;
         // *- Render user account menu.
         accountView.renderAccountMenu(
           isAuthor,

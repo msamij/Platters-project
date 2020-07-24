@@ -39,9 +39,9 @@ export const renderLikedRecipes = (recipe) => {
   }
 };
 
-export const removeLikedRecipe = (isLikeIcon, ID) => {
-  // *- If we have no liked recipes then simply remove the liked Recipes icon.
-  if (!isLikeIcon) {
+export const removeLikedRecipe = (likedRecipes, ID) => {
+  // *- If we have no liked recipes then simply remove the liked Recipes (HEART) icon.
+  if (likedRecipes.length === 0) {
     const likedItems = DOMStrings.likesBox.childNodes;
     Array.from(likedItems).forEach((item) =>
       item.parentElement.removeChild(item)

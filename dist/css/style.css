@@ -561,11 +561,14 @@ main {
 }
 
 .most-liked-recipes-section h2 {
-  color: rgb(73, 73, 73);
-  font-size: 1.2rem;
-  font-weight: lighter;
+  font-size: 1.1rem;
+  font-weight: 300;
   text-align: center;
-  margin: 30px 0;
+  margin: 25px 0;
+  padding: 8px 0;
+  color: #fff;
+  transform: skewY(-9deg);
+  background: linear-gradient(to right bottom, #ffcb74, #ff9595);
 }
 
 .most-liked-recipes--container {
