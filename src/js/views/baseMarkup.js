@@ -90,38 +90,114 @@ export const skeletonRecipeDetails = () =>
     </div>
   </div>`;
 
-export const renderRecipes = (recipe, recipeBoxNo) =>
+export const renderRecipeDetailsMarkup = () =>
+  `<div class="recipe-view-container"></div>`;
+
+export const renderRecipes = (recipe, recipeBoxNo, title1, title2) =>
   `<div class="recipes-box recipes-box-${recipeBoxNo}">
       <div class="btn-pagination-box btn-pagination-box-${recipeBoxNo} btn-pagination-box-prev"></div>
 
       <div class="recipes recipes-${recipeBoxNo}">
-        <a href="#${recipe[0].id}" class="recipe">
+        <a href="#${
+          recipe[0].recipeID ? recipe[0].recipeID : recipe[0].id
+        }" class="recipe">
           <div class="img-box">
             <img
-              src="https://spoonacular.com/recipeImages/${recipe[0].id}-636x393.jpg"
-              alt="${recipe[0].title}"
+              src="${
+                recipe[0].imgURL
+                  ? recipe[0].imgURL
+                  : `https://spoonacular.com/recipeImages/${recipe[0].id}-636x393.jpg`
+              }"
+              alt="${title1}"
             />
           </div>
-          <span class="recipe-title">${recipe[0].title}</span>
+          <span class="recipe-title">${title1}</span>
         </a>
 
-        <a href="#${recipe[1].id}" class="recipe">
+        <a href="#${
+          recipe[1].recipeID ? recipe[1].recipeID : recipe[1].id
+        }" class="recipe">
           <div class="img-box">
             <img
-              src="https://spoonacular.com/recipeImages/${recipe[1].id}-636x393.jpg"
-              alt="${recipe[1].title}"
+              src="${
+                recipe[0].imgURL
+                  ? recipe[0].imgURL
+                  : `https://spoonacular.com/recipeImages/${recipe[1].id}-636x393.jpg`
+              }"
+              alt="${title2}"
             />
           </div>
-          <span class="recipe-title">${recipe[1].title}</span>
+          <span class="recipe-title">${title2}</span>
         </a>
       </div>
       <div class="btn-pagination-box btn-pagination-box-${recipeBoxNo} btn-pagination-box-next"></div>
     </div>`;
 
-export const renderRecipeDetails = (recipe) =>
+export const renderAuthorRecipes = (recipe, title1, title2) =>
+  `<div class="recipes-box recipes-box-1">
+    <div class="btn-pagination-box btn-pagination-box-1 btn-pagination-box-prev"></div>
+
+    <div class="recipes recipes-1">
+      <a href="#${recipe[0].recipeID}" class="author-recipe">
+        <div class="img-box">
+          <img
+            src="${recipe[0].imgURL}"
+            alt="${title1}"
+          />
+        </div>
+        <span class="recipe-title">${title1}</span>
+        <div class="recipe-menu-btns-box">
+          <button class="btn-default delete-recipe-btn">Delete Recipe</button>
+        </div>
+      </a>
+
+      <a href="#${recipe[1].recipeID}" class="author-recipe">
+        <div class="img-box">
+          <img
+            src="${recipe[1].imgURL}"
+            alt="${title2}"
+          />
+        </div>
+        <span class="recipe-title">${title2}</span>
+        <div class="recipe-menu-btns-box">
+          <button class="btn-default delete-recipe-btn">Delete Recipe</button>
+        </div>
+      </a>
+    </div>
+
+    <div class="btn-pagination-box btn-pagination-box-1 btn-pagination-box-next"></div>
+  </div>`;
+
+export const renderAuthorRecipe = (recipe, title) =>
+  `<div class="recipes-box recipes-box-1">
+  <div class="btn-pagination-box btn-pagination-box-1 btn-pagination-box-prev"></div>
+
+  <div class="recipes recipes-1">
+    <a href="#${recipe.recipeID}" class="author-recipe">
+      <div class="img-box">
+        <img
+          src="${recipe.imgURL}"
+          alt="${title}"
+        />
+      </div>
+      <span class="recipe-title">${title}</span>
+      <div class="recipe-menu-btns-box">
+        <button class="btn-default delete-recipe-btn">Delete Recipe</button>
+      </div>
+    </a>
+  </div>
+
+  <div class="btn-pagination-box btn-pagination-box-1 btn-pagination-box-next"></div>
+</div>`;
+
+export const renderRecipeDetails = (recipe, isAuthorRecipe) =>
   `<figure class="recipe-img-box">
     <img
-    src="https://spoonacular.com/recipeImages/${recipe.id}-636x393.jpg"
+    src="${
+      isAuthorRecipe
+        ? recipe.imgURL
+        : `https://spoonacular.com/recipeImages/${recipe.id}-636x393.jpg`
+    }"
     alt="${recipe.title}"/>
       <div class="recipe-btns-box">
         <button class="btn-default btn-prev-alt btn-close-recipe">
@@ -166,12 +242,12 @@ export const ingredientButtons = (isNext, page) =>
     <i class="fas fa-angle-${isNext === "next" ? "right" : "left"}"></i>
   </button>`;
 
-export const renderInstructionBtn = (sourceUrl, sourceName) =>
+export const renderInstructionBtn = (sourceUrl, sourceName, isAuthorRecipe) =>
   `<div class="recipe-instruction-btn-box">
     <button class="btn-default recipe-instructions-btn">How to cook</button>
     <p>
       This recipe is designed by
-      <a href="${sourceUrl}">${sourceName}</a>
+      <a href="${isAuthorRecipe ? `#` : sourceUrl}">${sourceName}</a>
     </p>
   </div>`;
 
@@ -185,16 +261,31 @@ export const renderRecipeInstructions = (instructions) =>
     <span>${instructions}</span>
   </div>`;
 
-export const paginationRecipes = (recipe) =>
-  ` <a href="#${recipe.id}" class="recipe">
+export const paginationRecipes = (recipe, title) =>
+  ` <a href="#${recipe.recipeID ? recipe.recipeID : recipe.id}" class="recipe">
     <div class="img-box">
       <img
-        src="https://spoonacular.com/recipeImages/${recipe.id}-636x393.jpg"
-        alt="${recipe.title}"
+        src="${
+          recipe.imgURL
+            ? recipe.imgURL
+            : `https://spoonacular.com/recipeImages/${recipe.id}-636x393.jpg`
+        }"
+        alt="${title}"
       />
     </div>
-    <span class="recipe-title">${recipe.title}</span>
+    <span class="recipe-title">${title}</span>
     </a>`;
+
+export const authorPaginationRecipe = (recipe, title) =>
+  `<a href="#${recipe.recipeID}" class="author-recipe">
+    <div class="img-box">
+      <img src="${recipe.imgURL}" alt="${title}" />
+    </div>
+    <span class="recipe-title">${title}</span>
+    <div class="recipe-menu-btns-box">
+      <button class="btn-default delete-recipe-btn">Delete Recipe</button>
+    </div>
+  </a>`;
 
 export const paginationbtn = (isNext, page) =>
   `<button class="btn-default btn-pagination btn-${
@@ -243,13 +334,37 @@ export const renderLikedRecipesMenu = () =>
     <div class="liked-items">
   </div>`;
 
-export const renderLikedRecipe = (recipe) =>
-  `<a href="#${recipe.id}" class="liked-item">
+export const renderLikedRecipe = (recipe, title) =>
+  `<a href="#${
+    recipe.recipeID ? recipe.recipeID : recipe.id
+  }" class="liked-item">
     <div class="liked-item--img">
       <img
-        src="https://spoonacular.com/recipeImages/${recipe.id}-636x393.jpg"
-        alt="${recipe.title}"
+        src="${
+          recipe.imgURL
+            ? recipe.imgURL
+            : `https://spoonacular.com/recipeImages/${recipe.id}-636x393.jpg`
+        }"
+        alt="${title}"
       />
     </div>
-    <span>${recipe.title}</span>
+    <span>${title}</span>
   </a>`;
+
+export const renderMostLikedRecipe = (recipe, title, likes) =>
+  `<div class="most-liked-recipe">
+    <a href="#${recipe.recipeID ? recipe.recipeID : recipe.id}">
+      <div class="img-box">
+        <img src="${
+          recipe.imgURL
+            ? recipe.imgURL
+            : `https://spoonacular.com/recipeImages/${recipe.id}-636x393.jpg`
+        }" alt="${title}" />
+      </div>
+      <div class="recipe-details">
+        <span class="most-like-recipe-title">${title}</span>
+        <i class="far fa-heart like-icon"></i>
+        <span class="likes">${likes}</span>
+      </div>
+    </a>
+  </div>`;

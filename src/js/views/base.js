@@ -1,31 +1,139 @@
+import * as baseMarkup from "./baseMarkup";
+
 export const ID = require("uniqid");
 
 export const apiKey = `566c523054244b38a477795508ded7be`;
 
-export const DOMStrings = {
+export const DOMElements = {
   searchForm: document.querySelector(`.search-form`),
-  searchInput: document.querySelector(`.search-input`),
   createRecipeBox: document.querySelector(`.create-recipe-box`),
-  createRecipeBtn: document.querySelector(`.create-recipe-btn`),
+  createRecipeContainer: document.querySelector(`.create-recipe-container`),
   boxRight: document.querySelector(`.box-right`),
   likesBox: document.querySelector(`.likes-box`),
   formContainer: document.querySelector(`.form-container`),
-  accountForm: document.querySelector(`.account-form`),
   formText: document.querySelector(`.form-text`),
-  inputFirstName: document.querySelector(`.input-first-name`),
-  inputLastName: document.querySelector(`.input-last-name`),
-  inputUserName: document.querySelector(`.input-user-name`),
-  inputPassword: document.querySelector(`.password`),
   categoriesBox: document.querySelector(`.categories-box`),
   recipesSection: document.querySelector(`.recipes-section`),
   recipesContainer: document.querySelector(`.recipes-container`),
-  recipesBox: document.querySelectorAll(`.recipes-box`),
-  message: document.querySelector(`.message`),
+  mostLikedRecipesContainer: document.querySelector(
+    `.most-liked-recipes--container`
+  ),
   successMessage: document.querySelector(`.success-message`),
   errorMessage: document.querySelector(`.error-message`),
   success: document.querySelector(`.success`),
   error: document.querySelector(`.error`),
   backdrop: document.querySelector(`.backdrop`),
+};
+
+export const DOMClasses = {
+  recipeViewContainer: `.recipe-view-container`,
+  ingredientList: `.ingredient-list`,
+  recipeDetailsBox: `.recipe-details-box`,
+  recipeInstructionBtnBox: `.recipe-instruction-btn-box`,
+  deleteRecipeModal: `.delete-recipe-modal`,
+  IngredientBtnBox: `.btn-ingredient-box`,
+  IngredientBtnBoxNext: `.ingredient-btn-box-next`,
+  IngredientBtnBoxPrev: `.ingredient-btn-box-prev`,
+  paginationButton: `.btn-pagination`,
+  ingredientButton: `.btn-ingredient`,
+  recipeInstructionButton: `.recipe-instructions-btn`,
+  instructions: `.instructions`,
+  closeIngredientButton: `.btn-close-ingredient`,
+  closeRecipeButton: `.btn-close-recipe`,
+  likeButton: `.like-btn`,
+  likedItems: `.liked-items`,
+  categoriesButton: `.btn-categories`,
+  loginButton: `.btn-login`,
+  logoutButton: `.logout-btn`,
+  signupButton: `.btn-signup`,
+  closeRecipeFormButton: `.btn-close-form`,
+  closeCreateRecipeForm: `.btn-close-create-recipe`,
+  btnViewRecipe: `.view-recipe-btn`,
+  btnSaveRecipe: `.btn-save-recipe`,
+  btnNewRecipe: `.btn-new-recipe`,
+  btnNewIngredient: `.btn-new-ingredient`,
+  btnSaveIngredient: `.btn-save-ingredient`,
+  btnDeleteRecipe: `.delete-recipe-btn`,
+  btnYes: `.btn-yes`,
+  btnNo: `.btn-no`,
+};
+
+export const DOMInputs = {
+  searchInput: document.querySelector(`.search-input`),
+  inputFirstName: document.querySelector(`.input-first-name`),
+  inputLastName: document.querySelector(`.input-last-name`),
+  inputUserName: document.querySelector(`.input-user-name`),
+  inputPassword: document.querySelector(`.password`),
+  inputRecipeName: document.querySelector(`.input-recipe--name`),
+  inputImgUrl: document.querySelector(`.input-img-url`),
+  inputInstructions: document.querySelector(`.input_instructions`),
+  inputIngredient: document.querySelector(`.input-ingredient`),
+};
+
+export const DOMButtons = {
+  createRecipeBtn: document.querySelector(`.create-recipe-btn`),
+  btnNewIngredient: document.querySelector(`.btn-new-ingredient`),
+  btnSaveIngredient: document.querySelector(`.btn-save-ingredient`),
+};
+
+// ******/ SUPER CLASS FOR USER AND AUTHOR ACCOUNT CLASSES \******
+export default class Account {
+  constructor(firstName, lastName, userName, password) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.userName = userName;
+    this.password = password;
+  }
+}
+
+export const renderPaginationBtns = (
+  page,
+  recipeBoxNo,
+  noOfResults,
+  resPerPage
+) => {
+  // *- Initially we set the page to 1.
+  // *- Let's say that there are 3 Total pages.
+  // *- And we are on page 1 when we are on first page and there are more pages only render next button.
+  // *- When rendering next button set data attribute to page which is let's 1 to page + 1.
+  // *- So if are on page 1 and we want to goto second page we will set data attribute for next button to page + 1.
+  // *- For going backwards it's exactly same with (page is 2) (so 2 - 1) = 1 so we are on second page and we want to go to first page.
+  // *- So it would be 1.
+  let totalPages = Math.ceil(noOfResults / resPerPage);
+  let recipeBox = document.querySelector(`.recipes-box-${recipeBoxNo}`);
+
+  if (noOfResults > resPerPage) {
+    // *- If we are on first page and there's an another page then render next button.
+    // *- If button is next it will insert in the last child of recipeBox which is (btn-pagination-box-next), Look in the markup.
+    if (page === 1 && page < totalPages) {
+      recipeBox.lastElementChild.insertAdjacentHTML(
+        `afterbegin`,
+        baseMarkup.paginationbtn(`next`, page)
+      );
+    }
+
+    // *- If we are on one of the middle page that means we can go both ways so render both buttons.
+    else if (page > 1 && page < totalPages) {
+      recipeBox.firstElementChild.insertAdjacentHTML(
+        `afterbegin`,
+        baseMarkup.paginationbtn(`prev`, page)
+      );
+
+      recipeBox.lastElementChild.insertAdjacentHTML(
+        `afterbegin`,
+        baseMarkup.paginationbtn(`next`, page)
+      );
+    }
+
+    // *- If we are on the last page that means we can only go backwards so render only prev button.
+    // *- If button is previous it will insert in the first child of recipeBox which is (btn-pagination-box-prev), Look in the markup.
+    else if (page === totalPages) {
+      recipeBox.firstElementChild.insertAdjacentHTML(
+        `afterbegin`,
+        baseMarkup.paginationbtn(`prev`, page)
+      );
+    }
+  }
 };
 
 export const parseRecipeTitle = (title, limit = 13) => {

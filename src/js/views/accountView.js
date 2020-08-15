@@ -1,14 +1,14 @@
-import { DOMStrings } from "./base";
-import * as markupView from "./markupView";
+import { DOMElements, DOMInputs } from "./base";
+import * as baseMarkup from "./baseMarkup";
 
 export const renderAccountMenu = (isAuthor, firstName, lastName) => {
-  DOMStrings.boxRight.insertAdjacentHTML(
+  DOMElements.boxRight.insertAdjacentHTML(
     "afterbegin",
     isAuthor
-      ? markupView.renderAuthorAccountMenu(
+      ? baseMarkup.renderAuthorAccountMenu(
           parseAccountName(firstName, lastName)
         )
-      : markupView.renderUserAccountMenu(parseAccountName(firstName, lastName))
+      : baseMarkup.renderUserAccountMenu(parseAccountName(firstName, lastName))
   );
 };
 
@@ -21,17 +21,17 @@ export const removeAccountMenu = (isAuthor) => {
 
 export const clearFields = () => {
   [
-    DOMStrings.inputFirstName,
-    DOMStrings.inputLastName,
-    DOMStrings.inputUserName,
-    DOMStrings.inputPassword,
+    DOMInputs.inputFirstName,
+    DOMInputs.inputLastName,
+    DOMInputs.inputUserName,
+    DOMInputs.inputPassword,
   ].forEach((input) => (input.value = ``));
 };
 
-export const firstNameValue = () => DOMStrings.inputFirstName.value;
-export const lastNameValue = () => DOMStrings.inputLastName.value;
-export const userNameValue = () => DOMStrings.inputUserName.value;
-export const passwordValue = () => DOMStrings.inputPassword.value;
+export const firstNameValue = () => DOMInputs.inputFirstName.value;
+export const lastNameValue = () => DOMInputs.inputLastName.value;
+export const userNameValue = () => DOMInputs.inputUserName.value;
+export const passwordValue = () => DOMInputs.inputPassword.value;
 
 const parseAccountName = (firstName, lastName) => {
   // *- Split firstName and lastName into an array like this firstName = [`j`, `o`, `h`, `n`] and get the first letter.

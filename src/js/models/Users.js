@@ -1,11 +1,9 @@
+import Account from "../views/base";
 import { ID } from "../views/base";
 
-export default class Users {
+export default class Users extends Account {
   constructor(firstName, lastName, userName, password) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.userName = userName;
-    this.password = password;
+    super(firstName, lastName, userName, password);
     this.userID = ID();
     (this.likedAPIRecipes = []), (this.likedAuthorRecipes = []);
   }

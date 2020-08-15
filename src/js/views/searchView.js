@@ -1,9 +1,16 @@
-import { DOMStrings, parseRecipeTitle } from "./base";
-import * as markupView from "./markupView";
+import {
+  DOMElements,
+  DOMInputs,
+  parseRecipeTitle,
+  renderPaginationBtns,
+} from "./base";
+
+import * as baseMarkup from "./baseMarkup";
 
 export const processRecipes = (
   recipes,
   isQuery = false,
+  isAuthorRecipes,
   recipeBoxNo,
   page = 1,
   resPerPage = 2
@@ -44,13 +51,17 @@ export const processRecipes = (
     // *- So we select deserts recipe object = {obj1:{....},obj2:{....},obj3:{....}}.
     // *- Slice it from startPoint to endPoint and then render it.
     // <=============================================================================================================>
-    // *- If it's queryRecipe that means we only have one recipe array so we don't do this [[rec1], [rec2], [rec3]].
-    // *- Instead we only retrieve the actual recipes inside that array, like this ([recipe1{}, recipes2{}]).
-    // *- Where each object is the actual recipe in the array Eg --> we have one array where we have 4 desert recipes objects.
+    // *- If it's queryRecipe that means we only have one recipe array and inside that array we have our recipes.
+    // *- But if it's not queryRecipe that means we have an array and inside that array we have array of different recipes.
+    // *- Eg --> [[rec1], [rec2], [rec3]] here we have one array and inside that array we have different types of recipes array.
+    // *- That's why it going to test the queryRecipe if it's queryRecipe it will access recipes like this: [{recObj1}, {recObj2}].
+    // *- And if it's not queryRecipe,
+    // *- It will get each recipe array inside our array which have all the recipes array --> [[rec1], [rec2], [rec3]]
     paginateRecipes(
       isQuery
         ? recipes.slice(startPoint, endPoint)
         : recipes[parseInt(recipeBoxNo) - 1].slice(startPoint, endPoint),
+      isAuthorRecipes,
       recipeBoxNo,
       page,
       isQuery ? recipes.length : recipes[parseInt(recipeBoxNo) - 1].length,
@@ -59,26 +70,31 @@ export const processRecipes = (
   }
   // *- If we want to render recipe of the search query.
   else if (isQuery) {
-    // *- Remove previos recipes markup.
+    // *- Remove previous recipes markup.
     removePrevRecipesMarkup();
 
-    // *- Parse recipe title.
-    recipes.forEach((recipe) => {
-      recipe.title = parseRecipeTitle(recipe.title);
-    });
-
-    DOMStrings.recipesContainer.insertAdjacentHTML(
+    DOMElements.recipesContainer.insertAdjacentHTML(
       `afterbegin`,
-      markupView.renderRecipes(recipes.slice(startPoint, endPoint), `1`)
+      baseMarkup.renderRecipes(
+        recipes.slice(startPoint, endPoint),
+        `1`,
+        // *- Parse both recipes title.
+        // *- First it will slice recipes based on startPoint and endPoint eg --> from startPoint = 1 - endPoint = 3.
+        // *- So now we have new array of recipes since we slice it.
+        // *- SLiced array --> [recipe1, recipe2]
+        // *- Get first recipe title at index 0 and parseRecipeTitle and do the same for second recipe at index 1.
+        parseRecipeTitle(recipes.slice(startPoint, endPoint)[0].title),
+        parseRecipeTitle(recipes.slice(startPoint, endPoint)[1].title)
+      )
     );
     renderPaginationBtns(page, `1`, recipes.length, resPerPage);
   }
-  // *- Render All recipes.
+  // *- Render All types of recipes.
   else {
     // *- First we will remove all previous recipes since we have skeleton loaders on appload.
     removePrevRecipesMarkup();
     // *- Then render all types of recipes.
-    // *- On the first recipeBox it will render all pizzas recipes.
+    // *- On the first recipeBox it will render all pizzas recipes and so on.
     recipes.forEach((recipe, index) => {
       renderRecipes(
         recipe.slice(startPoint, endPoint),
@@ -93,36 +109,53 @@ export const processRecipes = (
 
 // <=================RENDERING RECIPES==================>
 const renderRecipes = (recipe, recipeBoxNo, page, noOfResults, resPerPage) => {
-  recipe.forEach((recipe) => {
-    recipe.title = parseRecipeTitle(recipe.title);
-  });
-  DOMStrings.recipesContainer.insertAdjacentHTML(
+  DOMElements.recipesContainer.insertAdjacentHTML(
     `beforeend`,
-    markupView.renderRecipes(recipe, recipeBoxNo)
+    baseMarkup.renderRecipes(
+      recipe,
+      recipeBoxNo,
+      parseRecipeTitle(recipe[0].title),
+      parseRecipeTitle(recipe[1].title)
+    )
   );
   renderPaginationBtns(page, recipeBoxNo, noOfResults, resPerPage);
 };
 
 const paginateRecipes = (
   recipe,
+  isAuthorRecipes,
   recipeBoxNo,
   page,
   noOfResults,
   resPerPage
 ) => {
-  recipe.forEach((recipe) => {
-    recipe.title = parseRecipeTitle(recipe.title);
-    document
-      .querySelector(`.recipes-${recipeBoxNo}`)
-      .insertAdjacentHTML(`beforeend`, markupView.paginationRecipes(recipe));
-  });
+  isAuthorRecipes
+    ? recipe.forEach((recipe) => {
+        document
+          .querySelector(`.recipes-${recipeBoxNo}`)
+          .insertAdjacentHTML(
+            "beforeend",
+            baseMarkup.authorPaginationRecipe(
+              recipe,
+              parseRecipeTitle(recipe.title)
+            )
+          );
+      })
+    : recipe.forEach((recipe) => {
+        document
+          .querySelector(`.recipes-${recipeBoxNo}`)
+          .insertAdjacentHTML(
+            `beforeend`,
+            baseMarkup.paginationRecipes(recipe, parseRecipeTitle(recipe.title))
+          );
+      });
   renderPaginationBtns(page, recipeBoxNo, noOfResults, resPerPage);
 };
 
 // <=================REMOVING RECIPES===================>
 export const removePrevRecipesMarkup = (recipeBoxNo) => {
   // *- If we are doing pagination of recipes, then we first need to remove prev recipes so that we can render next page of recipes.
-  // *- Only remove prev recipes keep the pagination box in the DOM (Pagination box is what holds pagination buttons).
+  // *- Only remove prev recipes keep the pagination box in the DOM (Pagination contains pagination buttons).
   if (recipeBoxNo) {
     const recipesToRemove = document.querySelector(`.recipes-${recipeBoxNo}`)
       .childNodes;
@@ -137,65 +170,19 @@ export const removePrevRecipesMarkup = (recipeBoxNo) => {
   }
   // *- When rendering recipes remove all prev recipes.
   else {
-    const recipesBox = DOMStrings.recipesContainer.childNodes;
+    const recipesBox = DOMElements.recipesContainer.childNodes;
     Array.from(recipesBox).forEach((el) => el.parentElement.removeChild(el));
   }
 };
 
 // <=================SKELETION RECIPES==================>
 export const renderSkeletonRecipes = () =>
-  DOMStrings.recipesContainer.insertAdjacentHTML(
+  DOMElements.recipesContainer.insertAdjacentHTML(
     `afterbegin`,
-    markupView.skeletonRecipes()
+    baseMarkup.skeletonRecipes()
   );
 
-export const clearSearchInput = () => (DOMStrings.searchInput.value = "");
-
-// <=================PAGINATION RECIPES=================>
-const renderPaginationBtns = (page, recipeBoxNo, noOfResults, resPerPage) => {
-  // *- Initially we set the page to 1.
-  // *- Let's say that there are 3 Total pages.
-  // *- And we are on page 1 when we are on first page and there are more pages only render next button.
-  // *- When rendering next button set data attribute to page which is let's 1 to page + 1.
-  // *- So if are on page 1 and we want to goto second page we will set data attribute for next button to page + 1.
-  // *- For going backwards it's exactly same with (page is 2) (so 2 - 1) = 1 so we are on second page and we want to go to first page.
-  // *- So it would be 1.
-  let totalPages = Math.ceil(noOfResults / resPerPage);
-  let recipeBox = document.querySelector(`.recipes-box-${recipeBoxNo}`);
-
-  if (noOfResults > resPerPage) {
-    // *- If we are on first page and there's an another page then render next button.
-    // *- If button is next it will insert in the last child of recipeBox which is (btn-pagination-box-next), Look in the markup.
-    if (page === 1 && page < totalPages) {
-      recipeBox.lastElementChild.insertAdjacentHTML(
-        `afterbegin`,
-        markupView.paginationbtn(`next`, page)
-      );
-    }
-
-    // *- If we are on one of the middle page that means we can go both ways so render both buttons.
-    else if (page > 1 && page < totalPages) {
-      recipeBox.firstElementChild.insertAdjacentHTML(
-        `afterbegin`,
-        markupView.paginationbtn(`prev`, page)
-      );
-
-      recipeBox.lastElementChild.insertAdjacentHTML(
-        `afterbegin`,
-        markupView.paginationbtn(`next`, page)
-      );
-    }
-
-    // *- If we are on the last page that means we can only go backwards so render only prev button.
-    // *- If button is previous it will insert in the first child of recipeBox which is (btn-pagination-box-prev), Look in the markup.
-    else if (page === totalPages) {
-      recipeBox.firstElementChild.insertAdjacentHTML(
-        `afterbegin`,
-        markupView.paginationbtn(`prev`, page)
-      );
-    }
-  }
-};
+export const clearSearchInput = () => (DOMInputs.searchInput.value = "");
 
 const removePaginationBtns = (paginationBoxNo) => {
   // *- Selecting the correct btns box and removing buttons.

@@ -1,21 +1,26 @@
-import { DOMStrings } from "./base";
-import * as markupView from "./markupView";
+import { DOMElements, DOMClasses } from "./base";
+import * as baseMarkup from "./baseMarkup";
 
-export const processRecipeDetails = (recipe) => {
-  // *- Parse the recipe title.
+export const processRecipeDetails = (recipe, isAuthorRecipe) => {
+  // *- Parse the recipe title (Check if it's author recipe).
   recipe.title = parseRecipeTitle(recipe.title);
 
   // *- Will Render Recipe Which was clicked.
   document
-    .querySelector(`.recipe-view-container`)
-    .insertAdjacentHTML(`afterbegin`, markupView.renderRecipeDetails(recipe));
+    .querySelector(DOMClasses.recipeViewContainer)
+    .insertAdjacentHTML(
+      `afterbegin`,
+      baseMarkup.renderRecipeDetails(recipe, isAuthorRecipe)
+    );
   // *- If there are ingredients and instructions render them on the UI.
-  if (recipe.ingredients) renderRecipeIngredients(recipe.ingredients);
+  if (recipe.ingredients)
+    renderRecipeIngredients(recipe.ingredients, isAuthorRecipe);
   if (recipe.instructions)
     renderRecipeInstructions(
       recipe.instructions,
-      recipe.sourceName,
-      recipe.sourceUrl
+      isAuthorRecipe ? recipe.authorName : recipe.sourceName,
+      isAuthorRecipe ? recipe.authorName : recipe.sourceUrl,
+      isAuthorRecipe
     );
 };
 
@@ -23,10 +28,12 @@ export const processRecipeDetails = (recipe) => {
 // *- Otherwise it will remove skeleton recipe.
 export const removeRecipeDetailsMarkup = (backToRecipes) => {
   if (backToRecipes) {
-    const recipeDetails = document.querySelector(`.recipe-view-container`);
+    const recipeDetails = document.querySelector(
+      DOMClasses.recipeViewContainer
+    );
     recipeDetails.parentElement.removeChild(recipeDetails);
   } else {
-    const childNodes = document.querySelector(`.recipe-view-container`)
+    const childNodes = document.querySelector(DOMClasses.recipeViewContainer)
       .childNodes;
     Array.from(childNodes).forEach((child) => {
       child.parentElement.removeChild(child);
@@ -35,76 +42,102 @@ export const removeRecipeDetailsMarkup = (backToRecipes) => {
 };
 
 export const prevRecipeDetails = () =>
-  document.querySelector(`.recipe-view-container`);
+  document.querySelector(DOMClasses.recipeViewContainer);
 
 // *- Will render skeleton for recipe.
 export const renderSkeletonRecipeDetails = () =>
-  DOMStrings.recipesSection.insertAdjacentHTML(
+  DOMElements.recipesSection.insertAdjacentHTML(
     `beforeend`,
-    markupView.skeletonRecipeDetails()
+    baseMarkup.skeletonRecipeDetails()
   );
 
 // *- Paginate Ingredients.
-export const paginateRecipeIngredient = (ingredients, page, resPerPage = 5) => {
+export const paginateRecipeIngredient = (
+  isAuthorRecipeIng,
+  ingredients,
+  page,
+  resPerPage = 5
+) => {
   // *- Parse the ingredients.
-  ingredients = ingredients.map((ing) => ing.originalString);
-  ingredients = parseRecipeIngredients(ingredients);
+  // *- Since in author recipe ingredients array we don't any property named originalString,
+  // *- We just have an array of ingredients like this --> ['1 tablespoon cream`].
+  // *- So just Parse the ingredients.
+  if (isAuthorRecipeIng) ingredients = parseRecipeIngredients(ingredients);
+  else {
+    ingredients = ingredients.map((ing) => ing.originalString);
+    ingredients = parseRecipeIngredients(ingredients);
+  }
 
   const startPoint = (page - 1) * resPerPage;
   const endPoint = page * resPerPage;
 
   // *- Remove prev ingredients.
   removePrevIngredients();
-  // *- Remove pagination buttons.
+  // *- Remove pagination buttons (So it won't duplicate).
   removeIngButtons();
 
   // *- Render Recipe ingredients.
   ingredients.slice(startPoint, endPoint).forEach((ing) => {
     document
-      .querySelector(`.ingredient-list`)
-      .insertAdjacentHTML(`beforeend`, markupView.renderIngredient(ing));
+      .querySelector(DOMClasses.ingredientList)
+      .insertAdjacentHTML(`beforeend`, baseMarkup.renderIngredient(ing));
   });
   // *- Render ingredient pagination buttons.
   renderIngredientBtns(page, ingredients.length, resPerPage);
 };
 
 // *- Render ingredients.
-const renderRecipeIngredients = (ingredients, page = 1, resPerPage = 5) => {
-  // *- Parse the ingredients.
-  ingredients = ingredients.map((ing) => ing.originalString);
-  ingredients = parseRecipeIngredients(ingredients);
+const renderRecipeIngredients = (
+  ingredients,
+  isAuthorRecipe,
+  page = 1,
+  resPerPage = 5
+) => {
+  // *- Since in author recipe ingredients array we don't any property named originalString,
+  // *- We just have an array of ingredients.
+  // *- So just Parse the ingredients.
+  if (isAuthorRecipe) ingredients = parseRecipeIngredients(ingredients);
+  else {
+    ingredients = ingredients.map((ing) => ing.originalString);
+    ingredients = parseRecipeIngredients(ingredients);
+  }
 
   const startPoint = (page - 1) * resPerPage;
   const endPoint = page * resPerPage;
 
   // *- Render the ingredientsMarkup.
   document
-    .querySelector(`.recipe-details-box`)
-    .insertAdjacentHTML(`afterbegin`, markupView.ingredientsMarkup());
+    .querySelector(DOMClasses.recipeDetailsBox)
+    .insertAdjacentHTML(`afterbegin`, baseMarkup.ingredientsMarkup());
 
   // *- Render ingredients.
   ingredients.slice(startPoint, endPoint).forEach((ing) => {
     document
-      .querySelector(`.ingredient-list`)
-      .insertAdjacentHTML(`beforeend`, markupView.renderIngredient(ing));
+      .querySelector(DOMClasses.ingredientList)
+      .insertAdjacentHTML(`beforeend`, baseMarkup.renderIngredient(ing));
   });
   // *- Render ingredient pagination buttons.
   renderIngredientBtns(page, ingredients.length, resPerPage);
 };
 
 // *- Render Recipe instructions.
-const renderRecipeInstructions = (instructions, sourceName, sourceUrl) => {
+const renderRecipeInstructions = (
+  instructions,
+  sourceName,
+  sourceUrl,
+  isAuthorRecipe
+) => {
   document
-    .querySelector(`.recipe-details-box`)
+    .querySelector(DOMClasses.recipeDetailsBox)
     .insertAdjacentHTML(
       `beforeend`,
-      markupView.renderInstructionBtn(sourceUrl, sourceName)
+      baseMarkup.renderInstructionBtn(sourceUrl, sourceName, isAuthorRecipe)
     );
   document
-    .querySelector(`.recipe-instruction-btn-box`)
+    .querySelector(DOMClasses.recipeInstructionBtnBox)
     .insertAdjacentHTML(
       `beforeend`,
-      markupView.renderRecipeInstructions(instructions)
+      baseMarkup.renderRecipeInstructions(instructions)
     );
 };
 
@@ -115,30 +148,30 @@ const renderIngredientBtns = (page, noOfResults, resPerPage) => {
   if (noOfResults > resPerPage) {
     if (page === 1 && page < totalPages) {
       document
-        .querySelector(`.ingredient-btn-box-next`)
+        .querySelector(DOMClasses.IngredientBtnBoxNext)
         .insertAdjacentHTML(
           `beforeend`,
-          markupView.ingredientButtons(`next`, page)
+          baseMarkup.ingredientButtons(`next`, page)
         );
     } else if (page > 1 && page < totalPages) {
       document
-        .querySelector(`.ingredient-btn-box-prev`)
+        .querySelector(DOMClasses.IngredientBtnBoxPrev)
         .insertAdjacentHTML(
           `afterbegin`,
-          markupView.ingredientButtons(`prev`, page)
+          baseMarkup.ingredientButtons(`prev`, page)
         );
       document
-        .querySelector(`.ingredient-btn-box-next`)
+        .querySelector(DOMClasses.IngredientBtnBoxNext)
         .insertAdjacentHTML(
           `beforeend`,
-          markupView.ingredientButtons(`next`, page)
+          baseMarkup.ingredientButtons(`next`, page)
         );
     } else if (page === totalPages) {
       document
-        .querySelector(`.ingredient-btn-box-prev`)
+        .querySelector(DOMClasses.IngredientBtnBoxPrev)
         .insertAdjacentHTML(
           `afterbegin`,
-          markupView.ingredientButtons(`prev`, page)
+          baseMarkup.ingredientButtons(`prev`, page)
         );
     }
   }
@@ -146,13 +179,13 @@ const renderIngredientBtns = (page, noOfResults, resPerPage) => {
 
 // *- Remove previous ingredients.
 const removePrevIngredients = () => {
-  const prevIng = document.querySelector(`.ingredient-list`).childNodes;
+  const prevIng = document.querySelector(DOMClasses.ingredientList).childNodes;
   Array.from(prevIng).forEach((ing) => ing.parentElement.removeChild(ing));
 };
 
 // *- Remove previous ingredient buttons.
 const removeIngButtons = () => {
-  const btnsBox = document.querySelectorAll(`.btn-ingredient-box`);
+  const btnsBox = document.querySelectorAll(DOMClasses.IngredientBtnBox);
   btnsBox.forEach((btnBox) => {
     const btn = btnBox.childNodes;
     btn.forEach((btn) => btn.parentElement.removeChild(btn));
@@ -195,7 +228,7 @@ const parseRecipeTitle = (title) => {
 };
 
 const parseRecipeIngredients = (ingredients) => {
-  // *- Split ingredients into multiple arrays --> like this ing1 = [["1"], ["cup"], ["canned"], ["apricot"]].
+  // *- Split ingredients into multiple arrays --> like this ing = [["1"], ["cup"], ["canned"], ["apricot"]].
   // *- So that each of them can be parsed.
   let newIng = [];
   ingredients.forEach((ing, index) => {

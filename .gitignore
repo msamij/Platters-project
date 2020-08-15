@@ -1,6 +1,6 @@
 #dependencies
 node_modules/
-# Configuration
+#Configuration files
 webpack.config.js
 .babelrc
 unusedMarkup.txt

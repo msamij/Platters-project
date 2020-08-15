@@ -109,6 +109,13 @@
         </section>
 
         <section class="recipes-section">
+          <div class="delete-recipe-modal">
+            <h2>Are you sure?</h2>
+            <div class="modal-btns-box">
+              <button class="btn-default btn-yes">Yes</button>
+              <button class="btn-default btn-no">No</button>
+            </div>
+          </div>
           <!-- ----------------------------------- -->
           <!-- FORM MARKUP -->
           <!-- ----------------------------------- -->
@@ -182,72 +189,18 @@
                   class="input-default form-input input-ingredient"
                   placeholder="Ingredient name"
                 />
-                <input
-                  type="text"
-                  class="input-default form-input input-ingredient-qty"
-                  placeholder="Qty"
-                />
                 <button class="btn-default btn-submit btn-new-ingredient">
                   New Ingredient
                 </button>
               </div>
+              <button class="btn-default btn-submit btn-save-ingredient">
+                Save Ingredient
+              </button>
               <button class="btn-default btn-submit btn-save-recipe">
                 Save Recipe
               </button>
-
               <button class="btn-default btn-submit btn-new-recipe">
                 New Recipe
-              </button>
-            </form>
-          </div>
-
-          <!-- ----------------------------------- -->
-          <!-- EDIT RECIPIES MARKUP -->
-          <!-- ----------------------------------- -->
-          <div class="edit-recipe-container">
-            <form class="recipe-form edit-recipe-form">
-              <div class="btn-close-box closeform-btn-box">
-                <button class="btn-default btn-prev-alt btn-close-edit-recipe">
-                  <i class="fas fa-times"></i>
-                </button>
-              </div>
-              <input
-                type="text"
-                class="input-default form-input input-recipe--name"
-                placeholder="Recipe name"
-              />
-              <input
-                type="text"
-                class="input-default form-input input-img-url"
-                placeholder="Image URL"
-              />
-              <textarea
-                class="input-default form-input input_instructions"
-                placeholder="Instructions"
-                cols="30"
-                rows="10"
-              ></textarea>
-              <div class="edit-ingredient-box">
-                <select class="ingredients-choice input-default form-input">
-                  <option></option>
-                </select>
-
-                <input
-                  type="text"
-                  class="input-default form-input input-ingredient"
-                  placeholder="New Ingredient"
-                />
-                <input
-                  type="text"
-                  class="input-default form-input input-ingredient-qty"
-                  placeholder="Qty"
-                />
-              </div>
-              <button class="btn-default btn-submit btn-delete-recipe">
-                Delete Recipe
-              </button>
-              <button class="btn-default btn-submit btn-update-recipe">
-                Update Recipe
               </button>
             </form>
           </div>
@@ -361,26 +314,15 @@
               ></div>
 
               <div class="recipes recipes-1">
-                <a href="#90123" class="author-recipe"
+                <a href="#" class="author-recipe"
                   ><div class="img-box">
                     <img src="" alt="" />
                   </div>
                   <span class="recipe-title"></span>
                   <div class="recipe-menu-btns-box">
-                    <button class="btn-default menu-btn edit-btn"></button>
-                  </div>
-                </a>
-
-                <a href="" class="author-recipe"
-                  ><div class="img-box">
-                    <img
-                      src="../delish-homemade-pizza-horizontal-1542312378.png"
-                      alt="Pizza"
-                    />
-                  </div>
-                  <span class="recipe-title"></span>
-                  <div class="recipe-menu-btns-box">
-                    <button class="btn-default menu-btn edit-btn">Edit</button>
+                    <button class="btn-default delete-recipe-btn">
+                      Delete Recipe
+                    </button>
                   </div>
                 </a>
               </div>
@@ -394,8 +336,8 @@
 
         <section class="most-liked-recipes-section">
           <h2>Most Liked Recipes 🔥</h2>
-          <!-- <aside class="most-liked-recipes--container">
-            <div class="most-liked-recipe">
+          <aside class="most-liked-recipes--container">
+            <!-- <div class="most-liked-recipe">
               <a href="">
                 <div class="img-box">
                   <img src="" alt="" />
@@ -406,8 +348,8 @@
                   <span class="likes"></span>
                 </div>
               </a>
-            </div>
-          </aside> -->
+            </div> -->
+          </aside>
         </section>
 
         <footer>
