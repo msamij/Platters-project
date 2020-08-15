@@ -14,7 +14,6 @@ export const readData = () => {
 const saveData = () => {
   localStorage.removeItem(`accountData`);
   localStorage.setItem(`accountData`, JSON.stringify(data));
-  console.log(JSON.parse(localStorage.getItem(`accountData`)));
 };
 
 export const verifyAccount = (isUser, userName, password) => {
@@ -57,7 +56,6 @@ export const signup = (isUser, obj) => {
 
 export const login = (obj) => {
   localStorage.setItem(`loggedInAccount`, JSON.stringify(obj));
-  console.log(JSON.parse(localStorage.getItem(`loggedInAccount`)));
 };
 
 export const logOut = () => {

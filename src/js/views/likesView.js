@@ -47,8 +47,6 @@ export const renderLikedRecipes = (recipe) => {
 export const renderMostLikedRecipes = (recipes) => {
   // *- If we have more than 4 recipes, then only render first four recipes.
   if (recipes.length <= 4) {
-    console.log(recipes);
-
     recipes.forEach((likeObj) => {
       DOMElements.mostLikedRecipesContainer.insertAdjacentHTML(
         `beforeend`,
@@ -60,7 +58,6 @@ export const renderMostLikedRecipes = (recipes) => {
       );
     });
   } else {
-    console.log(recipes.slice(0, 4));
     recipes.slice(0, 4).forEach((likeObj) => {
       DOMElements.mostLikedRecipesContainer.insertAdjacentHTML(
         `beforeend`,

@@ -52,6 +52,5 @@ export const renderAuthorRecipeDetails = () =>
 export const removeAuthorRecipe = (ID) => {
   // *- Selecting the recipe based on the ID.
   const recipeToRemove = document.querySelector(`a[href="#${ID}"]`);
-  console.log(recipeToRemove);
   recipeToRemove.parentElement.removeChild(recipeToRemove);
 };

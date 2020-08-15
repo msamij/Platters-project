@@ -681,7 +681,6 @@ const controlRecipeDelete = (event) => {
     // *- That's because if we delete the recipe from Account dataStructure first,
     // *- Then we will not know that if it was liked by author or not.
     if (Account.isRecipeLiked(false, false, state.author.userName, ID)) {
-      console.log("Liked");
       // *- Delete recipe from account.
       Account.deleteRecipe(ID);
       // *- Remove likedRecipe from UI.
@@ -827,7 +826,6 @@ const controlAccountMenu = (event) => {
 const viewAuthorRecipes = () => {
   // *- Get author recipes.
   state.authorRecipe = AuthorRecipes.getAuthorRecipes(state.author.authorID);
-  console.log(state.authorRecipe);
   // *- If author created any recipe only then process.
   if (state.authorRecipe.length !== 0) {
     // *- When clicked on view recipes button, set isAuthorRecipes to true,

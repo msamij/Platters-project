@@ -12,7 +12,6 @@ const readData = () => {
 const saveData = () => {
   localStorage.removeItem(`authorRecipes`);
   localStorage.setItem(`authorRecipes`, JSON.stringify(data));
-  console.log(JSON.parse(localStorage.getItem(`authorRecipes`)));
 };
 
 export default class AuthorRecipes {
