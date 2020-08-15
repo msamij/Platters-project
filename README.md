@@ -2,6 +2,8 @@
 
 - A simple javascript project called platters.
 
+# Run npm install to install dependencies.
+
 # FUNCTIONALITIES OF THE APP
 
 - You can search for recipes i used [spooncular food api](https://spoonacular.com/food-api) to fetch recipes 😋
