@@ -789,6 +789,7 @@ const controlSignup = (isUser, firstName, lastName, userName, password) => {
       ? (state.user = new Users(firstName, lastName, userName, password))
       : // *- Create new author account and save it in state.
         (state.author = new Authors(firstName, lastName, userName, password));
+
     // *- If it's user account save account in users Datastructure otherwise in author's dataStructure.
     Account.signup(isUser, isUser ? state.user : state.author);
     // *- Save logged in account in local storage.
