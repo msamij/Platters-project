@@ -2,7 +2,9 @@
 
 - A simple javascript project called platters.
 
-# Run npm install to install dependencies.
+### Run npm install to install dependencies.
+
+### Then run (npm start) to start the npm script which will bundle our files and start the web pack dev server.
 
 # FUNCTIONALITIES OF THE APP
 
