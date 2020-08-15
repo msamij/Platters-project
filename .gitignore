@@ -1,7 +1,11 @@
 #dependencies
 node_modules/
+
 #Configuration files
 webpack.config.js
 .babelrc
 unusedMarkup.txt
 config.txt
+
+#README
+README.md

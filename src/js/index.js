@@ -24,26 +24,6 @@ import * as authorRecipesView from "./views/authorRecipesView";
 // *- Stores flag to check if recipe ingredients are of type of author recipes.
 let state = {};
 
-// TODO:
-// 1: Render all recipes on load (DONE).
-// 2: Implement recipe Search (using form).
-// 3: Implement recipes pagination (DONE).
-// 4: Implement recipe details (ID) (DONE).
-// 5: Implement error handling (DONE).
-// 7: Implement user & author sign in model (DONE).
-// 6: Implement recipe liking model (DONE).
-// 8: Implement recipe builder model (DONE).
-// 9: Implement recipe edit feature (NOT GONNA IMPLEMENT).
-// 10: Implement view author recipes feature (DONE).
-// 11: Implement recipe delete feature (DONE).
-// 12: Implement most liked recipes (DONE).
-// 13: Implement local Storage (DONE).
-// 14: Test app (DONE).
-// 15: Clean up code.
-// 16: Run app in production mode.
-// 17: Commit files to repo.
-// 18: Upload to GitHub.
-
 // ******/ APPLOAD CONTROLLER \******
 // *- Controls rendering recipes on appload.
 const controlAppLoad = async () => {
