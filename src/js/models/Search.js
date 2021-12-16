@@ -4,7 +4,7 @@ import axios from "axios";
 export const getSearchRecipes = async (query) => {
   try {
     const response = await axios(
-      `https://cors-anywhere.herokuapp.com/https://api.spoonacular.com/recipes/search?apiKey=${apiKey}&query=${query}`
+      `https://api.spoonacular.com/recipes/search?apiKey=${apiKey}&query=${query}`
     );
     return response.data.results;
   } catch (error) {
